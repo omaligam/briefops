@@ -8,31 +8,35 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#09090B;--surface:#131316;--surface2:#1A1A1F;--border:#27272A;
-  --text:#FAFAFA;--text2:#A1A1AA;--accent:#10B981;--accent-dim:rgba(16,185,129,0.12);
-  --accent-glow:rgba(16,185,129,0.25);--warm:#F59E0B;--red:#EF4444;
+  --bg:#0F172E;--surface:#1A2847;--surface2:#232F4A;--border:#334155;
+  --text:#F8FAFC;--text2:#CBD5E1;--accent:#FF6B35;--accent-dim:rgba(255,107,53,0.12);
+  --accent-glow:rgba(255,107,53,0.25);--secondary:#00D9FF;
 }
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
 a{text-decoration:none;color:inherit}
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
 nav{display:flex;justify-content:space-between;align-items:center;padding:24px 40px;max-width:1400px;margin:0 auto;position:relative;z-index:100}
-.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.03em;display:flex;gap:2px}
-.logo span{color:var(--accent)}
-.nav-cta{font-size:14px;font-weight:600;color:var(--bg);background:var(--accent);padding:12px 26px;border-radius:10px;transition:all .3s;box-shadow:0 4px 16px rgba(16,185,129,0.2)}
-.nav-cta:hover{box-shadow:0 8px 32px rgba(16,185,129,0.4);transform:translateY(-2px)}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px}
+.logo svg{width:32px;height:32px}
+.nav-right{display:flex;align-items:center;gap:24px}
+.lang-selector{background:transparent;border:1px solid var(--border);color:var(--text2);padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s}
+.lang-selector:hover{border-color:var(--accent);color:var(--accent)}
+.nav-cta{font-size:14px;font-weight:600;color:var(--bg);background:var(--accent);padding:12px 26px;border-radius:10px;transition:all .3s;box-shadow:0 4px 16px rgba(255,107,53,0.3)}
+.nav-cta:hover{box-shadow:0 8px 32px rgba(255,107,53,0.5);transform:translateY(-2px)}
+.hidden{display:none}
 .hero{max-width:1400px;margin:0 auto;padding:100px 40px 80px;text-align:center}
-.hero-accent{display:inline-block;background:var(--accent-dim);border:1px solid rgba(16,185,129,0.3);padding:10px 20px;border-radius:50px;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:32px;letter-spacing:0.05em;text-transform:uppercase}
+.hero-accent{display:inline-block;background:var(--accent-dim);border:1px solid rgba(255,107,53,0.3);padding:10px 20px;border-radius:50px;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:32px;letter-spacing:0.05em;text-transform:uppercase}
 .hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,7vw,72px);font-weight:700;line-height:1.1;letter-spacing:-0.04em;max-width:900px;margin:0 auto 24px}
-.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 30px rgba(16,185,129,0.3)}
+.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 30px rgba(255,107,53,0.3)}
 .hero p{font-size:18px;color:var(--text2);max-width:620px;margin:0 auto 48px;line-height:1.8}
 .hero-ctas{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-.cta-primary{font-size:16px;font-weight:600;color:var(--bg);background:var(--accent);padding:18px 40px;border-radius:12px;transition:all .3s;box-shadow:0 8px 24px rgba(16,185,129,0.3);border:none;cursor:pointer}
-.cta-primary:hover{box-shadow:0 12px 40px rgba(16,185,129,0.5);transform:translateY(-3px)}
+.cta-primary{font-size:16px;font-weight:600;color:var(--bg);background:var(--accent);padding:18px 40px;border-radius:12px;transition:all .3s;box-shadow:0 8px 24px rgba(255,107,53,0.3);border:none;cursor:pointer}
+.cta-primary:hover{box-shadow:0 12px 40px rgba(255,107,53,0.5);transform:translateY(-3px)}
 .cta-ghost{font-size:16px;font-weight:500;color:var(--text);border:1.5px solid var(--text2);padding:18px 40px;border-radius:12px;transition:all .3s;background:transparent}
-.cta-ghost:hover{border-color:var(--text);color:var(--text);background:rgba(16,185,129,0.05)}
+.cta-ghost:hover{border-color:var(--accent);color:var(--accent)}
 .trust-bar{max-width:1400px;margin:0 auto;padding:0 40px 80px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;text-align:center;border-bottom:1px solid var(--border)}
 .trust-item{flex:1;min-width:150px}
-.trust-number{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--accent);}
+.trust-number{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--accent)}
 .trust-label{font-size:13px;color:var(--text2);margin-top:6px;text-transform:uppercase;letter-spacing:0.05em}
 .pain-section{max-width:1400px;margin:0 auto;padding:100px 40px}
 .section-label{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-bottom:16px}
@@ -44,7 +48,7 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:24px 4
 .pain-icon{font-size:32px;margin-bottom:16px}
 .pain-card h3{font-size:18px;font-weight:600;margin-bottom:12px}
 .pain-card p{font-size:15px;color:var(--text2);line-height:1.7}
-.solution-section{max-width:1400px;margin:0 auto;padding:100px 40px;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(16,185,129,0.02));border-radius:20px;margin-left:40px;margin-right:40px}
+.solution-section{max-width:1400px;margin:0 auto;padding:100px 40px;background:linear-gradient(135deg,rgba(255,107,53,0.08),rgba(0,217,255,0.04));border-radius:20px;margin-left:40px;margin-right:40px;border:1px solid rgba(255,107,53,0.1)}
 .solution-section .section-title{color:var(--text)}
 .solution-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;margin-top:60px}
 .solution-item{display:flex;gap:20px}
@@ -54,8 +58,8 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:24px 4
 .products-section{max-width:1400px;margin:0 auto;padding:100px 40px}
 .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:60px}
 .product-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;display:flex;flex-direction:column;transition:all .3s}
-.product-card:hover{border-color:var(--accent);box-shadow:0 16px 48px rgba(16,185,129,0.15)}
-.product-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-dim);border:1px solid rgba(16,185,129,0.3);padding:6px 14px;border-radius:50px;font-size:11px;font-weight:600;color:var(--accent);margin-bottom:16px;width:fit-content;text-transform:uppercase;letter-spacing:0.04em}
+.product-card:hover{border-color:var(--accent);box-shadow:0 16px 48px rgba(255,107,53,0.15)}
+.product-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-dim);border:1px solid rgba(255,107,53,0.3);padding:6px 14px;border-radius:50px;font-size:11px;font-weight:600;color:var(--accent);margin-bottom:16px;width:fit-content;text-transform:uppercase;letter-spacing:0.04em}
 .product-name{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:12px}
 .product-desc{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:32px;flex-grow:1}
 .product-footer{display:flex;justify-content:space-between;align-items:flex-end;padding-top:24px;border-top:1px solid var(--border)}
@@ -63,17 +67,17 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:24px 4
 .product-price span{font-size:13px;font-weight:400;color:var(--text2)}
 .product-time{font-size:12px;color:var(--text2)}
 .how-section{max-width:1400px;margin:0 auto;padding:100px 40px}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;margin-top:60px;position:relative}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;margin-top:60px}
 .step-num{font-family:'Space Grotesk',sans-serif;font-size:56px;font-weight:700;color:var(--accent);opacity:0.15;margin-bottom:16px;line-height:1}
 .step h3{font-size:18px;font-weight:600;margin-bottom:12px}
 .step p{font-size:15px;color:var(--text2);line-height:1.7}
 .objection-section{max-width:1400px;margin:0 auto;padding:100px 40px}
 .faq-item{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
 .faq-item:last-child{border:none}
-.faq-q{font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q{font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
 .faq-a{font-size:15px;color:var(--text2);margin-top:12px;line-height:1.7;display:none}
 .faq-item.open .faq-a{display:block}
-.guarantee-section{max-width:1400px;margin:0 auto;padding:60px 40px;background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(16,185,129,0.03));border:1px solid rgba(16,185,129,0.2);border-radius:16px;text-align:center}
+.guarantee-section{max-width:1400px;margin:0 auto;padding:60px 40px;background:linear-gradient(135deg,rgba(255,107,53,0.1),rgba(0,217,255,0.05));border:1px solid rgba(255,107,53,0.2);border-radius:16px;text-align:center}
 .guarantee-section h3{font-size:24px;font-weight:700;margin-bottom:12px;color:var(--accent)}
 .guarantee-section p{font-size:16px;color:var(--text2);max-width:600px;margin:0 auto;line-height:1.8}
 .final-cta{max-width:1400px;margin:0 auto;padding:120px 40px;text-align:center}
@@ -81,7 +85,7 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:24px 4
 .final-cta p{font-size:18px;color:var(--text2);max-width:600px;margin:0 auto 48px;line-height:1.8}
 footer{max-width:1400px;margin:0 auto;padding:60px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--text2);flex-wrap:wrap;gap:20px}
 @media(max-width:768px){
-  nav{padding:16px 20px}.nav-cta{padding:10px 20px;font-size:12px}
+  nav{padding:16px 20px}.nav-right{gap:12px}.lang-selector,.nav-cta{padding:10px 16px;font-size:12px}
   .hero{padding:60px 20px 50px}.hero h1{font-size:36px}
   .hero-ctas{gap:12px}.cta-primary,.cta-ghost{padding:14px 28px;font-size:14px}
   .trust-bar{gap:30px;padding:0 20px 50px}.trust-number{font-size:24px}
@@ -95,165 +99,178 @@ footer{max-width:1400px;margin:0 auto;padding:60px 40px;border-top:1px solid var
 <body>
 
 <nav>
-  <div class="logo">Brief<span>Ops</span></div>
-  <a href="mailto:hello@briefops.online" class="nav-cta">Start Now</a>
+  <div class="logo">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="2" y="2" width="28" height="28" rx="4"></rect>
+      <circle cx="16" cy="16" r="6"></circle>
+      <path d="M16 8v-2M16 26v2M8 16h-2M26 16h2"></path>
+    </svg>
+    <span data-en="BriefOps" data-es="BriefOps">BriefOps</span>
+  </div>
+  <div class="nav-right">
+    <select class="lang-selector" id="langSwitch">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+    </select>
+    <a href="mailto:hello@briefops.online" class="nav-cta" data-en="Start Now" data-es="Comenzar">Start Now</a>
+  </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-accent">For founders who decide with data</div>
-  <h1>Intelligence reports that <em>close deals</em>.</h1>
-  <p>Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. At 80% less than consulting firms charge.</p>
+  <div class="hero-accent" data-en="For founders who decide with data" data-es="Para fundadores que deciden con datos">For founders who decide with data</div>
+  <h1><span data-en="Intelligence reports that " data-es="Reportes de inteligencia que ">Intelligence reports that </span><em data-en="close deals" data-es="cierran tratos">close deals</em>.</h1>
+  <p data-en="Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. At 80% less than consulting firms charge." data-es="Deja de adivinar. Obtén análisis de mercado profesional, investigación competitiva y documentos listos para inversores en 48 horas. A 80% menos de lo que cobran las firmas de consultoría.">Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. At 80% less than consulting firms charge.</p>
   <div class="hero-ctas">
-    <a href="mailto:hello@briefops.online" class="cta-primary">Get Your First Report</a>
-    <a href="#products" class="cta-ghost">See What We Deliver</a>
+    <a href="mailto:hello@briefops.online" class="cta-primary" data-en="Get Your First Report" data-es="Obtén Tu Primer Reporte">Get Your First Report</a>
+    <a href="#products" class="cta-ghost" data-en="See What We Deliver" data-es="Ve Lo Que Entregamos">See What We Deliver</a>
   </div>
 </section>
 
 <section class="trust-bar">
   <div class="trust-item">
     <div class="trust-number">48h</div>
-    <div class="trust-label">Delivery Time</div>
+    <div class="trust-label" data-en="Delivery Time" data-es="Tiempo de Entrega">Delivery Time</div>
   </div>
   <div class="trust-item">
     <div class="trust-number">10x</div>
-    <div class="trust-label">Faster Than Agencies</div>
+    <div class="trust-label" data-en="Faster Than Agencies" data-es="Más Rápido Que Agencias">Faster Than Agencies</div>
   </div>
   <div class="trust-item">
     <div class="trust-number">$297</div>
-    <div class="trust-label">Starting Price</div>
+    <div class="trust-label" data-en="Starting Price" data-es="Precio de Inicio">Starting Price</div>
   </div>
   <div class="trust-item">
     <div class="trust-number">100%</div>
-    <div class="trust-label">Data-Backed</div>
+    <div class="trust-label" data-en="Data-Backed" data-es="Respaldado por Datos">Data-Backed</div>
   </div>
 </section>
 
 <section class="pain-section">
-  <div class="section-label">The Problem</div>
-  <div class="section-title">You're making decisions blind.</div>
-  <div class="section-sub">Every day you're guessing about market size, competitor moves, and what investors actually care about. And when you need answers, your options are bad:</div>
+  <div class="section-label" data-en="The Problem" data-es="El Problema">The Problem</div>
+  <div class="section-title" data-en="You're making decisions blind." data-es="Estás tomando decisiones a ciegas.">You're making decisions blind.</div>
+  <div class="section-sub" data-en="Every day you're guessing about market size, competitor moves, and what investors actually care about. And when you need answers, your options are bad:" data-es="Cada día adivinas sobre el tamaño del mercado, los movimientos de los competidores y lo que realmente les importa a los inversores. Y cuando necesitas respuestas, tus opciones son malas:">Every day you're guessing about market size, competitor moves, and what investors actually care about. And when you need answers, your options are bad:</div>
   <div class="pain-grid">
     <div class="pain-card">
       <div class="pain-icon">🤖</div>
-      <h3>AI tools give you garbage</h3>
-      <p>ChatGPT summaries sound professional but have no data. They hallucinate facts. You can't present them to investors.</p>
+      <h3 data-en="AI tools give you garbage" data-es="Las herramientas de IA te dan basura">AI tools give you garbage</h3>
+      <p data-en="ChatGPT summaries sound professional but have no data. They hallucinate facts. You can't present them to investors." data-es="Los resúmenes de ChatGPT suenan profesionales pero no tienen datos. Alucina hechos. No puedes presentarlos a inversores.">ChatGPT summaries sound professional but have no data. They hallucinate facts. You can't present them to investors.</p>
     </div>
     <div class="pain-card">
       <div class="pain-icon">📅</div>
-      <h3>Consultants take forever</h3>
-      <p>$10K reports that take 6 weeks. By then your market has moved. You need answers now, not next month.</p>
+      <h3 data-en="Consultants take forever" data-es="Los consultores tardan para siempre">Consultants take forever</h3>
+      <p data-en="$10K reports that take 6 weeks. By then your market has moved. You need answers now, not next month." data-es="Reportes de $10K que tardan 6 semanas. Para entonces tu mercado ha cambiado. Necesitas respuestas ahora, no el próximo mes.">$10K reports that take 6 weeks. By then your market has moved. You need answers now, not next month.</p>
     </div>
     <div class="pain-card">
       <div class="pain-icon">💰</div>
-      <h3>Nothing fits your budget</h3>
-      <p>Either free garbage or $10K+ you can't afford. There's nothing in the middle that's actually good.</p>
+      <h3 data-en="Nothing fits your budget" data-es="Nada se ajusta a tu presupuesto">Nothing fits your budget</h3>
+      <p data-en="Either free garbage or $10K+ you can't afford. There's nothing in the middle that's actually good." data-es="O basura gratis o $10K+ que no puedes pagar. No hay nada en el medio que sea realmente bueno.">Either free garbage or $10K+ you can't afford. There's nothing in the middle that's actually good.</p>
     </div>
   </div>
 </section>
 
 <section class="solution-section">
-  <div class="section-label">The Solution</div>
-  <div class="section-title">Real intelligence. Real data. Real speed.</div>
-  <div class="section-sub">BriefOps delivers professional reports with live market data, analyzed and formatted, ready to present or act on.</div>
+  <div class="section-label" data-en="The Solution" data-es="La Solución">The Solution</div>
+  <div class="section-title" data-en="Real intelligence. Real data. Real speed." data-es="Inteligencia real. Datos reales. Velocidad real.">Real intelligence. Real data. Real speed.</div>
+  <div class="section-sub" data-en="BriefOps delivers professional reports with live market data, analyzed and formatted, ready to present or act on." data-es="BriefOps entrega reportes profesionales con datos de mercado en vivo, analizados y formateados, listos para presentar o actuar.">BriefOps delivers professional reports with live market data, analyzed and formatted, ready to present or act on.</div>
   <div class="solution-list">
     <div class="solution-item">
       <div class="solution-check">✓</div>
       <div>
-        <h3>Live data from Semrush</h3>
-        <p>Real search rankings, competitor traffic, backlink profiles. Not AI-generated guesses. Actual market intelligence.</p>
+        <h3 data-en="Live data from Semrush" data-es="Datos en vivo de Semrush">Live data from Semrush</h3>
+        <p data-en="Real search rankings, competitor traffic, backlink profiles. Not AI-generated guesses. Actual market intelligence." data-es="Rankings reales de búsqueda, tráfico de competidores, perfiles de enlaces de retroceso. No son adivinanzas generadas por IA. Inteligencia de mercado real.">Real search rankings, competitor traffic, backlink profiles. Not AI-generated guesses. Actual market intelligence.</p>
       </div>
     </div>
     <div class="solution-item">
       <div class="solution-check">✓</div>
       <div>
-        <h3>48-hour turnaround</h3>
-        <p>You send the brief. We pull the data. You have the report. No waiting for meetings or revisions.</p>
+        <h3 data-en="48-hour turnaround" data-es="Entrega en 48 horas">48-hour turnaround</h3>
+        <p data-en="You send the brief. We pull the data. You have the report. No waiting for meetings or revisions." data-es="Envías el resumen. Sacamos los datos. Tienes el reporte. Sin esperar reuniones o revisiones.">You send the brief. We pull the data. You have the report. No waiting for meetings or revisions.</p>
       </div>
     </div>
     <div class="solution-item">
       <div class="solution-check">✓</div>
       <div>
-        <h3>Presentation-ready documents</h3>
-        <p>PPTX, XLSX, PDF — formatted professionally. You download it and share with your board or investors immediately.</p>
+        <h3 data-en="Presentation-ready documents" data-es="Documentos listos para presentar">Presentation-ready documents</h3>
+        <p data-en="PPTX, XLSX, PDF — formatted professionally. You download it and share with your board or investors immediately." data-es="PPTX, XLSX, PDF — formateados profesionalmente. Descárgalo y comparte con tu junta o inversores inmediatamente.">PPTX, XLSX, PDF — formatted professionally. You download it and share with your board or investors immediately.</p>
       </div>
     </div>
     <div class="solution-item">
       <div class="solution-check">✓</div>
       <div>
-        <h3>Human-reviewed every time</h3>
-        <p>Not a robot output. Each report is reviewed for quality and accuracy before you get it.</p>
+        <h3 data-en="Human-reviewed every time" data-es="Revisado por humanos cada vez">Human-reviewed every time</h3>
+        <p data-en="Not a robot output. Each report is reviewed for quality and accuracy before you get it." data-es="No es un resultado de robot. Cada reporte se revisa por calidad y precisión antes de que lo recibas.">Not a robot output. Each report is reviewed for quality and accuracy before you get it.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section class="products-section" id="products">
-  <div class="section-label">What We Deliver</div>
-  <div class="section-title">Reports that win funding and close deals.</div>
+  <div class="section-label" data-en="What We Deliver" data-es="Lo Que Entregamos">What We Deliver</div>
+  <div class="section-title" data-en="Reports that win funding and close deals." data-es="Reportes que ganan financiamiento y cierran tratos.">Reports that win funding and close deals.</div>
   <div class="product-grid">
     <div class="product-card">
-      <div class="product-badge">Most Popular</div>
-      <div class="product-name">SEO & Market Audit</div>
-      <div class="product-desc">Understand your competitive position. What keywords you're winning, where you're losing, what competitors leave open for you.</div>
+      <div class="product-badge" data-en="Most Popular" data-es="Más Popular">Most Popular</div>
+      <div class="product-name" data-en="SEO & Market Audit" data-es="Auditoría de SEO y Mercado">SEO & Market Audit</div>
+      <div class="product-desc" data-en="Understand your competitive position. What keywords you're winning, where you're losing, what competitors leave open for you." data-es="Comprende tu posición competitiva. Qué palabras clave estás ganando, dónde estás perdiendo, qué dejan abierto los competidores para ti.">Understand your competitive position. What keywords you're winning, where you're losing, what competitors leave open for you.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$297</div>
-          <div class="product-time">Delivered in 48h</div>
+          <div class="product-time" data-en="Delivered in 48h" data-es="Entregado en 48h">Delivered in 48h</div>
         </div>
       </div>
     </div>
     <div class="product-card">
-      <div class="product-badge">Investor Ready</div>
-      <div class="product-name">Investor Pitch Deck</div>
-      <div class="product-desc">The presentation you send to VCs. Market sizing, competitive landscape, business model, traction narrative, financial overview.</div>
+      <div class="product-badge" data-en="Investor Ready" data-es="Listo para Inversores">Investor Ready</div>
+      <div class="product-name" data-en="Investor Pitch Deck" data-es="Presentación para Inversores">Investor Pitch Deck</div>
+      <div class="product-desc" data-en="The presentation you send to VCs. Market sizing, competitive landscape, business model, traction narrative, financial overview." data-es="La presentación que envías a VCs. Dimensionamiento del mercado, panorama competitivo, modelo de negocio, narrativa de tracción, descripción financiera.">The presentation you send to VCs. Market sizing, competitive landscape, business model, traction narrative, financial overview.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$997</div>
-          <div class="product-time">Delivered in 72h</div>
+          <div class="product-time" data-en="Delivered in 72h" data-es="Entregado en 72h">Delivered in 72h</div>
         </div>
       </div>
     </div>
     <div class="product-card">
-      <div class="product-badge">Deep Dive</div>
-      <div class="product-name">Competitive Intelligence</div>
-      <div class="product-desc">Know your competition better than they know themselves. Traffic sources, content strategy, ad spend, positioning gaps.</div>
+      <div class="product-badge" data-en="Deep Dive" data-es="Análisis Profundo">Deep Dive</div>
+      <div class="product-name" data-en="Competitive Intelligence" data-es="Inteligencia Competitiva">Competitive Intelligence</div>
+      <div class="product-desc" data-en="Know your competition better than they know themselves. Traffic sources, content strategy, ad spend, positioning gaps." data-es="Conoce tu competencia mejor que ellos a sí mismos. Fuentes de tráfico, estrategia de contenido, gasto en publicidad, brechas de posicionamiento.">Know your competition better than they know themselves. Traffic sources, content strategy, ad spend, positioning gaps.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$497</div>
-          <div class="product-time">Delivered in 48h</div>
+          <div class="product-time" data-en="Delivered in 48h" data-es="Entregado en 48h">Delivered in 48h</div>
         </div>
       </div>
     </div>
     <div class="product-card">
-      <div class="product-badge">Full Plan</div>
-      <div class="product-name">Business Plan + Financials</div>
-      <div class="product-desc">Complete business plan with market analysis and a working Excel financial model with 3-year projections you can edit.</div>
+      <div class="product-badge" data-en="Full Plan" data-es="Plan Completo">Full Plan</div>
+      <div class="product-name" data-en="Business Plan + Financials" data-es="Plan de Negocio + Financieros">Business Plan + Financials</div>
+      <div class="product-desc" data-en="Complete business plan with market analysis and a working Excel financial model with 3-year projections you can edit." data-es="Plan de negocio completo con análisis de mercado y un modelo financiero de Excel funcional con proyecciones de 3 años que puedes editar.">Complete business plan with market analysis and a working Excel financial model with 3-year projections you can edit.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$1,497</div>
-          <div class="product-time">Delivered in 72h</div>
+          <div class="product-time" data-en="Delivered in 72h" data-es="Entregado en 72h">Delivered in 72h</div>
         </div>
       </div>
     </div>
     <div class="product-card">
-      <div class="product-badge">Quick</div>
-      <div class="product-name">Market Research Brief</div>
-      <div class="product-desc">Focused research on a specific market. TAM/SAM/SOM sizing, key players, trends, and current data packaged for your board.</div>
+      <div class="product-badge" data-en="Quick" data-es="Rápido">Quick</div>
+      <div class="product-name" data-en="Market Research Brief" data-es="Resumen de Investigación de Mercado">Market Research Brief</div>
+      <div class="product-desc" data-en="Focused research on a specific market. TAM/SAM/SOM sizing, key players, trends, and current data packaged for your board." data-es="Investigación enfocada en un mercado específico. Dimensionamiento TAM/SAM/SOM, actores clave, tendencias y datos actuales empaquetados para tu junta.">Focused research on a specific market. TAM/SAM/SOM sizing, key players, trends, and current data packaged for your board.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$397</div>
-          <div class="product-time">Delivered in 48h</div>
+          <div class="product-time" data-en="Delivered in 48h" data-es="Entregado en 48h">Delivered in 48h</div>
         </div>
       </div>
     </div>
     <div class="product-card">
-      <div class="product-badge">Ongoing</div>
-      <div class="product-name">Monthly Radar</div>
-      <div class="product-desc">Competitive monitoring that never stops. Track your 5 competitors, keyword movements, traffic shifts, and emerging threats monthly.</div>
+      <div class="product-badge" data-en="Ongoing" data-es="Continuo">Ongoing</div>
+      <div class="product-name" data-en="Monthly Radar" data-es="Radar Mensual">Monthly Radar</div>
+      <div class="product-desc" data-en="Competitive monitoring that never stops. Track your 5 competitors, keyword movements, traffic shifts, and emerging threats monthly." data-es="Monitoreo competitivo que nunca se detiene. Rastrea tus 5 competidores, movimientos de palabras clave, cambios de tráfico y amenazas emergentes mensualmente.">Competitive monitoring that never stops. Track your 5 competitors, keyword movements, traffic shifts, and emerging threats monthly.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$197<span>/mo</span></div>
-          <div class="product-time">Every month, on schedule</div>
+          <div class="product-time" data-en="Every month, on schedule" data-es="Cada mes, a tiempo">Every month, on schedule</div>
         </div>
       </div>
     </div>
@@ -261,72 +278,66 @@ footer{max-width:1400px;margin:0 auto;padding:60px 40px;border-top:1px solid var
 </section>
 
 <section class="how-section">
-  <div class="section-label">How It Works</div>
-  <div class="section-title">Three steps. No meetings. No surprises.</div>
+  <div class="section-label" data-en="How It Works" data-es="Cómo Funciona">How It Works</div>
+  <div class="section-title" data-en="Three steps. No meetings. No surprises." data-es="Tres pasos. Sin reuniones. Sin sorpresas.">Three steps. No meetings. No surprises.</div>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
-      <h3>Send your brief</h3>
-      <p>Tell us what you need: your domain, competitors, goals. We'll ask clarifying questions if needed. Takes 5 minutes.</p>
+      <h3 data-en="Send your brief" data-es="Envía tu resumen">Send your brief</h3>
+      <p data-en="Tell us what you need: your domain, competitors, goals. We'll ask clarifying questions if needed. Takes 5 minutes." data-es="Cuéntanos qué necesitas: tu dominio, competidores, objetivos. Haremos preguntas aclaratorias si es necesario. Toma 5 minutos.">Tell us what you need: your domain, competitors, goals. We'll ask clarifying questions if needed. Takes 5 minutes.</p>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <h3>We build your report</h3>
-      <p>Real data pulls, competitive analysis, market research — compiled into a professional document designed to impress.</p>
+      <h3 data-en="We build your report" data-es="Construimos tu reporte">We build your report</h3>
+      <p data-en="Real data pulls, competitive analysis, market research — compiled into a professional document designed to impress." data-es="Extracciones de datos reales, análisis competitivo, investigación de mercado — compilados en un documento profesional diseñado para impresionar.">Real data pulls, competitive analysis, market research — compiled into a professional document designed to impress.</p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <h3>Download and present</h3>
-      <p>PPTX, XLSX, or PDF ready to send to your board, investors, or team. One round of revisions included.</p>
-    </div>
-  </div>
-</section>
-
-<section class="objection-section">
-  <div class="section-label">Common Questions</div>
-  <div class="section-title">Everything you need to know.</div>
-  <div style="max-width:700px;margin:60px auto 0">
-    <div class="faq-item open">
-      <div class="faq-q">Is the data actually live or AI-generated?<span>▼</span></div>
-      <div class="faq-a">Live. We pull data from Semrush (professional SEO and competitive intelligence tool) and current market sources. Zero hallucinations. Every report includes sources so you can verify the data yourself.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I get revisions?<span>▼</span></div>
-      <div class="faq-a">Yes. One round of revisions is included with every report. If you need substantial changes, we can discuss additional rounds.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What if I'm not happy with the report?<span>▼</span></div>
-      <div class="faq-a">We'll revise it until it meets your expectations, or refund you completely. No questions asked. We're confident in what we deliver.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">How is this different from hiring a consultant?<span>▼</span></div>
-      <div class="faq-a">Speed and price. Consultants take weeks and charge $5K-20K. We deliver in 48 hours at a fraction of the cost. You get 80% of the insight at 20% of the price.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I use these reports for investor pitches?<span>▼</span></div>
-      <div class="faq-a">Absolutely. Our reports are designed specifically for that — professional formatting, credible data, investor-ready presentation. Many of our clients use them in pitches.</div>
+      <h3 data-en="Download and present" data-es="Descarga y presenta">Download and present</h3>
+      <p data-en="PPTX, XLSX, or PDF ready to send to your board, investors, or team. One round of revisions included." data-es="PPTX, XLSX o PDF listo para enviar a tu junta, inversores o equipo. Una ronda de revisiones incluida.">PPTX, XLSX, or PDF ready to send to your board, investors, or team. One round of revisions included.</p>
     </div>
   </div>
 </section>
 
 <section class="guarantee-section">
-  <h3>No-Risk Guarantee</h3>
-  <p>If the report doesn't meet your expectations, you don't pay. We'll revise it until it does, or refund you completely. Your success is our only metric.</p>
+  <h3 data-en="No-Risk Guarantee" data-es="Garantía Sin Riesgo">No-Risk Guarantee</h3>
+  <p data-en="If the report doesn't meet your expectations, you don't pay. We'll revise it until it does, or refund you completely. Your success is our only metric." data-es="Si el reporte no cumple tus expectativas, no pagas. Lo revisaremos hasta que lo haga, o te reembolsamos completamente. Tu éxito es nuestra única métrica.">If the report doesn't meet your expectations, you don't pay. We'll revise it until it does, or refund you completely. Your success is our only metric.</p>
 </section>
 
 <section class="final-cta">
-  <h2>Your competitors are deciding with data. Are you?</h2>
-  <p>Get your first intelligence report in 48 hours. No long-term commitments. No BS. Just real insight that moves the needle.</p>
-  <a href="mailto:hello@briefops.online" class="cta-primary">Get Started Now</a>
+  <h2 data-en="Your competitors are deciding with data. Are you?" data-es="Tus competidores están decidiendo con datos. ¿Y tú?">Your competitors are deciding with data. Are you?</h2>
+  <p data-en="Get your first intelligence report in 48 hours. No long-term commitments. No BS. Just real insight that moves the needle." data-es="Obtén tu primer reporte de inteligencia en 48 horas. Sin compromisos a largo plazo. Sin BS. Solo insight real que mueve la aguja.">Get your first intelligence report in 48 hours. No long-term commitments. No BS. Just real insight that moves the needle.</p>
+  <a href="mailto:hello@briefops.online" class="cta-primary" data-en="Get Started Now" data-es="Comenzar Ahora">Get Started Now</a>
 </section>
 
 <footer>
-  <div class="logo">Brief<span>Ops</span></div>
-  <div>© 2026 BriefOps. Data-driven intelligence for founders.</div>
+  <div class="logo">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="2" y="2" width="28" height="28" rx="4"></rect>
+      <circle cx="16" cy="16" r="6"></circle>
+      <path d="M16 8v-2M16 26v2M8 16h-2M26 16h2"></path>
+    </svg>
+    <span>BriefOps</span>
+  </div>
+  <div data-en="© 2026 BriefOps. Data-driven intelligence for founders." data-es="© 2026 BriefOps. Inteligencia impulsada por datos para fundadores.">© 2026 BriefOps. Data-driven intelligence for founders.</div>
   <a href="mailto:hello@briefops.online">hello@briefops.online</a>
 </footer>
 
 <script>
+let currentLang = 'en';
+
+document.getElementById('langSwitch').addEventListener('change', (e) => {
+  currentLang = e.target.value;
+  updateLanguage();
+});
+
+function updateLanguage() {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = el.getAttribute(`data-${currentLang}`);
+  });
+  document.documentElement.lang = currentLang;
+}
+
 document.querySelectorAll('.faq-item').forEach(item => {
   item.querySelector('.faq-q').addEventListener('click', () => {
     item.classList.toggle('open');
