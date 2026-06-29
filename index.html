@@ -4,94 +4,415 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BriefOps — Intelligence Reports That Close Deals</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 :root{
-  --bg:#0F172E;--surface:#1A2847;--surface2:#232F4A;--border:#334155;
-  --text:#F8FAFC;--text2:#CBD5E1;--accent:#FF6B35;--accent-dim:rgba(255,107,53,0.12);
-  --accent-glow:rgba(255,107,53,0.25);--secondary:#00D9FF;
+  --bg:#F8F6F3;--surface:#FFFFFF;--surface2:#FAF8F5;--border:#E8E6E3;
+  --text:#1F1F1F;--text2:#6B6B6B;--primary:#2C3E50;--accent:#C9A961;
+  --accent-light:rgba(201,169,97,0.15);--primary-light:rgba(44,62,80,0.08);
 }
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+body{
+  font-family:'Poppins',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
 a{text-decoration:none;color:inherit}
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 40px;max-width:1400px;margin:0 auto;position:relative;z-index:100}
-.logo{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px}
-.logo svg{width:32px;height:32px}
-.nav-right{display:flex;align-items:center;gap:24px}
-.lang-selector{background:transparent;border:1px solid var(--border);color:var(--text2);padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s}
-.lang-selector:hover{border-color:var(--accent);color:var(--accent)}
-.nav-cta{font-size:14px;font-weight:600;color:var(--bg);background:var(--accent);padding:12px 26px;border-radius:10px;transition:all .3s;box-shadow:0 4px 16px rgba(255,107,53,0.3)}
-.nav-cta:hover{box-shadow:0 8px 32px rgba(255,107,53,0.5);transform:translateY(-2px)}
-.hidden{display:none}
-.hero{max-width:1400px;margin:0 auto;padding:100px 40px 80px;text-align:center}
-.hero-accent{display:inline-block;background:var(--accent-dim);border:1px solid rgba(255,107,53,0.3);padding:10px 20px;border-radius:50px;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:32px;letter-spacing:0.05em;text-transform:uppercase}
-.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,7vw,72px);font-weight:700;line-height:1.1;letter-spacing:-0.04em;max-width:900px;margin:0 auto 24px}
-.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 30px rgba(255,107,53,0.3)}
-.hero p{font-size:18px;color:var(--text2);max-width:620px;margin:0 auto 48px;line-height:1.8}
-.hero-ctas{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-.cta-primary{font-size:16px;font-weight:600;color:var(--bg);background:var(--accent);padding:18px 40px;border-radius:12px;transition:all .3s;box-shadow:0 8px 24px rgba(255,107,53,0.3);border:none;cursor:pointer}
-.cta-primary:hover{box-shadow:0 12px 40px rgba(255,107,53,0.5);transform:translateY(-3px)}
-.cta-ghost{font-size:16px;font-weight:500;color:var(--text);border:1.5px solid var(--text2);padding:18px 40px;border-radius:12px;transition:all .3s;background:transparent}
-.cta-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.trust-bar{max-width:1400px;margin:0 auto;padding:0 40px 80px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;text-align:center;border-bottom:1px solid var(--border)}
-.trust-item{flex:1;min-width:150px}
-.trust-number{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--accent)}
-.trust-label{font-size:13px;color:var(--text2);margin-top:6px;text-transform:uppercase;letter-spacing:0.05em}
-.pain-section{max-width:1400px;margin:0 auto;padding:100px 40px}
-.section-label{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-bottom:16px}
-.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-0.03em;margin-bottom:20px;max-width:700px}
-.section-sub{font-size:17px;color:var(--text2);max-width:600px;margin-bottom:60px;line-height:1.8}
-.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
-.pain-card{padding:40px;background:var(--surface);border:1px solid var(--border);border-radius:16px;transition:all .3s}
-.pain-card:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-4px)}
+
+/* ANIMATIONS */
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes slideInLeft{
+  from{opacity:0;transform:translateX(-30px)}
+  to{opacity:1;transform:translateX(0)}
+}
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:0.8}
+}
+@keyframes glow{
+  0%{box-shadow:0 0 0 0 rgba(201,169,97,0.3)}
+  50%{box-shadow:0 0 0 8px rgba(201,169,97,0)}
+  100%{box-shadow:0 0 0 0 rgba(201,169,97,0)}
+}
+
+.fade-in{animation:fadeInUp 0.8s ease-out forwards;opacity:0}
+.fade-in-delay-1{animation-delay:0.1s}
+.fade-in-delay-2{animation-delay:0.2s}
+.fade-in-delay-3{animation-delay:0.3s}
+
+/* NAVIGATION */
+nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(248,246,243,0.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:20px 40px;
+}
+nav-content{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;
+  letter-spacing:-0.5px;
+  animation:slideInLeft 0.8s ease-out;
+}
+.logo::before{
+  content:'';width:24px;height:24px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  border-radius:4px;
+}
+.nav-right{display:flex;gap:20px;align-items:center}
+.lang-selector{
+  background:transparent;border:1px solid var(--border);
+  color:var(--text2);padding:8px 14px;border-radius:6px;
+  font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all 0.3s;
+}
+.lang-selector:hover{border-color:var(--primary);color:var(--primary)}
+.nav-cta{
+  background:var(--primary);color:white;
+  padding:12px 28px;border-radius:6px;
+  font-size:14px;font-weight:600;
+  transition:all 0.3s;
+}
+.nav-cta:hover{
+  background:var(--accent);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(44,62,80,0.2);
+}
+
+/* HERO */
+.hero{
+  max-width:1400px;margin:0 auto;
+  padding:120px 40px 80px;text-align:center;
+}
+.hero-accent{
+  display:inline-block;
+  background:var(--accent-light);border:1px solid rgba(201,169,97,0.3);
+  padding:10px 20px;border-radius:4px;
+  font-size:12px;font-weight:600;
+  color:var(--primary);letter-spacing:0.08em;
+  text-transform:uppercase;margin-bottom:32px;
+  animation:fadeInUp 0.8s ease-out;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,8vw,72px);
+  font-weight:700;line-height:1.1;
+  letter-spacing:-1px;
+  margin-bottom:24px;max-width:900px;margin-left:auto;margin-right:auto;
+  animation:fadeInUp 0.8s ease-out 0.1s forwards;opacity:0;
+}
+.hero h1 em{
+  font-style:normal;color:var(--accent);
+  text-decoration:underline;text-decoration-thickness:3px;
+  text-underline-offset:6px;
+}
+.hero p{
+  font-size:18px;color:var(--text2);
+  max-width:620px;margin:0 auto 48px;line-height:1.8;
+  animation:fadeInUp 0.8s ease-out 0.2s forwards;opacity:0;
+}
+.hero-ctas{
+  display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
+  animation:fadeInUp 0.8s ease-out 0.3s forwards;opacity:0;
+}
+.cta-primary{
+  background:var(--primary);color:white;
+  padding:18px 40px;border-radius:6px;
+  font-family:'Poppins',sans-serif;
+  font-size:16px;font-weight:600;
+  border:none;cursor:pointer;
+  transition:all 0.3s;
+  box-shadow:0 8px 24px rgba(44,62,80,0.15);
+}
+.cta-primary:hover{
+  background:var(--accent);
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(201,169,97,0.3);
+}
+.cta-ghost{
+  color:var(--primary);border:2px solid var(--primary);
+  padding:16px 40px;border-radius:6px;
+  font-family:'Poppins',sans-serif;
+  font-size:16px;font-weight:600;
+  background:transparent;cursor:pointer;
+  transition:all 0.3s;
+}
+.cta-ghost:hover{
+  background:var(--primary-light);
+  transform:translateY(-3px);
+}
+
+/* TRUST BAR */
+.trust-bar{
+  max-width:1400px;margin:0 auto;
+  padding:80px 40px;
+  display:flex;justify-content:center;gap:60px;flex-wrap:wrap;
+  text-align:center;border-bottom:1px solid var(--border);
+}
+.trust-item{flex:1;min-width:150px;animation:fadeInUp 0.8s ease-out forwards;opacity:0}
+.trust-item:nth-child(1){animation-delay:0.2s}
+.trust-item:nth-child(2){animation-delay:0.3s}
+.trust-item:nth-child(3){animation-delay:0.4s}
+.trust-item:nth-child(4){animation-delay:0.5s}
+.trust-number{
+  font-family:'Playfair Display',serif;
+  font-size:40px;font-weight:700;
+  color:var(--primary);
+}
+.trust-label{
+  font-size:12px;color:var(--text2);
+  margin-top:8px;text-transform:uppercase;
+  letter-spacing:0.06em;font-weight:500;
+}
+
+/* SECTIONS */
+.section{max-width:1400px;margin:0 auto;padding:100px 40px}
+.section-label{
+  font-size:12px;color:var(--primary);
+  text-transform:uppercase;letter-spacing:0.08em;
+  font-weight:600;margin-bottom:16px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,6vw,56px);
+  font-weight:700;letter-spacing:-1px;
+  margin-bottom:24px;max-width:700px;
+  animation:fadeInUp 0.8s ease-out forwards;opacity:0;
+}
+.section-sub{
+  font-size:17px;color:var(--text2);
+  max-width:600px;margin-bottom:60px;line-height:1.8;
+  animation:fadeInUp 0.8s ease-out 0.1s forwards;opacity:0;
+}
+
+/* PAIN CARDS */
+.pain-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:32px;
+}
+.pain-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:40px;border-radius:8px;
+  transition:all 0.4s;
+  animation:fadeInUp 0.8s ease-out forwards;opacity:0;
+}
+.pain-card:nth-child(1){animation-delay:0.2s}
+.pain-card:nth-child(2){animation-delay:0.3s}
+.pain-card:nth-child(3){animation-delay:0.4s}
+.pain-card:hover{
+  border-color:var(--accent);
+  box-shadow:0 12px 32px rgba(44,62,80,0.1);
+  transform:translateY(-4px);
+}
 .pain-icon{font-size:32px;margin-bottom:16px}
-.pain-card h3{font-size:18px;font-weight:600;margin-bottom:12px}
+.pain-card h3{
+  font-size:18px;font-weight:700;
+  margin-bottom:12px;color:var(--primary);
+}
 .pain-card p{font-size:15px;color:var(--text2);line-height:1.7}
-.solution-section{max-width:1400px;margin:0 auto;padding:100px 40px;background:linear-gradient(135deg,rgba(255,107,53,0.08),rgba(0,217,255,0.04));border-radius:20px;margin-left:40px;margin-right:40px;border:1px solid rgba(255,107,53,0.1)}
-.solution-section .section-title{color:var(--text)}
-.solution-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;margin-top:60px}
-.solution-item{display:flex;gap:20px}
-.solution-check{width:28px;height:28px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bg);flex-shrink:0;margin-top:2px}
-.solution-item h3{font-size:16px;font-weight:600;margin-bottom:8px}
+
+/* SOLUTION */
+.solution-section{
+  max-width:1400px;margin:0 auto 100px;
+  padding:80px 40px;
+  background:linear-gradient(135deg,var(--primary-light),var(--accent-light));
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-left:40px;margin-right:40px;
+}
+.solution-list{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:40px;margin-top:60px;
+}
+.solution-item{
+  display:flex;gap:20px;
+  animation:fadeInUp 0.8s ease-out forwards;opacity:0;
+}
+.solution-item:nth-child(1){animation-delay:0.2s}
+.solution-item:nth-child(2){animation-delay:0.3s}
+.solution-item:nth-child(3){animation-delay:0.4s}
+.solution-item:nth-child(4){animation-delay:0.5s}
+.solution-check{
+  width:28px;height:28px;
+  background:var(--accent);color:white;
+  border-radius:50%;display:flex;
+  align-items:center;justify-content:center;
+  font-weight:700;flex-shrink:0;
+}
+.solution-item h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--primary)}
 .solution-item p{font-size:15px;color:var(--text2);line-height:1.7}
+
+/* PRODUCTS */
 .products-section{max-width:1400px;margin:0 auto;padding:100px 40px}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:60px}
-.product-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;display:flex;flex-direction:column;transition:all .3s}
-.product-card:hover{border-color:var(--accent);box-shadow:0 16px 48px rgba(255,107,53,0.15)}
-.product-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-dim);border:1px solid rgba(255,107,53,0.3);padding:6px 14px;border-radius:50px;font-size:11px;font-weight:600;color:var(--accent);margin-bottom:16px;width:fit-content;text-transform:uppercase;letter-spacing:0.04em}
-.product-name{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:12px}
-.product-desc{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:32px;flex-grow:1}
-.product-footer{display:flex;justify-content:space-between;align-items:flex-end;padding-top:24px;border-top:1px solid var(--border)}
-.product-price{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700}
-.product-price span{font-size:13px;font-weight:400;color:var(--text2)}
+.product-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:28px;margin-top:60px;
+}
+.product-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:40px;border-radius:8px;
+  display:flex;flex-direction:column;
+  transition:all 0.4s;
+  animation:fadeInUp 0.8s ease-out forwards;opacity:0;
+}
+.product-card:nth-child(1){animation-delay:0.15s}
+.product-card:nth-child(2){animation-delay:0.25s}
+.product-card:nth-child(3){animation-delay:0.35s}
+.product-card:nth-child(4){animation-delay:0.45s}
+.product-card:nth-child(5){animation-delay:0.55s}
+.product-card:nth-child(6){animation-delay:0.65s}
+.product-card:hover{
+  border-color:var(--accent);
+  box-shadow:0 16px 40px rgba(44,62,80,0.12);
+  transform:translateY(-4px);
+}
+.product-badge{
+  display:inline-flex;
+  background:var(--accent-light);border:1px solid rgba(201,169,97,0.3);
+  padding:6px 12px;border-radius:4px;
+  font-size:11px;font-weight:600;
+  color:var(--primary);text-transform:uppercase;
+  letter-spacing:0.05em;margin-bottom:16px;width:fit-content;
+}
+.product-name{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;
+  margin-bottom:12px;color:var(--primary);
+}
+.product-desc{
+  font-size:15px;color:var(--text2);
+  line-height:1.8;margin-bottom:32px;flex-grow:1;
+}
+.product-footer{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;padding-top:24px;
+  border-top:1px solid var(--border);
+}
+.product-price{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:700;
+  color:var(--primary);
+}
+.product-price span{
+  font-size:13px;font-weight:400;color:var(--text2);
+}
 .product-time{font-size:12px;color:var(--text2)}
+
+/* HOW SECTION */
 .how-section{max-width:1400px;margin:0 auto;padding:100px 40px}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;margin-top:60px}
-.step-num{font-family:'Space Grotesk',sans-serif;font-size:56px;font-weight:700;color:var(--accent);opacity:0.15;margin-bottom:16px;line-height:1}
-.step h3{font-size:18px;font-weight:600;margin-bottom:12px}
+.steps{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;margin-top:60px;
+}
+.step{animation:fadeInUp 0.8s ease-out forwards;opacity:0}
+.step:nth-child(1){animation-delay:0.2s}
+.step:nth-child(2){animation-delay:0.3s}
+.step:nth-child(3){animation-delay:0.4s}
+.step-num{
+  font-family:'Playfair Display',serif;
+  font-size:56px;font-weight:700;
+  color:var(--accent);opacity:0.2;
+  line-height:1;margin-bottom:16px;
+}
+.step h3{
+  font-size:18px;font-weight:700;
+  margin-bottom:12px;color:var(--primary);
+}
 .step p{font-size:15px;color:var(--text2);line-height:1.7}
+
+/* FAQ */
 .objection-section{max-width:1400px;margin:0 auto;padding:100px 40px}
-.faq-item{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.faq-item{
+  margin-bottom:20px;padding-bottom:20px;
+  border-bottom:1px solid var(--border);
+  animation:fadeInUp 0.8s ease-out forwards;opacity:0;
+}
+.faq-item:nth-child(1){animation-delay:0.15s}
+.faq-item:nth-child(2){animation-delay:0.25s}
+.faq-item:nth-child(3){animation-delay:0.35s}
+.faq-item:nth-child(4){animation-delay:0.45s}
+.faq-item:nth-child(5){animation-delay:0.55s}
 .faq-item:last-child{border:none}
-.faq-q{font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
-.faq-a{font-size:15px;color:var(--text2);margin-top:12px;line-height:1.7;display:none}
+.faq-q{
+  font-size:16px;font-weight:600;
+  cursor:pointer;display:flex;
+  justify-content:space-between;align-items:center;
+  color:var(--primary);transition:all 0.3s;
+}
+.faq-q:hover{color:var(--accent)}
+.faq-a{
+  font-size:15px;color:var(--text2);
+  margin-top:12px;line-height:1.7;display:none;
+}
 .faq-item.open .faq-a{display:block}
-.guarantee-section{max-width:1400px;margin:0 auto;padding:60px 40px;background:linear-gradient(135deg,rgba(255,107,53,0.1),rgba(0,217,255,0.05));border:1px solid rgba(255,107,53,0.2);border-radius:16px;text-align:center}
-.guarantee-section h3{font-size:24px;font-weight:700;margin-bottom:12px;color:var(--accent)}
-.guarantee-section p{font-size:16px;color:var(--text2);max-width:600px;margin:0 auto;line-height:1.8}
-.final-cta{max-width:1400px;margin:0 auto;padding:120px 40px;text-align:center}
-.final-cta h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-0.03em;margin-bottom:20px}
-.final-cta p{font-size:18px;color:var(--text2);max-width:600px;margin:0 auto 48px;line-height:1.8}
-footer{max-width:1400px;margin:0 auto;padding:60px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--text2);flex-wrap:wrap;gap:20px}
+
+/* GUARANTEE */
+.guarantee-section{
+  max-width:1400px;margin:0 auto;
+  padding:60px 40px;
+  background:var(--primary-light);
+  border:1px solid rgba(44,62,80,0.2);
+  border-radius:8px;text-align:center;
+  animation:fadeInUp 0.8s ease-out;
+}
+.guarantee-section h3{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:700;
+  margin-bottom:12px;color:var(--primary);
+}
+.guarantee-section p{
+  font-size:16px;color:var(--text2);
+  max-width:600px;margin:0 auto;line-height:1.8;
+}
+
+/* FINAL CTA */
+.final-cta{
+  max-width:1400px;margin:0 auto;
+  padding:120px 40px;text-align:center;
+}
+.final-cta h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,6vw,56px);
+  font-weight:700;letter-spacing:-1px;
+  margin-bottom:20px;
+  animation:fadeInUp 0.8s ease-out;
+}
+.final-cta p{
+  font-size:18px;color:var(--text2);
+  max-width:600px;margin:0 auto 48px;line-height:1.8;
+  animation:fadeInUp 0.8s ease-out 0.1s forwards;opacity:0;
+}
+
+/* FOOTER */
+footer{
+  max-width:1400px;margin:0 auto;
+  padding:60px 40px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;
+  align-items:center;font-size:14px;color:var(--text2);
+  flex-wrap:wrap;gap:20px;
+}
+
+.hidden{display:none}
+
 @media(max-width:768px){
-  nav{padding:16px 20px}.nav-right{gap:12px}.lang-selector,.nav-cta{padding:10px 16px;font-size:12px}
-  .hero{padding:60px 20px 50px}.hero h1{font-size:36px}
-  .hero-ctas{gap:12px}.cta-primary,.cta-ghost{padding:14px 28px;font-size:14px}
-  .trust-bar{gap:30px;padding:0 20px 50px}.trust-number{font-size:24px}
-  .pain-section,.solution-section,.products-section,.how-section,.objection-section,.final-cta{padding:60px 20px}
+  nav{padding:16px 20px}
+  .hero{padding:60px 20px 50px}
+  .hero h1{font-size:36px}
+  .trust-bar{gap:20px;padding:60px 20px}
+  .trust-number{font-size:32px}
+  .section{padding:60px 20px}
   .solution-section{margin-left:20px;margin-right:20px}
-  .product-grid{gap:20px}.step-num{font-size:40px}
   footer{flex-direction:column;align-items:center;text-align:center;padding:40px 20px}
 }
 </style>
@@ -99,20 +420,15 @@ footer{max-width:1400px;margin:0 auto;padding:60px 40px;border-top:1px solid var
 <body>
 
 <nav>
-  <div class="logo">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="2" y="2" width="28" height="28" rx="4"></rect>
-      <circle cx="16" cy="16" r="6"></circle>
-      <path d="M16 8v-2M16 26v2M8 16h-2M26 16h2"></path>
-    </svg>
-    <span data-en="BriefOps" data-es="BriefOps">BriefOps</span>
-  </div>
-  <div class="nav-right">
-    <select class="lang-selector" id="langSwitch">
-      <option value="en">English</option>
-      <option value="es">Español</option>
-    </select>
-    <a href="mailto:hello@briefops.online" class="nav-cta" data-en="Start Now" data-es="Comenzar">Start Now</a>
+  <div style="max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;width:100%">
+    <div class="logo" data-en="BriefOps" data-es="BriefOps">BriefOps</div>
+    <div class="nav-right">
+      <select class="lang-selector" id="langSwitch">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+      <a href="mailto:hello@briefops.online" class="nav-cta" data-en="Start Now" data-es="Comenzar">Start Now</a>
+    </div>
   </div>
 </nav>
 
@@ -145,7 +461,7 @@ footer{max-width:1400px;margin:0 auto;padding:60px 40px;border-top:1px solid var
   </div>
 </section>
 
-<section class="pain-section">
+<section class="section pain-section">
   <div class="section-label" data-en="The Problem" data-es="El Problema">The Problem</div>
   <div class="section-title" data-en="You're making decisions blind." data-es="Estás tomando decisiones a ciegas.">You're making decisions blind.</div>
   <div class="section-sub" data-en="Every day you're guessing about market size, competitor moves, and what investors actually care about. And when you need answers, your options are bad:" data-es="Cada día adivinas sobre el tamaño del mercado, los movimientos de los competidores y lo que realmente les importa a los inversores. Y cuando necesitas respuestas, tus opciones son malas:">Every day you're guessing about market size, competitor moves, and what investors actually care about. And when you need answers, your options are bad:</div>
@@ -169,156 +485,178 @@ footer{max-width:1400px;margin:0 auto;padding:60px 40px;border-top:1px solid var
 </section>
 
 <section class="solution-section">
-  <div class="section-label" data-en="The Solution" data-es="La Solución">The Solution</div>
-  <div class="section-title" data-en="Real intelligence. Real data. Real speed." data-es="Inteligencia real. Datos reales. Velocidad real.">Real intelligence. Real data. Real speed.</div>
-  <div class="section-sub" data-en="BriefOps delivers professional reports with live market data, analyzed and formatted, ready to present or act on." data-es="BriefOps entrega reportes profesionales con datos de mercado en vivo, analizados y formateados, listos para presentar o actuar.">BriefOps delivers professional reports with live market data, analyzed and formatted, ready to present or act on.</div>
-  <div class="solution-list">
-    <div class="solution-item">
-      <div class="solution-check">✓</div>
-      <div>
-        <h3 data-en="Live data from Semrush" data-es="Datos en vivo de Semrush">Live data from Semrush</h3>
-        <p data-en="Real search rankings, competitor traffic, backlink profiles. Not AI-generated guesses. Actual market intelligence." data-es="Rankings reales de búsqueda, tráfico de competidores, perfiles de enlaces de retroceso. No son adivinanzas generadas por IA. Inteligencia de mercado real.">Real search rankings, competitor traffic, backlink profiles. Not AI-generated guesses. Actual market intelligence.</p>
+  <div style="max-width:1400px;margin:0 auto">
+    <div class="section-label" data-en="The Solution" data-es="La Solución">The Solution</div>
+    <div class="section-title" data-en="Real intelligence. Real data. Real speed." data-es="Inteligencia real. Datos reales. Velocidad real.">Real intelligence. Real data. Real speed.</div>
+    <div class="section-sub" data-en="BriefOps delivers professional reports with live market data, analyzed and formatted, ready to present or act on." data-es="BriefOps entrega reportes profesionales con datos de mercado en vivo, analizados y formateados, listos para presentar o actuar.">BriefOps delivers professional reports with live market data, analyzed and formatted, ready to present or act on.</div>
+    <div class="solution-list">
+      <div class="solution-item">
+        <div class="solution-check">✓</div>
+        <div>
+          <h3 data-en="Live data from Semrush" data-es="Datos en vivo de Semrush">Live data from Semrush</h3>
+          <p data-en="Real search rankings, competitor traffic, backlink profiles. Not AI-generated guesses. Actual market intelligence." data-es="Rankings reales de búsqueda, tráfico de competidores, perfiles de enlaces. Inteligencia de mercado real.">Real search rankings, competitor traffic, backlink profiles. Not AI-generated guesses.</p>
+        </div>
       </div>
-    </div>
-    <div class="solution-item">
-      <div class="solution-check">✓</div>
-      <div>
-        <h3 data-en="48-hour turnaround" data-es="Entrega en 48 horas">48-hour turnaround</h3>
-        <p data-en="You send the brief. We pull the data. You have the report. No waiting for meetings or revisions." data-es="Envías el resumen. Sacamos los datos. Tienes el reporte. Sin esperar reuniones o revisiones.">You send the brief. We pull the data. You have the report. No waiting for meetings or revisions.</p>
+      <div class="solution-item">
+        <div class="solution-check">✓</div>
+        <div>
+          <h3 data-en="48-hour turnaround" data-es="Entrega en 48 horas">48-hour turnaround</h3>
+          <p data-en="You send the brief. We pull the data. You have the report. No waiting for meetings or revisions." data-es="Envías el resumen. Sacamos los datos. Tienes el reporte. Sin esperar reuniones.">You send the brief. We pull the data. You have the report.</p>
+        </div>
       </div>
-    </div>
-    <div class="solution-item">
-      <div class="solution-check">✓</div>
-      <div>
-        <h3 data-en="Presentation-ready documents" data-es="Documentos listos para presentar">Presentation-ready documents</h3>
-        <p data-en="PPTX, XLSX, PDF — formatted professionally. You download it and share with your board or investors immediately." data-es="PPTX, XLSX, PDF — formateados profesionalmente. Descárgalo y comparte con tu junta o inversores inmediatamente.">PPTX, XLSX, PDF — formatted professionally. You download it and share with your board or investors immediately.</p>
+      <div class="solution-item">
+        <div class="solution-check">✓</div>
+        <div>
+          <h3 data-en="Presentation-ready documents" data-es="Documentos listos para presentar">Presentation-ready documents</h3>
+          <p data-en="PPTX, XLSX, PDF — formatted professionally. You download and share immediately." data-es="PPTX, XLSX, PDF — formateados profesionalmente. Descarga y comparte inmediatamente.">PPTX, XLSX, PDF — formatted professionally.</p>
+        </div>
       </div>
-    </div>
-    <div class="solution-item">
-      <div class="solution-check">✓</div>
-      <div>
-        <h3 data-en="Human-reviewed every time" data-es="Revisado por humanos cada vez">Human-reviewed every time</h3>
-        <p data-en="Not a robot output. Each report is reviewed for quality and accuracy before you get it." data-es="No es un resultado de robot. Cada reporte se revisa por calidad y precisión antes de que lo recibas.">Not a robot output. Each report is reviewed for quality and accuracy before you get it.</p>
+      <div class="solution-item">
+        <div class="solution-check">✓</div>
+        <div>
+          <h3 data-en="Human-reviewed every time" data-es="Revisado por humanos">Human-reviewed every time</h3>
+          <p data-en="Not a robot output. Each report is reviewed for quality and accuracy before you get it." data-es="No es un resultado de robot. Cada reporte se revisa por calidad.">Not a robot output. Each report is reviewed for quality.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="products-section" id="products">
+<section class="section products-section" id="products">
   <div class="section-label" data-en="What We Deliver" data-es="Lo Que Entregamos">What We Deliver</div>
   <div class="section-title" data-en="Reports that win funding and close deals." data-es="Reportes que ganan financiamiento y cierran tratos.">Reports that win funding and close deals.</div>
   <div class="product-grid">
     <div class="product-card">
       <div class="product-badge" data-en="Most Popular" data-es="Más Popular">Most Popular</div>
-      <div class="product-name" data-en="SEO & Market Audit" data-es="Auditoría de SEO y Mercado">SEO & Market Audit</div>
-      <div class="product-desc" data-en="Understand your competitive position. What keywords you're winning, where you're losing, what competitors leave open for you." data-es="Comprende tu posición competitiva. Qué palabras clave estás ganando, dónde estás perdiendo, qué dejan abierto los competidores para ti.">Understand your competitive position. What keywords you're winning, where you're losing, what competitors leave open for you.</div>
+      <div class="product-name" data-en="SEO & Market Audit" data-es="Auditoría de SEO">SEO & Market Audit</div>
+      <div class="product-desc" data-en="Understand your competitive position. What keywords you're winning, where you're losing, what competitors leave open." data-es="Comprende tu posición competitiva. Palabras clave que ganas, dónde pierdes, lo que dejan los competidores.">Understand your competitive position. What keywords you're winning, where you're losing, what competitors leave open.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$297</div>
-          <div class="product-time" data-en="Delivered in 48h" data-es="Entregado en 48h">Delivered in 48h</div>
+          <div class="product-time" data-en="48h delivery" data-es="Entrega en 48h">48h delivery</div>
         </div>
       </div>
     </div>
     <div class="product-card">
       <div class="product-badge" data-en="Investor Ready" data-es="Listo para Inversores">Investor Ready</div>
-      <div class="product-name" data-en="Investor Pitch Deck" data-es="Presentación para Inversores">Investor Pitch Deck</div>
-      <div class="product-desc" data-en="The presentation you send to VCs. Market sizing, competitive landscape, business model, traction narrative, financial overview." data-es="La presentación que envías a VCs. Dimensionamiento del mercado, panorama competitivo, modelo de negocio, narrativa de tracción, descripción financiera.">The presentation you send to VCs. Market sizing, competitive landscape, business model, traction narrative, financial overview.</div>
+      <div class="product-name" data-en="Investor Pitch Deck" data-es="Presentación para VCs">Investor Pitch Deck</div>
+      <div class="product-desc" data-en="Market sizing, competitive landscape, business model, traction narrative, financial overview." data-es="Dimensionamiento, competencia, modelo, tracción, financieros.">Market sizing, competitive landscape, business model, traction narrative, financial overview.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$997</div>
-          <div class="product-time" data-en="Delivered in 72h" data-es="Entregado en 72h">Delivered in 72h</div>
+          <div class="product-time" data-en="72h delivery" data-es="Entrega en 72h">72h delivery</div>
         </div>
       </div>
     </div>
     <div class="product-card">
       <div class="product-badge" data-en="Deep Dive" data-es="Análisis Profundo">Deep Dive</div>
       <div class="product-name" data-en="Competitive Intelligence" data-es="Inteligencia Competitiva">Competitive Intelligence</div>
-      <div class="product-desc" data-en="Know your competition better than they know themselves. Traffic sources, content strategy, ad spend, positioning gaps." data-es="Conoce tu competencia mejor que ellos a sí mismos. Fuentes de tráfico, estrategia de contenido, gasto en publicidad, brechas de posicionamiento.">Know your competition better than they know themselves. Traffic sources, content strategy, ad spend, positioning gaps.</div>
+      <div class="product-desc" data-en="Traffic sources, content strategy, ad spend, positioning gaps. Know them better than they know themselves." data-es="Tráfico, contenido, gasto, brechas. Conócelos mejor que ellos mismos.">Traffic sources, content strategy, ad spend, positioning gaps.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$497</div>
-          <div class="product-time" data-en="Delivered in 48h" data-es="Entregado en 48h">Delivered in 48h</div>
+          <div class="product-time" data-en="48h delivery" data-es="Entrega en 48h">48h delivery</div>
         </div>
       </div>
     </div>
     <div class="product-card">
       <div class="product-badge" data-en="Full Plan" data-es="Plan Completo">Full Plan</div>
-      <div class="product-name" data-en="Business Plan + Financials" data-es="Plan de Negocio + Financieros">Business Plan + Financials</div>
-      <div class="product-desc" data-en="Complete business plan with market analysis and a working Excel financial model with 3-year projections you can edit." data-es="Plan de negocio completo con análisis de mercado y un modelo financiero de Excel funcional con proyecciones de 3 años que puedes editar.">Complete business plan with market analysis and a working Excel financial model with 3-year projections you can edit.</div>
+      <div class="product-name" data-en="Business Plan + Financials" data-es="Plan + Financieros">Business Plan + Financials</div>
+      <div class="product-desc" data-en="Complete business plan with market analysis and Excel financial model with 3-year projections." data-es="Plan completo con análisis de mercado y modelo Excel con 3 años de proyecciones.">Complete business plan with market analysis and Excel model with projections.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$1,497</div>
-          <div class="product-time" data-en="Delivered in 72h" data-es="Entregado en 72h">Delivered in 72h</div>
+          <div class="product-time" data-en="72h delivery" data-es="Entrega en 72h">72h delivery</div>
         </div>
       </div>
     </div>
     <div class="product-card">
       <div class="product-badge" data-en="Quick" data-es="Rápido">Quick</div>
-      <div class="product-name" data-en="Market Research Brief" data-es="Resumen de Investigación de Mercado">Market Research Brief</div>
-      <div class="product-desc" data-en="Focused research on a specific market. TAM/SAM/SOM sizing, key players, trends, and current data packaged for your board." data-es="Investigación enfocada en un mercado específico. Dimensionamiento TAM/SAM/SOM, actores clave, tendencias y datos actuales empaquetados para tu junta.">Focused research on a specific market. TAM/SAM/SOM sizing, key players, trends, and current data packaged for your board.</div>
+      <div class="product-name" data-en="Market Research Brief" data-es="Investigación de Mercado">Market Research Brief</div>
+      <div class="product-desc" data-en="TAM/SAM/SOM sizing, key players, trends, current data packaged for your board." data-es="Dimensionamiento, actores, tendencias, datos empaquetados para tu junta.">TAM/SAM/SOM sizing, key players, trends, data for your board.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$397</div>
-          <div class="product-time" data-en="Delivered in 48h" data-es="Entregado en 48h">Delivered in 48h</div>
+          <div class="product-time" data-en="48h delivery" data-es="Entrega en 48h">48h delivery</div>
         </div>
       </div>
     </div>
     <div class="product-card">
       <div class="product-badge" data-en="Ongoing" data-es="Continuo">Ongoing</div>
       <div class="product-name" data-en="Monthly Radar" data-es="Radar Mensual">Monthly Radar</div>
-      <div class="product-desc" data-en="Competitive monitoring that never stops. Track your 5 competitors, keyword movements, traffic shifts, and emerging threats monthly." data-es="Monitoreo competitivo que nunca se detiene. Rastrea tus 5 competidores, movimientos de palabras clave, cambios de tráfico y amenazas emergentes mensualmente.">Competitive monitoring that never stops. Track your 5 competitors, keyword movements, traffic shifts, and emerging threats monthly.</div>
+      <div class="product-desc" data-en="Track your 5 competitors, keyword movements, traffic shifts, and emerging threats every month." data-es="Rastrea 5 competidores, palabras clave, tráfico y amenazas cada mes.">Track your 5 competitors, keyword movements, traffic shifts every month.</div>
       <div class="product-footer">
         <div>
           <div class="product-price">$197<span>/mo</span></div>
-          <div class="product-time" data-en="Every month, on schedule" data-es="Cada mes, a tiempo">Every month, on schedule</div>
+          <div class="product-time" data-en="Monthly" data-es="Mensual">Monthly</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="how-section">
+<section class="section how-section">
   <div class="section-label" data-en="How It Works" data-es="Cómo Funciona">How It Works</div>
   <div class="section-title" data-en="Three steps. No meetings. No surprises." data-es="Tres pasos. Sin reuniones. Sin sorpresas.">Three steps. No meetings. No surprises.</div>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <h3 data-en="Send your brief" data-es="Envía tu resumen">Send your brief</h3>
-      <p data-en="Tell us what you need: your domain, competitors, goals. We'll ask clarifying questions if needed. Takes 5 minutes." data-es="Cuéntanos qué necesitas: tu dominio, competidores, objetivos. Haremos preguntas aclaratorias si es necesario. Toma 5 minutos.">Tell us what you need: your domain, competitors, goals. We'll ask clarifying questions if needed. Takes 5 minutes.</p>
+      <p data-en="Tell us what you need: your domain, competitors, goals. Takes 5 minutes." data-es="Cuéntanos qué necesitas. Toma 5 minutos.">Tell us what you need: your domain, competitors, goals. Takes 5 minutes.</p>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <h3 data-en="We build your report" data-es="Construimos tu reporte">We build your report</h3>
-      <p data-en="Real data pulls, competitive analysis, market research — compiled into a professional document designed to impress." data-es="Extracciones de datos reales, análisis competitivo, investigación de mercado — compilados en un documento profesional diseñado para impresionar.">Real data pulls, competitive analysis, market research — compiled into a professional document designed to impress.</p>
+      <p data-en="Real data pulls, analysis, research — compiled into a professional document." data-es="Datos reales, análisis, investigación — compilados profesionalmente.">Real data pulls, analysis, research — compiled professionally.</p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <h3 data-en="Download and present" data-es="Descarga y presenta">Download and present</h3>
-      <p data-en="PPTX, XLSX, or PDF ready to send to your board, investors, or team. One round of revisions included." data-es="PPTX, XLSX o PDF listo para enviar a tu junta, inversores o equipo. Una ronda de revisiones incluida.">PPTX, XLSX, or PDF ready to send to your board, investors, or team. One round of revisions included.</p>
+      <p data-en="PPTX, XLSX, or PDF ready. One round of revisions included." data-es="PPTX, XLSX o PDF listo. Una ronda de revisiones incluida.">PPTX, XLSX, or PDF ready. One round of revisions included.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section objection-section">
+  <div class="section-label" data-en="Questions" data-es="Preguntas">Questions</div>
+  <div class="section-title" data-en="Everything you should know." data-es="Todo lo que debes saber.">Everything you should know.</div>
+  <div style="max-width:700px;margin:60px auto 0">
+    <div class="faq-item open">
+      <div class="faq-q">Is the data actually live or AI-generated?<span>▼</span></div>
+      <div class="faq-a">Live. We pull from Semrush (professional SEO tool) and current market sources. Zero hallucinations. Every report includes sources.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I get revisions?<span>▼</span></div>
+      <div class="faq-a">Yes. One round included. Additional rounds available. We revise until you're happy, or refund completely.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if I'm not satisfied?<span>▼</span></div>
+      <div class="faq-a">We'll revise it or refund you. No questions asked. Your success is our only metric.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How is this different from hiring a consultant?<span>▼</span></div>
+      <div class="faq-a">Speed and price. Consultants take weeks and charge $5K-20K. We deliver in 48 hours at a fraction of the cost. 80% of the insight at 20% of the price.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I use these for investor pitches?<span>▼</span></div>
+      <div class="faq-a">Absolutely. Our reports are designed for investor presentations — professional formatting, credible data, investor-ready. Many clients use them in pitches successfully.</div>
     </div>
   </div>
 </section>
 
 <section class="guarantee-section">
   <h3 data-en="No-Risk Guarantee" data-es="Garantía Sin Riesgo">No-Risk Guarantee</h3>
-  <p data-en="If the report doesn't meet your expectations, you don't pay. We'll revise it until it does, or refund you completely. Your success is our only metric." data-es="Si el reporte no cumple tus expectativas, no pagas. Lo revisaremos hasta que lo haga, o te reembolsamos completamente. Tu éxito es nuestra única métrica.">If the report doesn't meet your expectations, you don't pay. We'll revise it until it does, or refund you completely. Your success is our only metric.</p>
+  <p data-en="If the report doesn't meet your expectations, you don't pay. We'll revise it until it does, or refund you completely. Your success is our only metric." data-es="Si el reporte no cumple tus expectativas, no pagas. Lo revisaremos o te reembolsamos. Tu éxito es nuestra única métrica.">If the report doesn't meet your expectations, you don't pay. We'll revise it or refund you. Your success is our only metric.</p>
 </section>
 
 <section class="final-cta">
   <h2 data-en="Your competitors are deciding with data. Are you?" data-es="Tus competidores están decidiendo con datos. ¿Y tú?">Your competitors are deciding with data. Are you?</h2>
-  <p data-en="Get your first intelligence report in 48 hours. No long-term commitments. No BS. Just real insight that moves the needle." data-es="Obtén tu primer reporte de inteligencia en 48 horas. Sin compromisos a largo plazo. Sin BS. Solo insight real que mueve la aguja.">Get your first intelligence report in 48 hours. No long-term commitments. No BS. Just real insight that moves the needle.</p>
+  <p data-en="Get your first intelligence report in 48 hours. No long-term commitments. No BS. Just real insight that moves the needle." data-es="Obtén tu primer reporte en 48 horas. Sin compromisos a largo plazo. Sin BS. Solo insight real que mueve la aguja.">Get your first intelligence report in 48 hours. No BS. Just real insight that moves the needle.</p>
   <a href="mailto:hello@briefops.online" class="cta-primary" data-en="Get Started Now" data-es="Comenzar Ahora">Get Started Now</a>
 </section>
 
 <footer>
-  <div class="logo">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="2" y="2" width="28" height="28" rx="4"></rect>
-      <circle cx="16" cy="16" r="6"></circle>
-      <path d="M16 8v-2M16 26v2M8 16h-2M26 16h2"></path>
-    </svg>
-    <span>BriefOps</span>
-  </div>
+  <div class="logo">BriefOps</div>
   <div data-en="© 2026 BriefOps. Data-driven intelligence for founders." data-es="© 2026 BriefOps. Inteligencia impulsada por datos para fundadores.">© 2026 BriefOps. Data-driven intelligence for founders.</div>
   <a href="mailto:hello@briefops.online">hello@briefops.online</a>
 </footer>
@@ -342,6 +680,21 @@ document.querySelectorAll('.faq-item').forEach(item => {
   item.querySelector('.faq-q').addEventListener('click', () => {
     item.classList.toggle('open');
   });
+});
+
+// Observe elements for animation trigger
+const observerOptions = {threshold:0.1};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.style.animation = entry.target.style.animation;
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('[class*="fade-in"], .pain-card, .product-card, .step, .faq-item, .trust-item, .solution-item').forEach(el => {
+  observer.observe(el);
 });
 </script>
 
