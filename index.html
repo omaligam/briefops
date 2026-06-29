@@ -3,330 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BriefOps — Intelligence Reports That Close Deals</title>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>BriefOps</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 :root{
-  --bg:#FAFAF9;--fg:#121212;--accent:#D97706;
-  --muted:#878787;--border:#E5E5E5;
-  --gradient-1:linear-gradient(135deg,#D97706,#B45309);
-  --gradient-2:linear-gradient(135deg,#1F2937,#111827);
+  --bg:#0a0e27;--fg:#ffffff;--primary:#0ea5e9;--secondary:#06b6d4;
+  --accent:#312e81;--muted:#94a3b8;--border:rgba(15,23,42,0.5);
 }
-
 body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--bg);color:var(--fg);
-  line-height:1.6;overflow-x:hidden;
-  position:relative;
+  font-family:'Space Grotesk','Inter',system-ui,sans-serif;
+  background:var(--bg);color:var(--fg);overflow-x:hidden;
+  line-height:1.6;position:relative;
 }
 
-/* TEXTURE BACKGROUND */
+/* ANIMATED BACKGROUND */
 body::before{
-  content:'';position:fixed;top:0;left:0;
-  width:100%;height:100%;
-  background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23000' filter='url(%23noise)' opacity='0.01'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:1;
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  background:radial-gradient(circle at 20% 50%,rgba(14,165,233,0.1) 0%,transparent 50%),
+             radial-gradient(circle at 80% 80%,rgba(6,182,212,0.08) 0%,transparent 50%);
+  animation:bgShift 15s ease-in-out infinite;
+  pointer-events:none;z-index:0;
+}
+@keyframes bgShift{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(30px,-30px)}
 }
 
-/* SCROLL ANIMATIONS */
-@keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+/* FLOATING ELEMENTS */
+.float-1{animation:float1 6s ease-in-out infinite;position:fixed;pointer-events:none;z-index:1}
+.float-2{animation:float2 8s ease-in-out infinite;position:fixed;pointer-events:none;z-index:1}
+.float-3{animation:float3 7s ease-in-out infinite;position:fixed;pointer-events:none;z-index:1}
+
+@keyframes float1{0%,100%{transform:translateY(0px) translateX(0px)}50%{transform:translateY(-40px) translateX(20px)}}
+@keyframes float2{0%,100%{transform:translateY(0px) translateX(0px)}50%{transform:translateY(30px) translateX(-30px)}}
+@keyframes float3{0%,100%{transform:translateY(0px) translateX(0px)}50%{transform:translateY(-30px) translateX(-20px)}}
+
+.float-1{top:10%;right:5%;width:300px;height:300px;background:radial-gradient(circle,rgba(6,182,212,0.15),transparent 70%);border-radius:50%;filter:blur(40px)}
+.float-2{top:60%;left:5%;width:250px;height:250px;background:radial-gradient(circle,rgba(14,165,233,0.12),transparent 70%);border-radius:50%;filter:blur(40px)}
+.float-3{top:30%;right:20%;width:200px;height:200px;background:radial-gradient(circle,rgba(6,182,212,0.1),transparent 70%);border-radius:50%;filter:blur(40px)}
+
+/* ANIMATIONS */
+@keyframes slideUp{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes glow{0%{box-shadow:0 0 20px rgba(14,165,233,0.3)}50%{box-shadow:0 0 40px rgba(14,165,233,0.6)}100%{box-shadow:0 0 20px rgba(14,165,233,0.3)}}
+@keyframes textGlow{0%{text-shadow:0 0 10px rgba(14,165,233,0.3)}50%{text-shadow:0 0 30px rgba(14,165,233,0.8)}100%{text-shadow:0 0 10px rgba(14,165,233,0.3)}}
+@keyframes morphBg{0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%}100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}}
 
 .animate-on-scroll{opacity:0}
-.animate-on-scroll.visible{animation:fadeUp 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards}
-.slide-left.visible{animation:slideInLeft 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards}
-.slide-right.visible{animation:slideInRight 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards}
-.scale.visible{animation:scaleIn 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards}
+.animate-on-scroll.visible{animation:slideUp 0.8s cubic-bezier(0.22,1,0.36,1) forwards}
 
-/* NAVIGATION */
+position{position:relative;z-index:10}
+
+/* NAV */
 nav{
-  position:sticky;top:0;z-index:1001;
-  background:rgba(250,250,249,0.8);backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:1000;
+  background:rgba(10,14,39,0.7);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
-  padding:24px 40px;
+  padding:20px 40px;
 }
-nav > div{
-  max-width:1400px;margin:0 auto;
-  display:flex;justify-content:space-between;align-items:center;
-  position:relative;z-index:10;
+nav-container{
+  max-width:1400px;margin:0 auto;display:flex;
+  justify-content:space-between;align-items:center;
+  position:relative;z-index:11;
 }
 .logo{
-  font-family:'Crimson Text',serif;font-size:28px;
-  font-weight:700;letter-spacing:-1px;
-  background:var(--gradient-1);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+  font-size:24px;font-weight:700;
+  letter-spacing:-1px;background:linear-gradient(135deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:textGlow 3s ease-in-out infinite;
 }
-.nav-right{display:flex;gap:24px;align-items:center}
+.nav-right{display:flex;gap:20px;align-items:center}
 .lang-selector{
-  background:transparent;border:1.5px solid var(--border);
-  color:var(--muted);padding:8px 14px;border-radius:4px;
-  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
+  background:rgba(30,41,59,0.5);border:1px solid var(--border);
+  color:var(--muted);padding:8px 14px;border-radius:6px;
+  font-family:'Space Grotesk',sans-serif;font-size:13px;
   cursor:pointer;transition:all 0.3s;
 }
-.lang-selector:hover{border-color:var(--accent);color:var(--fg)}
+.lang-selector:hover{
+  border-color:var(--primary);color:var(--primary);
+  background:rgba(14,165,233,0.1);
+}
 .nav-cta{
-  background:var(--fg);color:white;
-  padding:12px 28px;border-radius:4px;
-  font-size:14px;font-weight:600;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:var(--bg);border:none;padding:12px 28px;border-radius:6px;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;
   cursor:pointer;transition:all 0.3s;
-  border:none;
 }
 .nav-cta:hover{
-  background:var(--accent);
-  transform:translateY(-2px);
+  transform:translateY(-3px);box-shadow:0 12px 30px rgba(14,165,233,0.4);
 }
 
 /* HERO */
 .hero{
-  max-width:1400px;margin:0 auto;
-  padding:140px 40px 100px;
+  max-width:1400px;margin:0 auto;padding:140px 40px 100px;
   position:relative;z-index:10;
 }
-.hero-text h1{
-  font-family:'Crimson Text',serif;
-  font-size:clamp(48px,9vw,76px);
-  font-weight:700;line-height:1.15;
-  letter-spacing:-2px;margin-bottom:24px;
-  color:var(--fg);
+.hero-content{
+  max-width:800px;
 }
-.hero-text h1 em{
-  font-style:normal;background:var(--gradient-1);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+.hero h1{
+  font-size:clamp(48px,8vw,80px);font-weight:700;
+  letter-spacing:-2px;line-height:1.1;
+  margin-bottom:24px;animation:slideUp 0.8s ease-out;
 }
-.hero-text p{
-  font-size:18px;color:var(--muted);
-  max-width:540px;line-height:1.8;
-  margin-bottom:48px;
+.hero h1 span{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:textGlow 3s ease-in-out infinite;
+}
+.hero p{
+  font-size:18px;color:var(--muted);max-width:600px;
+  line-height:1.8;margin-bottom:48px;
+  animation:slideUp 0.8s ease-out 0.1s both;
 }
 .hero-ctas{
   display:flex;gap:20px;flex-wrap:wrap;
+  animation:slideUp 0.8s ease-out 0.2s both;
 }
 .cta-primary{
-  background:var(--fg);color:white;
-  padding:16px 36px;border-radius:4px;
-  font-family:'Inter',sans-serif;font-size:15px;
-  font-weight:600;border:none;cursor:pointer;
-  transition:all 0.3s;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:var(--bg);border:none;padding:16px 40px;
+  border-radius:8px;font-family:'Space Grotesk',sans-serif;
+  font-weight:600;cursor:pointer;transition:all 0.3s;
+  box-shadow:0 8px 24px rgba(14,165,233,0.3);
 }
 .cta-primary:hover{
-  background:var(--accent);
-  transform:translateY(-2px);
-  box-shadow:0 12px 32px rgba(217,119,6,0.2);
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(14,165,233,0.5);
 }
 .cta-secondary{
-  background:transparent;color:var(--fg);
-  padding:16px 36px;border:1.5px solid var(--border);
-  border-radius:4px;font-family:'Inter',sans-serif;
-  font-size:15px;font-weight:600;
+  background:transparent;border:2px solid var(--primary);
+  color:var(--primary);padding:14px 40px;border-radius:8px;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;
   cursor:pointer;transition:all 0.3s;
 }
 .cta-secondary:hover{
-  border-color:var(--fg);
-  background:rgba(18,18,18,0.03);
+  background:rgba(14,165,233,0.1);
+  box-shadow:0 0 20px rgba(14,165,233,0.3);
 }
 
-/* STATS SECTION */
+/* STATS */
 .stats{
   max-width:1400px;margin:0 auto;padding:100px 40px;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:60px;border-top:1px solid var(--border);
+  gap:40px;border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
-}
-.stat-item{
-  text-align:center;
-  animation:fadeUp 0.8s ease-out forwards;opacity:0;
-}
-.stat-item:nth-child(1){animation-delay:0.1s}
-.stat-item:nth-child(2){animation-delay:0.2s}
-.stat-item:nth-child(3){animation-delay:0.3s}
-.stat-item:nth-child(4){animation-delay:0.4s}
-.stat-number{
-  font-family:'Crimson Text',serif;font-size:48px;
-  font-weight:700;background:var(--gradient-1);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;margin-bottom:8px;
-}
-.stat-label{
-  font-size:13px;color:var(--muted);
-  text-transform:uppercase;letter-spacing:0.08em;
-}
-
-/* SECTIONS */
-.section{
-  max-width:1400px;margin:0 auto;padding:120px 40px;
   position:relative;z-index:10;
 }
+.stat{text-align:center;animation:slideUp 0.8s ease-out forwards;opacity:0}
+.stat:nth-child(1){animation-delay:0.1s}
+.stat:nth-child(2){animation-delay:0.2s}
+.stat:nth-child(3){animation-delay:0.3s}
+.stat:nth-child(4){animation-delay:0.4s}
+.stat-num{
+  font-size:48px;font-weight:700;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+.stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+
+/* SECTIONS */
+.section{max-width:1400px;margin:0 auto;padding:120px 40px;position:relative;z-index:10}
 .section-pre{
-  font-size:12px;color:var(--accent);
-  text-transform:uppercase;letter-spacing:0.1em;
-  font-weight:700;margin-bottom:16px;
+  font-size:12px;color:var(--primary);text-transform:uppercase;
+  letter-spacing:0.1em;font-weight:700;margin-bottom:16px;
 }
 .section h2{
-  font-family:'Crimson Text',serif;
-  font-size:clamp(40px,7vw,56px);
-  font-weight:700;letter-spacing:-1px;
-  margin-bottom:32px;max-width:700px;
+  font-size:clamp(40px,7vw,60px);font-weight:700;
+  letter-spacing:-1px;margin-bottom:32px;max-width:700px;
 }
 .section p{
-  font-size:17px;color:var(--muted);
-  max-width:600px;line-height:1.8;margin-bottom:60px;
+  font-size:17px;color:var(--muted);max-width:600px;
+  line-height:1.8;margin-bottom:60px;
 }
 
-/* PROBLEM CARDS */
-.problem-grid{
+/* CARDS */
+.grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:40px;
+  gap:32px;
 }
-.problem-card{
-  border:1px solid var(--border);padding:48px 40px;
-  border-radius:8px;background:white;
-  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  animation:fadeUp 0.8s ease-out forwards;opacity:0;
+.card{
+  background:rgba(30,41,59,0.3);border:1px solid var(--border);
+  padding:40px;border-radius:12px;
+  transition:all 0.4s cubic-bezier(0.22,1,0.36,1);
+  animation:slideUp 0.8s ease-out forwards;opacity:0;
+  backdrop-filter:blur(10px);
 }
-.problem-card:nth-child(1){animation-delay:0.1s}
-.problem-card:nth-child(2){animation-delay:0.2s}
-.problem-card:nth-child(3){animation-delay:0.3s}
-.problem-card:hover{
-  border-color:var(--accent);
-  box-shadow:0 16px 48px rgba(217,119,6,0.08);
-  transform:translateY(-6px);
+.card:nth-child(1){animation-delay:0.1s}
+.card:nth-child(2){animation-delay:0.2s}
+.card:nth-child(3){animation-delay:0.3s}
+.card:nth-child(4){animation-delay:0.4s}
+.card:nth-child(5){animation-delay:0.5s}
+.card:nth-child(6){animation-delay:0.6s}
+.card:hover{
+  border-color:var(--primary);
+  background:rgba(14,165,233,0.05);
+  transform:translateY(-8px);
+  box-shadow:0 20px 60px rgba(14,165,233,0.2);
 }
-.problem-icon{
-  width:48px;height:48px;background:rgba(217,119,6,0.1);
-  border-radius:6px;margin-bottom:24px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:24px;
+.card h3{
+  font-size:20px;font-weight:700;margin-bottom:12px;
+  color:var(--fg);
 }
-.problem-card h3{
-  font-family:'Crimson Text',serif;font-size:20px;
-  font-weight:700;margin-bottom:12px;color:var(--fg);
-}
-.problem-card p{
+.card p{
   font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:0;
 }
-
-/* SOLUTION SECTION */
-.solution-section{
-  max-width:1400px;margin:0 auto;padding:120px 40px;
-  background:linear-gradient(135deg,rgba(217,119,6,0.04),rgba(217,119,6,0.02));
-  border:1px solid rgba(217,119,6,0.1);border-radius:12px;
-  margin-left:40px;margin-right:40px;
+.card-badge{
+  display:inline-block;background:rgba(14,165,233,0.15);
+  color:var(--primary);padding:6px 12px;border-radius:4px;
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.06em;margin-bottom:16px;
+  border:1px solid rgba(14,165,233,0.3);
 }
+.card-price{
+  font-size:32px;font-weight:700;color:var(--primary);
+  margin-top:24px;padding-top:24px;border-top:1px solid var(--border);
+}
+.card-time{font-size:12px;color:var(--muted)}
+
+/* SOLUTION */
 .solution-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:48px;
+  gap:40px;
 }
 .solution-item{
-  animation:fadeUp 0.8s ease-out forwards;opacity:0;
+  animation:slideUp 0.8s ease-out forwards;opacity:0;
 }
 .solution-item:nth-child(1){animation-delay:0.15s}
 .solution-item:nth-child(2){animation-delay:0.25s}
 .solution-item:nth-child(3){animation-delay:0.35s}
 .solution-item:nth-child(4){animation-delay:0.45s}
-.solution-check{
-  width:32px;height:32px;background:var(--accent);
-  color:white;border-radius:50%;display:flex;
+.check{
+  width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:var(--bg);border-radius:50%;display:flex;
   align-items:center;justify-content:center;
-  font-weight:700;font-size:18px;margin-bottom:16px;
+  font-weight:700;font-size:20px;margin-bottom:16px;
+  animation:glow 2s ease-in-out infinite;
 }
-.solution-item h3{
-  font-family:'Crimson Text',serif;font-size:18px;
-  font-weight:700;margin-bottom:8px;color:var(--fg);
-}
-.solution-item p{
-  font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:0;
-}
-
-/* PRODUCTS */
-.products-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-  gap:32px;
-}
-.product-card{
-  border:1px solid var(--border);border-radius:8px;
-  padding:48px 40px;background:white;
-  display:flex;flex-direction:column;
-  transition:all 0.4s;
-  animation:fadeUp 0.8s ease-out forwards;opacity:0;
-}
-.product-card:nth-child(1){animation-delay:0.1s}
-.product-card:nth-child(2){animation-delay:0.2s}
-.product-card:nth-child(3){animation-delay:0.3s}
-.product-card:nth-child(4){animation-delay:0.4s}
-.product-card:nth-child(5){animation-delay:0.5s}
-.product-card:nth-child(6){animation-delay:0.6s}
-.product-card:hover{
-  border-color:var(--accent);
-  box-shadow:0 20px 56px rgba(217,119,6,0.12);
-  transform:translateY(-8px);
-}
-.product-badge{
-  display:inline-block;
-  background:rgba(217,119,6,0.1);color:var(--accent);
-  padding:6px 12px;border-radius:3px;
-  font-size:11px;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.06em;margin-bottom:16px;width:fit-content;
-  border:1px solid rgba(217,119,6,0.2);
-}
-.product-card h3{
-  font-family:'Crimson Text',serif;font-size:20px;
-  font-weight:700;margin-bottom:12px;color:var(--fg);
-}
-.product-card p{
-  font-size:15px;color:var(--muted);
-  line-height:1.7;margin-bottom:32px;flex-grow:1;
-}
-.product-footer{
-  display:flex;justify-content:space-between;
-  align-items:flex-end;padding-top:24px;
-  border-top:1px solid var(--border);
-}
-.product-price{
-  font-family:'Crimson Text',serif;font-size:32px;
-  font-weight:700;color:var(--fg);
-}
-.product-price span{
-  font-size:13px;font-weight:400;color:var(--muted);
-}
-.product-time{
-  font-size:12px;color:var(--muted);
-}
+.solution-item h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.solution-item p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:0}
 
 /* PROCESS */
 .process-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:60px;
+  gap:50px;
 }
-.process-step{
-  animation:fadeUp 0.8s ease-out forwards;opacity:0;
+.step{animation:slideUp 0.8s ease-out forwards;opacity:0}
+.step:nth-child(1){animation-delay:0.15s}
+.step:nth-child(2){animation-delay:0.25s}
+.step:nth-child(3){animation-delay:0.35s}
+.step-num{
+  font-size:80px;font-weight:700;
+  color:rgba(14,165,233,0.15);line-height:1;margin-bottom:20px;
 }
-.process-step:nth-child(1){animation-delay:0.15s}
-.process-step:nth-child(2){animation-delay:0.25s}
-.process-step:nth-child(3){animation-delay:0.35s}
-.step-number{
-  font-family:'Crimson Text',serif;font-size:72px;
-  font-weight:700;color:rgba(217,119,6,0.15);
-  line-height:1;margin-bottom:20px;
-}
-.process-step h3{
-  font-family:'Crimson Text',serif;font-size:20px;
-  font-weight:700;margin-bottom:12px;color:var(--fg);
-}
-.process-step p{
-  font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:0;
-}
+.step h3{font-size:20px;font-weight:700;margin-bottom:12px}
+.step p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:0}
 
 /* FAQ */
 .faq-list{max-width:700px;margin:60px auto 0}
 .faq-item{
   padding:24px 0;border-bottom:1px solid var(--border);
-  animation:fadeUp 0.8s ease-out forwards;opacity:0;
+  animation:slideUp 0.8s ease-out forwards;opacity:0;
 }
 .faq-item:nth-child(1){animation-delay:0.1s}
 .faq-item:nth-child(2){animation-delay:0.2s}
@@ -339,7 +281,7 @@ nav > div{
   align-items:center;color:var(--fg);
   transition:all 0.3s;
 }
-.faq-q:hover{color:var(--accent)}
+.faq-q:hover{color:var(--primary)}
 .faq-a{
   font-size:15px;color:var(--muted);
   margin-top:16px;line-height:1.7;display:none;
@@ -349,16 +291,14 @@ nav > div{
 /* GUARANTEE */
 .guarantee{
   max-width:1400px;margin:0 auto;padding:80px 40px;
-  text-align:center;background:linear-gradient(135deg,rgba(217,119,6,0.08),rgba(217,119,6,0.03));
-  border:1px solid rgba(217,119,6,0.1);border-radius:8px;
-  animation:fadeUp 0.8s ease-out;
+  text-align:center;background:rgba(14,165,233,0.05);
+  border:1px solid var(--border);border-radius:12px;
+  backdrop-filter:blur(10px);animation:slideUp 0.8s ease-out;
 }
 .guarantee h3{
-  font-family:'Crimson Text',serif;font-size:28px;
-  font-weight:700;margin-bottom:16px;
-  background:var(--gradient-1);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+  font-size:28px;font-weight:700;margin-bottom:16px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .guarantee p{
   font-size:16px;color:var(--muted);
@@ -371,16 +311,14 @@ nav > div{
   text-align:center;
 }
 .final-cta h2{
-  font-family:'Crimson Text',serif;
-  font-size:clamp(40px,7vw,56px);font-weight:700;
+  font-size:clamp(40px,7vw,60px);font-weight:700;
   letter-spacing:-1px;margin-bottom:24px;
-  color:var(--fg);
-  animation:fadeUp 0.8s ease-out;
+  animation:slideUp 0.8s ease-out;
 }
 .final-cta p{
   font-size:18px;color:var(--muted);
   max-width:600px;margin:0 auto 48px;line-height:1.8;
-  animation:fadeUp 0.8s ease-out 0.1s forwards;opacity:0;
+  animation:slideUp 0.8s ease-out 0.1s both;
 }
 
 /* FOOTER */
@@ -388,257 +326,224 @@ footer{
   max-width:1400px;margin:0 auto;padding:60px 40px;
   border-top:1px solid var(--border);
   display:flex;justify-content:space-between;
-  align-items:center;font-size:14px;
-  color:var(--muted);flex-wrap:wrap;gap:20px;
-  position:relative;z-index:10;
+  align-items:center;font-size:14px;color:var(--muted);
+  flex-wrap:wrap;gap:20px;position:relative;z-index:10;
 }
 
 .hidden{display:none}
 
 @media(max-width:768px){
-  nav > div{flex-direction:column;gap:20px}
+  nav{padding:16px 20px}
   .hero{padding:80px 20px 60px}
-  .hero-text h1{font-size:36px}
+  .hero h1{font-size:36px}
   .stats{padding:60px 20px;gap:40px}
-  .section,.solution-section{padding:60px 20px!important;margin-left:20px!important;margin-right:20px!important}
-  .guarantee{margin-left:20px;margin-right:20px}
+  .section{padding:60px 20px}
   footer{flex-direction:column;text-align:center;padding:40px 20px}
 }
 </style>
 </head>
 <body>
 
+<div class="float-1"></div>
+<div class="float-2"></div>
+<div class="float-3"></div>
+
 <nav>
-  <div>
+  <nav-container>
     <div class="logo">BriefOps</div>
     <div class="nav-right">
       <select class="lang-selector" id="langSwitch">
         <option value="en">English</option>
         <option value="es">Español</option>
       </select>
-      <button class="nav-cta" onclick="document.location='mailto:hello@briefops.online'">Start Now</button>
+      <button class="nav-cta" onclick="document.location='mailto:hello@briefops.online'">Start</button>
     </div>
-  </div>
+  </nav-container>
 </nav>
 
 <section class="hero">
-  <div class="hero-text">
-    <h1 data-en="Intelligence reports that <em>move markets</em>" data-es="Reportes de inteligencia que <em>mueven mercados</em>">Intelligence reports that <em>move markets</em></h1>
-    <p data-en="Stop guessing about market size, competitor strategy, and investor priorities. Get professional research in 48 hours. 80% cheaper than consulting firms." data-es="Deja de adivinar sobre tamaño de mercado, estrategia de competidores y prioridades de inversores. Obtén investigación profesional en 48 horas. 80% más barato que consultorías.">Stop guessing about market size, competitor strategy, and investor priorities. Get professional research in 48 hours. 80% cheaper than consulting firms.</p>
+  <div class="hero-content">
+    <h1><span data-en="Intelligence reports that move markets" data-es="Reportes de inteligencia que mueven mercados">Intelligence reports that move markets</span></h1>
+    <p data-en="Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms." data-es="Deja de adivinar. Obtén análisis de mercado profesional en 48 horas. 80% más barato que consultorías.">Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms.</p>
     <div class="hero-ctas">
-      <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online'">Get Your First Report</button>
-      <a href="#products" class="cta-secondary">See What We Deliver</a>
+      <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online'">Get Report Now</button>
+      <a href="#products" class="cta-secondary">See Offerings</a>
     </div>
   </div>
 </section>
 
 <section class="stats">
-  <div class="stat-item">
-    <div class="stat-number">48h</div>
+  <div class="stat">
+    <div class="stat-num">48h</div>
     <div class="stat-label">Delivery</div>
   </div>
-  <div class="stat-item">
-    <div class="stat-number">10x</div>
-    <div class="stat-label">Faster Than Consultants</div>
+  <div class="stat">
+    <div class="stat-num">10x</div>
+    <div class="stat-label">Faster</div>
   </div>
-  <div class="stat-item">
-    <div class="stat-number">$297</div>
-    <div class="stat-label">Starting Price</div>
+  <div class="stat">
+    <div class="stat-num">$297</div>
+    <div class="stat-label">Starting</div>
   </div>
-  <div class="stat-item">
-    <div class="stat-number">100%</div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
     <div class="stat-label">Real Data</div>
   </div>
 </section>
 
 <section class="section">
-  <div class="section-pre">The Problem</div>
+  <div class="section-pre">The Reality</div>
   <h2 data-en="You're flying blind" data-es="Estás volando a ciegas">You're flying blind</h2>
-  <p data-en="Every decision you make lacks data. Market research takes weeks. Consultants cost a fortune. AI tools hallucinate facts. There's no middle ground—until now." data-es="Cada decisión que tomas carece de datos. La investigación de mercado tarda semanas. Los consultores cuestan una fortuna. Las herramientas de IA alucina hechos.">Every decision you make lacks data. Market research takes weeks. Consultants cost a fortune. AI tools hallucinate facts. There's no middle ground—until now.</p>
+  <p data-en="Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solution—until now." data-es="Cada decisión carece de datos. La investigación tarda semanas. Los consultores cuestan miles. Hay solución ahora.">Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solution—until now.</p>
   
-  <div class="problem-grid">
-    <div class="problem-card">
-      <div class="problem-icon">📊</div>
-      <h3>No real market data</h3>
-      <p>You guess at TAM, CAC, and competitive positioning. Guesses lead to bad decisions. Bad decisions burn capital.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>No Real Data</h3>
+      <p>You guess at TAM, CAC, positioning. Guesses burn capital. Bad decisions stack.</p>
     </div>
-    <div class="problem-card">
-      <div class="problem-icon">⏳</div>
-      <h3>Consultants take forever</h3>
-      <p>$10K reports arrive in 6 weeks. By then, your market has shifted. You need answers now, not next quarter.</p>
+    <div class="card">
+      <h3>Consultants Are Slow</h3>
+      <p>$10K reports arrive in 6 weeks. Your market shifted. You needed answers yesterday.</p>
     </div>
-    <div class="problem-card">
-      <div class="problem-icon">🤖</div>
-      <h3>AI tools aren't trustworthy</h3>
-      <p>ChatGPT sounds professional but invents data. You can't present hallucinations to investors or your board.</p>
+    <div class="card">
+      <h3>AI Can't Be Trusted</h3>
+      <p>ChatGPT sounds professional but invents data. You can't present hallucinations to investors.</p>
     </div>
   </div>
 </section>
 
-<section class="solution-section">
-  <div class="section-pre">The Solution</div>
-  <div style="max-width:1400px">
-    <h2 data-en="Real intelligence. Real speed." data-es="Inteligencia real. Velocidad real.">Real intelligence. Real speed.</h2>
-    <p data-en="Live market data. Professional analysis. Delivered in 48 hours. No guessing. No delays. No hallucinations." data-es="Datos de mercado en vivo. Análisis profesional. Entregado en 48 horas. Sin adivinanzas. Sin retrasos. Sin alucinaciones.">Live market data. Professional analysis. Delivered in 48 hours. No guessing. No delays. No hallucinations.</p>
-    
-    <div class="solution-grid">
-      <div class="solution-item">
-        <div class="solution-check">✓</div>
-        <h3>Live Semrush data</h3>
-        <p>Real search rankings, competitor traffic, backlink profiles. Actual intelligence, not guesses.</p>
-      </div>
-      <div class="solution-item">
-        <div class="solution-check">✓</div>
-        <h3>48-hour turnaround</h3>
-        <p>Brief sent. Data pulled. Report delivered. No meetings. No back-and-forth. Done.</p>
-      </div>
-      <div class="solution-item">
-        <div class="solution-check">✓</div>
-        <h3>Investor-ready format</h3>
-        <p>PPTX, XLSX, PDF. Professional design. Download and present to your board tomorrow.</p>
-      </div>
-      <div class="solution-item">
-        <div class="solution-check">✓</div>
-        <h3>Human-reviewed</h3>
-        <p>Not robot output. Each report checked for accuracy and quality before delivery.</p>
-      </div>
+<section class="section">
+  <div class="section-pre">Our Approach</div>
+  <h2 data-en="Real intelligence. Real speed." data-es="Inteligencia real. Velocidad real.">Real intelligence. Real speed.</h2>
+  <p data-en="Live market data. Professional analysis. 48 hours. No guessing. No delays. No hallucinations." data-es="Datos en vivo. Análisis profesional. 48 horas. Sin adivinanzas.">Live market data. Professional analysis. 48 hours. No guessing. No delays. No hallucinations.</p>
+  
+  <div class="solution-grid">
+    <div class="solution-item">
+      <div class="check">✓</div>
+      <h3>Live Semrush Data</h3>
+      <p>Real search rankings, competitor traffic, backlinks. Actual intelligence, not guesses.</p>
+    </div>
+    <div class="solution-item">
+      <div class="check">✓</div>
+      <h3>48-Hour Delivery</h3>
+      <p>Brief sent. Data pulled. Report delivered. No meetings. No delays. Done.</p>
+    </div>
+    <div class="solution-item">
+      <div class="check">✓</div>
+      <h3>Investor-Ready Format</h3>
+      <p>PPTX, XLSX, PDF. Professional. Download and present to your board tomorrow.</p>
+    </div>
+    <div class="solution-item">
+      <div class="check">✓</div>
+      <h3>Human-Reviewed</h3>
+      <p>Not robot output. Each report checked for accuracy and quality before delivery.</p>
     </div>
   </div>
 </section>
 
 <section class="section" id="products">
-  <div class="section-pre">What We Deliver</div>
+  <div class="section-pre">Services</div>
   <h2 data-en="Reports that close deals" data-es="Reportes que cierran tratos">Reports that close deals</h2>
   
-  <div class="products-grid">
-    <div class="product-card">
-      <div class="product-badge">Popular</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-badge">Popular</div>
       <h3>SEO & Market Audit</h3>
-      <p>Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open for you.</p>
-      <div class="product-footer">
-        <div>
-          <div class="product-price">$297</div>
-          <div class="product-time">48h</div>
-        </div>
-      </div>
+      <p>Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open.</p>
+      <div class="card-price">$297 <div class="card-time">48h</div></div>
     </div>
 
-    <div class="product-card">
-      <div class="product-badge">Investors</div>
+    <div class="card">
+      <div class="card-badge">Investors</div>
       <h3>Pitch Deck</h3>
       <p>Market sizing, competitive landscape, business model, traction narrative, financials. Ready for VCs.</p>
-      <div class="product-footer">
-        <div>
-          <div class="product-price">$997</div>
-          <div class="product-time">72h</div>
-        </div>
-      </div>
+      <div class="card-price">$997 <div class="card-time">72h</div></div>
     </div>
 
-    <div class="product-card">
-      <div class="product-badge">Strategy</div>
+    <div class="card">
+      <div class="card-badge">Strategy</div>
       <h3>Competitive Intelligence</h3>
-      <p>Traffic sources, content strategy, ad spend, positioning. Know your competition better than they know themselves.</p>
-      <div class="product-footer">
-        <div>
-          <div class="product-price">$497</div>
-          <div class="product-time">48h</div>
-        </div>
-      </div>
+      <p>Traffic sources, content strategy, ad spend, positioning. Know competitors better than they know themselves.</p>
+      <div class="card-price">$497 <div class="card-time">48h</div></div>
     </div>
 
-    <div class="product-card">
-      <div class="product-badge">Complete</div>
-      <h3>Business Plan + Financials</h3>
-      <p>Full business plan with market analysis. Working Excel model with 3-year projections you can edit.</p>
-      <div class="product-footer">
-        <div>
-          <div class="product-price">$1,497</div>
-          <div class="product-time">72h</div>
-        </div>
-      </div>
+    <div class="card">
+      <div class="card-badge">Complete</div>
+      <h3>Business Plan & Financials</h3>
+      <p>Full plan with market analysis. Working Excel model with 3-year projections you can edit.</p>
+      <div class="card-price">$1,497 <div class="card-time">72h</div></div>
     </div>
 
-    <div class="product-card">
-      <div class="product-badge">Research</div>
+    <div class="card">
+      <div class="card-badge">Research</div>
       <h3>Market Research Brief</h3>
-      <p>TAM/SAM/SOM sizing. Key players. Trends. Current data packaged for your board decision.</p>
-      <div class="product-footer">
-        <div>
-          <div class="product-price">$397</div>
-          <div class="product-time">48h</div>
-        </div>
-      </div>
+      <p>TAM/SAM/SOM sizing. Key players. Trends. Current data packaged for board decisions.</p>
+      <div class="card-price">$397 <div class="card-time">48h</div></div>
     </div>
 
-    <div class="product-card">
-      <div class="product-badge">Ongoing</div>
+    <div class="card">
+      <div class="card-badge">Ongoing</div>
       <h3>Monthly Radar</h3>
-      <p>Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Catch emerging threats monthly.</p>
-      <div class="product-footer">
-        <div>
-          <div class="product-price">$197<span>/mo</span></div>
-          <div class="product-time">Monthly</div>
-        </div>
-      </div>
+      <p>Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Monthly updates.</p>
+      <div class="card-price">$197 <div class="card-time">/mo</div></div>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="section-pre">How It Works</div>
-  <h2 data-en="Three steps" data-es="Tres pasos">Three steps</h2>
+  <div class="section-pre">Process</div>
+  <h2>Three Steps</h2>
   
   <div class="process-grid">
-    <div class="process-step">
-      <div class="step-number">1</div>
-      <h3>Send your brief</h3>
-      <p>Domain, competitors, goals. Tell us what you need to know. Takes 5 minutes.</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Send Brief</h3>
+      <p>Domain, competitors, goals. Takes 5 minutes.</p>
     </div>
-    <div class="process-step">
-      <div class="step-number">2</div>
-      <h3>We research</h3>
-      <p>Pull live data. Analyze competitors. Build your report. Professional output, every time.</p>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>We Research</h3>
+      <p>Pull live data. Analyze. Build report. Professional output guaranteed.</p>
     </div>
-    <div class="process-step">
-      <div class="step-number">3</div>
-      <h3>Download & present</h3>
-      <p>PPTX, XLSX, or PDF. Ready to share tomorrow. One revision round included.</p>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Download & Present</h3>
+      <p>PPTX, XLSX, or PDF. One revision included. Ready tomorrow.</p>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="section-pre">Common Questions</div>
+  <div class="section-pre">Questions</div>
   <h2>Answers</h2>
   
   <div class="faq-list">
     <div class="faq-item open">
-      <div class="faq-q">Is this data actually live or AI-generated? <span>→</span></div>
-      <div class="faq-a">Live. We pull from Semrush (professional SEO intelligence) and current market sources. Zero hallucinations. Every report includes sources you can verify.</div>
+      <div class="faq-q">Is data live or AI-generated? <span>→</span></div>
+      <div class="faq-a">Live. Semrush (professional SEO) and current market sources. Zero hallucinations. Every report includes sources you can verify.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">What if I'm not satisfied? <span>→</span></div>
-      <div class="faq-a">We revise it or refund you completely. No questions. Your success is our only metric.</div>
+      <div class="faq-a">Full refund or we revise. No questions. Your success is our only metric.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Can I use these for investor pitches? <span>→</span></div>
-      <div class="faq-a">Absolutely. Our reports are designed for investor presentations. Professional formatting, credible data, investor-ready. Many clients close funding with them.</div>
+      <div class="faq-q">Can I use for investor pitches? <span>→</span></div>
+      <div class="faq-a">Absolutely. Designed for investor presentations. Many clients close funding with them.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">How is this different from hiring a consultant? <span>→</span></div>
-      <div class="faq-a">Speed and price. Consultants take weeks and cost $5K-20K. We deliver in 48 hours at 80% less. Get 80% of the insight at 20% of the cost.</div>
+      <div class="faq-q">How does this beat consultants? <span>→</span></div>
+      <div class="faq-a">Speed and price. Consultants: weeks, $5K-20K. Us: 48 hours, 80% cheaper. Same insight, fraction of cost.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Can I get revisions? <span>→</span></div>
-      <div class="faq-a">One round included. Additional rounds negotiable. We keep refining until you're happy.</div>
+      <div class="faq-q">Can I revise? <span>→</span></div>
+      <div class="faq-a">One round included. We keep refining until happy.</div>
     </div>
   </div>
 </section>
 
 <section class="guarantee">
   <h3>No-Risk Guarantee</h3>
-  <p>If the report doesn't meet your expectations, you don't pay. Revise until it does, or get a full refund. We win when you win.</p>
+  <p>Report doesn't meet expectations? Full refund. We win when you win.</p>
 </section>
 
 <section class="final-cta">
@@ -649,37 +554,27 @@ footer{
 
 <footer>
   <div class="logo">BriefOps</div>
-  <div>© 2026 BriefOps</div>
+  <div>© 2026</div>
   <a href="mailto:hello@briefops.online">hello@briefops.online</a>
 </footer>
 
 <script>
-let currentLang = 'en';
+let lang = 'en';
 document.getElementById('langSwitch').addEventListener('change', (e) => {
-  currentLang = e.target.value;
-  updateLanguage();
-});
-function updateLanguage() {
+  lang = e.target.value;
   document.querySelectorAll('[data-en]').forEach(el => {
-    if(currentLang === 'en') el.innerHTML = el.getAttribute('data-en');
-    else el.innerHTML = el.getAttribute('data-es');
+    el.innerHTML = el.getAttribute(`data-${lang}`);
   });
-}
+});
 
-// Scroll animations
-const observer = new IntersectionObserver((entries) => {
+const obs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if(entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, {threshold:0.1});
 
-document.querySelectorAll('.animate-on-scroll, .problem-card, .solution-item, .product-card, .process-step, .faq-item, .stat-item').forEach(el => {
-  observer.observe(el);
-});
+document.querySelectorAll('.animate-on-scroll, .card, .solution-item, .step, .faq-item, .stat').forEach(el => obs.observe(el));
 
-// FAQ
 document.querySelectorAll('.faq-item').forEach(item => {
   item.querySelector('.faq-q').addEventListener('click', () => {
     item.classList.toggle('open');
