@@ -3,7 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BriefOps</title>
+
+<!-- FIX: TÃ­tulo SEO mÃ¡s descriptivo -->
+<title>BriefOps â Intelligence Reports That Move Markets | 48h Delivery</title>
+
+<!-- FIX: Meta description (faltaba) -->
+<meta name="description" content="Professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms. Live Semrush data, zero hallucinations.">
+
+<!-- FIX: Open Graph tags (faltaban) -->
+<meta property="og:title" content="BriefOps â Intelligence Reports That Move Markets">
+<meta property="og:description" content="Professional market analysis and investor-ready documents in 48 hours. 80% cheaper than consulting firms.">
+<meta property="og:url" content="https://briefops.online">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BriefOps">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BriefOps â Intelligence Reports That Move Markets">
+<meta name="twitter:description" content="Professional market analysis in 48 hours. 80% cheaper than consulting firms.">
+
+<!-- FIX: URL canÃ³nica (faltaba) -->
+<link rel="canonical" href="https://briefops.online">
+
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -57,8 +76,6 @@ body::before{
 .animate-on-scroll{opacity:0}
 .animate-on-scroll.visible{animation:slideUp 0.8s cubic-bezier(0.22,1,0.36,1) forwards}
 
-position{position:relative;z-index:10}
-
 /* LOGO */
 .logo-icon{
   width:36px;height:36px;display:inline-block;vertical-align:middle;
@@ -89,7 +106,8 @@ nav{
   border-bottom:1px solid var(--border);
   padding:20px 40px;
 }
-nav-container{
+/* FIX: nav-container era un elemento HTML invÃ¡lido â ahora es una clase en un div */
+.nav-container{
   max-width:1400px;margin:0 auto;display:flex;
   justify-content:space-between;align-items:center;
   position:relative;z-index:11;
@@ -113,11 +131,12 @@ nav-container{
   border-color:var(--primary);color:var(--primary);
   background:rgba(14,165,233,0.1);
 }
+.lang-selector option{background:var(--bg);color:var(--fg)}
 .nav-cta{
   background:linear-gradient(135deg,var(--primary),var(--secondary));
   color:var(--bg);border:none;padding:12px 28px;border-radius:6px;
   font-family:'Space Grotesk',sans-serif;font-weight:600;
-  cursor:pointer;transition:all 0.3s;
+  cursor:pointer;transition:all 0.3s;font-size:15px;
 }
 .nav-cta:hover{
   transform:translateY(-3px);box-shadow:0 12px 30px rgba(14,165,233,0.4);
@@ -155,7 +174,7 @@ nav-container{
   color:var(--bg);border:none;padding:16px 40px;
   border-radius:8px;font-family:'Space Grotesk',sans-serif;
   font-weight:600;cursor:pointer;transition:all 0.3s;
-  box-shadow:0 8px 24px rgba(14,165,233,0.3);
+  box-shadow:0 8px 24px rgba(14,165,233,0.3);font-size:16px;
 }
 .cta-primary:hover{
   transform:translateY(-4px);
@@ -165,7 +184,8 @@ nav-container{
   background:transparent;border:2px solid var(--primary);
   color:var(--primary);padding:14px 40px;border-radius:8px;
   font-family:'Space Grotesk',sans-serif;font-weight:600;
-  cursor:pointer;transition:all 0.3s;
+  cursor:pointer;transition:all 0.3s;text-decoration:none;
+  display:inline-flex;align-items:center;font-size:16px;
 }
 .cta-secondary:hover{
   background:rgba(14,165,233,0.1);
@@ -219,6 +239,7 @@ nav-container{
   transition:all 0.4s cubic-bezier(0.22,1,0.36,1);
   animation:slideUp 0.8s ease-out forwards;opacity:0;
   backdrop-filter:blur(10px);
+  display:flex;flex-direction:column;
 }
 .card:nth-child(1){animation-delay:0.1s}
 .card:nth-child(2){animation-delay:0.2s}
@@ -236,8 +257,9 @@ nav-container{
   font-size:20px;font-weight:700;margin-bottom:12px;
   color:var(--fg);
 }
-.card p{
+.card > p{
   font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:0;
+  flex:1;
 }
 .card-badge{
   display:inline-block;background:rgba(14,165,233,0.15);
@@ -245,12 +267,29 @@ nav-container{
   font-size:11px;font-weight:700;text-transform:uppercase;
   letter-spacing:0.06em;margin-bottom:16px;
   border:1px solid rgba(14,165,233,0.3);
+  align-self:flex-start;
 }
 .card-price{
   font-size:32px;font-weight:700;color:var(--primary);
   margin-top:24px;padding-top:24px;border-top:1px solid var(--border);
 }
-.card-time{font-size:12px;color:var(--muted)}
+.card-time{font-size:12px;color:var(--muted);margin-bottom:16px}
+
+/* FIX: BotÃ³n CTA en cada tarjeta de servicio (faltaba completamente) */
+.card-cta{
+  display:block;width:100%;text-align:center;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:var(--bg);border:none;padding:13px 24px;
+  border-radius:8px;font-family:'Space Grotesk',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;
+  transition:all 0.3s;text-decoration:none;
+  box-shadow:0 4px 16px rgba(14,165,233,0.25);
+  margin-top:auto;
+}
+.card-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(14,165,233,0.45);
+}
 
 /* SOLUTION */
 .solution-grid{
@@ -305,9 +344,12 @@ nav-container{
   font-size:16px;font-weight:600;cursor:pointer;
   display:flex;justify-content:space-between;
   align-items:center;color:var(--fg);
-  transition:all 0.3s;
+  transition:all 0.3s;user-select:none;
 }
 .faq-q:hover{color:var(--primary)}
+/* FIX: flecha rotatoria para indicar estado abierto/cerrado */
+.faq-arrow{display:inline-block;transition:transform 0.3s}
+.faq-item.open .faq-arrow{transform:rotate(90deg)}
 .faq-a{
   font-size:15px;color:var(--muted);
   margin-top:16px;line-height:1.7;display:none;
@@ -355,16 +397,29 @@ footer{
   align-items:center;font-size:14px;color:var(--muted);
   flex-wrap:wrap;gap:20px;position:relative;z-index:10;
 }
+footer a{color:var(--primary);text-decoration:none}
+footer a:hover{text-decoration:underline}
 
 .hidden{display:none}
 
+/* FIX: Responsivo mejorado â grillas en columna Ãºnica en mÃ³vil */
 @media(max-width:768px){
   nav{padding:16px 20px}
   .hero{padding:80px 20px 60px}
-  .hero h1{font-size:36px}
+  .hero h1{font-size:36px;letter-spacing:-1px}
   .stats{padding:60px 20px;gap:40px}
   .section{padding:60px 20px}
+  .grid{grid-template-columns:1fr}
+  .solution-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr}
   footer{flex-direction:column;text-align:center;padding:40px 20px}
+  .hero-ctas{flex-direction:column}
+  .cta-primary,.cta-secondary{width:100%;justify-content:center;text-align:center}
+}
+@media(max-width:480px){
+  .stat-num{font-size:36px}
+  .card{padding:28px}
+  .card-price{font-size:26px}
 }
 </style>
 </head>
@@ -375,28 +430,35 @@ footer{
 <div class="float-3"></div>
 
 <nav>
-  <nav-container>
+  <!-- FIX: <nav-container> era un elemento HTML invÃ¡lido â reemplazado con <div class="nav-container"> -->
+  <div class="nav-container">
     <div class="logo">
-      <div class="logo-icon"></div>
+      <div class="logo-icon" aria-hidden="true"></div>
       BriefOps
     </div>
     <div class="nav-right">
-      <select class="lang-selector" id="langSwitch">
+      <select class="lang-selector" id="langSwitch" aria-label="Select language">
         <option value="en">English</option>
-        <option value="es">Español</option>
+        <option value="es">EspaÃ±ol</option>
       </select>
-      <button class="nav-cta" onclick="document.location='mailto:hello@briefops.online'"><span data-en="Start" data-es="Comenzar">Start</span></button>
+      <button class="nav-cta" onclick="document.location='mailto:hello@briefops.online'" aria-label="Contact us to start">
+        <span data-en="Start" data-es="Comenzar">Start</span>
+      </button>
     </div>
-  </nav-container>
+  </div>
 </nav>
 
 <section class="hero">
   <div class="hero-content">
     <h1><span data-en="Intelligence reports that move markets" data-es="Reportes de inteligencia que mueven mercados">Intelligence reports that move markets</span></h1>
-    <p data-en="Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms." data-es="Deja de adivinar. Obtén análisis de mercado profesional, investigación competitiva y documentos listos para inversionistas en 48 horas. 80% más barato que consultorías.">Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms.</p>
+    <p data-en="Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms." data-es="Deja de adivinar. ObtÃ©n anÃ¡lisis de mercado profesional, investigaciÃ³n competitiva y documentos listos para inversionistas en 48 horas. 80% mÃ¡s barato que consultorÃ­as.">Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms.</p>
     <div class="hero-ctas">
-      <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online'"><span data-en="Get Report Now" data-es="Obtén tu Reporte">Get Report Now</span></button>
-      <a href="#products" class="cta-secondary"><span data-en="See Offerings" data-es="Ver Ofertas">See Offerings</span></a>
+      <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online?subject=Report%20Request'" aria-label="Get a report now">
+        <span data-en="Get Report Now" data-es="ObtÃ©n tu Reporte">Get Report Now</span>
+      </button>
+      <a href="#products" class="cta-secondary">
+        <span data-en="See Offerings" data-es="Ver Ofertas">See Offerings</span>
+      </a>
     </div>
   </div>
 </section>
@@ -408,7 +470,7 @@ footer{
   </div>
   <div class="stat">
     <div class="stat-num">10x</div>
-    <div class="stat-label"><span data-en="Faster" data-es="Más Rápido">Faster</span></div>
+    <div class="stat-label"><span data-en="Faster" data-es="MÃ¡s RÃ¡pido">Faster</span></div>
   </div>
   <div class="stat">
     <div class="stat-num">$297</div>
@@ -423,8 +485,8 @@ footer{
 <section class="section">
   <div class="section-pre"><span data-en="The Reality" data-es="La Realidad">The Reality</span></div>
   <h2 data-en="You're flying blind" data-es="Vuelas a ciegas">You're flying blind</h2>
-  <p data-en="Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solution—until now." data-es="Cada decisión carece de datos. La investigación de mercado tarda semanas. Los consultores cuestan miles. La IA inventa datos. No hay solución... hasta ahora.">Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solution—until now.</p>
-  
+  <p data-en="Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solutionâuntil now." data-es="Cada decisiÃ³n carece de datos. La investigaciÃ³n de mercado tarda semanas. Los consultores cuestan miles. La IA inventa datos. No hay soluciÃ³n... hasta ahora.">Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solutionâuntil now.</p>
+
   <div class="grid">
     <div class="card">
       <h3><span data-en="No Real Data" data-es="Sin Datos Reales">No Real Data</span></h3>
@@ -432,7 +494,7 @@ footer{
     </div>
     <div class="card">
       <h3><span data-en="Consultants Are Slow" data-es="Los Consultores Son Lentos">Consultants Are Slow</span></h3>
-      <p><span data-en="$10K reports arrive in 6 weeks. Your market shifted. You needed answers yesterday." data-es="Los reportes de $10K llegan en 6 semanas. Tu mercado cambió. Necesitabas respuestas ayer.">$10K reports arrive in 6 weeks. Your market shifted. You needed answers yesterday.</span></p>
+      <p><span data-en="$10K reports arrive in 6 weeks. Your market shifted. You needed answers yesterday." data-es="Los reportes de $10K llegan en 6 semanas. Tu mercado cambiÃ³. Necesitabas respuestas ayer.">$10K reports arrive in 6 weeks. Your market shifted. You needed answers yesterday.</span></p>
     </div>
     <div class="card">
       <h3><span data-en="AI Can't Be Trusted" data-es="La IA No Es Confiable">AI Can't Be Trusted</span></h3>
@@ -444,77 +506,102 @@ footer{
 <section class="section">
   <div class="section-pre"><span data-en="Our Approach" data-es="Nuestro Enfoque">Our Approach</span></div>
   <h2 data-en="Real intelligence. Real speed." data-es="Inteligencia real. Velocidad real.">Real intelligence. Real speed.</h2>
-  <p data-en="Live market data. Professional analysis. 48 hours. No guessing. No delays. No hallucinations." data-es="Datos de mercado en vivo. Análisis profesional. 48 horas. Sin adivinanzas. Sin demoras. Sin alucinaciones.">Live market data. Professional analysis. 48 hours. No guessing. No delays. No hallucinations.</p>
-  
+  <p data-en="Live market data. Professional analysis. 48 hours. No guessing. No delays. No hallucinations." data-es="Datos de mercado en vivo. AnÃ¡lisis profesional. 48 horas. Sin adivinanzas. Sin demoras. Sin alucinaciones.">Live market data. Professional analysis. 48 hours. No guessing. No delays. No hallucinations.</p>
+
   <div class="solution-grid">
     <div class="solution-item">
-      <div class="check">✓</div>
+      <div class="check" aria-hidden="true">â</div>
       <h3><span data-en="Live Semrush Data" data-es="Datos de Semrush en Vivo">Live Semrush Data</span></h3>
-      <p><span data-en="Real search rankings, competitor traffic, backlinks. Actual intelligence, not guesses." data-es="Rankings reales de búsqueda, tráfico de competidores, backlinks. Inteligencia real, sin adivinanzas.">Real search rankings, competitor traffic, backlinks. Actual intelligence, not guesses.</span></p>
+      <p><span data-en="Real search rankings, competitor traffic, backlinks. Actual intelligence, not guesses." data-es="Rankings reales de bÃºsqueda, trÃ¡fico de competidores, backlinks. Inteligencia real, sin adivinanzas.">Real search rankings, competitor traffic, backlinks. Actual intelligence, not guesses.</span></p>
     </div>
     <div class="solution-item">
-      <div class="check">✓</div>
+      <div class="check" aria-hidden="true">â</div>
       <h3><span data-en="48-Hour Delivery" data-es="Entrega en 48 Horas">48-Hour Delivery</span></h3>
-      <p><span data-en="Brief sent. Data pulled. Report delivered. No meetings. No delays. Done." data-es="Brief enviado. Datos extraídos. Reporte entregado. Sin reuniones. Sin demoras. Listo.">Brief sent. Data pulled. Report delivered. No meetings. No delays. Done.</span></p>
+      <p><span data-en="Brief sent. Data pulled. Report delivered. No meetings. No delays. Done." data-es="Brief enviado. Datos extraÃ­dos. Reporte entregado. Sin reuniones. Sin demoras. Listo.">Brief sent. Data pulled. Report delivered. No meetings. No delays. Done.</span></p>
     </div>
     <div class="solution-item">
-      <div class="check">✓</div>
+      <div class="check" aria-hidden="true">â</div>
       <h3><span data-en="Investor-Ready Format" data-es="Formato Listo para Inversores">Investor-Ready Format</span></h3>
-      <p><span data-en="PPTX, XLSX, PDF. Professional. Download and present to your board tomorrow." data-es="PPTX, XLSX, PDF. Profesional. Descarga y presenta a tu junta directiva mañana.">PPTX, XLSX, PDF. Professional. Download and present to your board tomorrow.</span></p>
+      <p><span data-en="PPTX, XLSX, PDF. Professional. Download and present to your board tomorrow." data-es="PPTX, XLSX, PDF. Profesional. Descarga y presenta a tu junta directiva maÃ±ana.">PPTX, XLSX, PDF. Professional. Download and present to your board tomorrow.</span></p>
     </div>
     <div class="solution-item">
-      <div class="check">✓</div>
+      <div class="check" aria-hidden="true">â</div>
       <h3><span data-en="Human-Reviewed" data-es="Revisado por Humanos">Human-Reviewed</span></h3>
-      <p><span data-en="Not robot output. Each report checked for accuracy and quality before delivery." data-es="No es salida de robot. Cada reporte se verifica por precisión y calidad antes de entregar.">Not robot output. Each report checked for accuracy and quality before delivery.</span></p>
+      <p><span data-en="Not robot output. Each report checked for accuracy and quality before delivery." data-es="No es salida de robot. Cada reporte se verifica por precisiÃ³n y calidad antes de entregar.">Not robot output. Each report checked for accuracy and quality before delivery.</span></p>
     </div>
   </div>
 </section>
 
+<!-- FIX: Cada tarjeta de servicio ahora tiene un botÃ³n "Get This Report" -->
 <section class="section" id="products">
   <div class="section-pre"><span data-en="Services" data-es="Servicios">Services</span></div>
   <h2 data-en="Reports that close deals" data-es="Reportes que cierran tratos">Reports that close deals</h2>
-  
+
   <div class="grid">
     <div class="card">
       <div class="card-badge"><span data-en="Popular" data-es="Popular">Popular</span></div>
-      <h3><span data-en="SEO & Market Audit" data-es="Auditoría SEO y de Mercado">SEO & Market Audit</span></h3>
-      <p><span data-en="Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open." data-es="Entiende dónde estás ganando y perdiendo. Identifica brechas de palabras clave. Encuentra lo que los competidores dejan abierto.">Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open.</span></p>
-      <div class="card-price">$297 <div class="card-time">48h</div></div>
+      <h3><span data-en="SEO & Market Audit" data-es="AuditorÃ­a SEO y de Mercado">SEO & Market Audit</span></h3>
+      <p><span data-en="Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open." data-es="Entiende dÃ³nde estÃ¡s ganando y perdiendo. Identifica brechas de palabras clave. Encuentra lo que los competidores dejan abierto.">Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open.</span></p>
+      <div class="card-price">$297</div>
+      <div class="card-time">48h <span data-en="delivery" data-es="entrega">delivery</span></div>
+      <a class="card-cta" href="mailto:hello@briefops.online?subject=SEO%20%26%20Market%20Audit%20Request" aria-label="Order SEO & Market Audit">
+        <span data-en="Get This Report â" data-es="Obtener Reporte â">Get This Report â</span>
+      </a>
     </div>
 
     <div class="card">
       <div class="card-badge"><span data-en="Investors" data-es="Inversores">Investors</span></div>
       <h3><span data-en="Pitch Deck" data-es="Deck de Pitch">Pitch Deck</span></h3>
-      <p><span data-en="Market sizing, competitive landscape, business model, traction narrative, financials. Ready for VCs." data-es="Dimensionamiento de mercado, panorama competitivo, modelo de negocio, narrativa de tracción, finanzas. Listo para VCs.">Market sizing, competitive landscape, business model, traction narrative, financials. Ready for VCs.</span></p>
-      <div class="card-price">$997 <div class="card-time">72h</div></div>
+      <p><span data-en="Market sizing, competitive landscape, business model, traction narrative, financials. Ready for VCs." data-es="Dimensionamiento de mercado, panorama competitivo, modelo de negocio, narrativa de tracciÃ³n, finanzas. Listo para VCs.">Market sizing, competitive landscape, business model, traction narrative, financials. Ready for VCs.</span></p>
+      <div class="card-price">$997</div>
+      <div class="card-time">72h <span data-en="delivery" data-es="entrega">delivery</span></div>
+      <a class="card-cta" href="mailto:hello@briefops.online?subject=Pitch%20Deck%20Request" aria-label="Order Pitch Deck">
+        <span data-en="Get This Report â" data-es="Obtener Reporte â">Get This Report â</span>
+      </a>
     </div>
 
     <div class="card">
       <div class="card-badge"><span data-en="Strategy" data-es="Estrategia">Strategy</span></div>
       <h3><span data-en="Competitive Intelligence" data-es="Inteligencia Competitiva">Competitive Intelligence</span></h3>
-      <p><span data-en="Traffic sources, content strategy, ad spend, positioning. Know competitors better than they know themselves." data-es="Fuentes de tráfico, estrategia de contenido, gasto en publicidad, posicionamiento. Conoce a los competidores mejor que ellos mismos.">Traffic sources, content strategy, ad spend, positioning. Know competitors better than they know themselves.</span></p>
-      <div class="card-price">$497 <div class="card-time">48h</div></div>
+      <p><span data-en="Traffic sources, content strategy, ad spend, positioning. Know competitors better than they know themselves." data-es="Fuentes de trÃ¡fico, estrategia de contenido, gasto en publicidad, posicionamiento. Conoce a los competidores mejor que ellos mismos.">Traffic sources, content strategy, ad spend, positioning. Know competitors better than they know themselves.</span></p>
+      <div class="card-price">$497</div>
+      <div class="card-time">48h <span data-en="delivery" data-es="entrega">delivery</span></div>
+      <a class="card-cta" href="mailto:hello@briefops.online?subject=Competitive%20Intelligence%20Request" aria-label="Order Competitive Intelligence">
+        <span data-en="Get This Report â" data-es="Obtener Reporte â">Get This Report â</span>
+      </a>
     </div>
 
     <div class="card">
       <div class="card-badge"><span data-en="Complete" data-es="Completo">Complete</span></div>
       <h3><span data-en="Business Plan & Financials" data-es="Plan de Negocio y Finanzas">Business Plan & Financials</span></h3>
-      <p><span data-en="Full plan with market analysis. Working Excel model with 3-year projections you can edit." data-es="Plan completo con análisis de mercado. Modelo de Excel funcional con proyecciones de 3 años que puedes editar.">Full plan with market analysis. Working Excel model with 3-year projections you can edit.</span></p>
-      <div class="card-price">$1,497 <div class="card-time">72h</div></div>
+      <p><span data-en="Full plan with market analysis. Working Excel model with 3-year projections you can edit." data-es="Plan completo con anÃ¡lisis de mercado. Modelo de Excel funcional con proyecciones de 3 aÃ±os que puedes editar.">Full plan with market analysis. Working Excel model with 3-year projections you can edit.</span></p>
+      <div class="card-price">$1,497</div>
+      <div class="card-time">72h <span data-en="delivery" data-es="entrega">delivery</span></div>
+      <a class="card-cta" href="mailto:hello@briefops.online?subject=Business%20Plan%20%26%20Financials%20Request" aria-label="Order Business Plan & Financials">
+        <span data-en="Get This Report â" data-es="Obtener Reporte â">Get This Report â</span>
+      </a>
     </div>
 
     <div class="card">
-      <div class="card-badge"><span data-en="Research" data-es="Investigación">Research</span></div>
-      <h3><span data-en="Market Research Brief" data-es="Resumen de Investigación de Mercado">Market Research Brief</span></h3>
+      <div class="card-badge"><span data-en="Research" data-es="InvestigaciÃ³n">Research</span></div>
+      <h3><span data-en="Market Research Brief" data-es="Resumen de InvestigaciÃ³n de Mercado">Market Research Brief</span></h3>
       <p><span data-en="TAM/SAM/SOM sizing. Key players. Trends. Current data packaged for board decisions." data-es="Dimensionamiento de TAM/SAM/SOM. Jugadores clave. Tendencias. Datos actuales empaquetados para decisiones de junta.">TAM/SAM/SOM sizing. Key players. Trends. Current data packaged for board decisions.</span></p>
-      <div class="card-price">$397 <div class="card-time">48h</div></div>
+      <div class="card-price">$397</div>
+      <div class="card-time">48h <span data-en="delivery" data-es="entrega">delivery</span></div>
+      <a class="card-cta" href="mailto:hello@briefops.online?subject=Market%20Research%20Brief%20Request" aria-label="Order Market Research Brief">
+        <span data-en="Get This Report â" data-es="Obtener Reporte â">Get This Report â</span>
+      </a>
     </div>
 
     <div class="card">
       <div class="card-badge"><span data-en="Ongoing" data-es="Continuo">Ongoing</span></div>
       <h3><span data-en="Monthly Radar" data-es="Radar Mensual">Monthly Radar</span></h3>
-      <p><span data-en="Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Monthly updates." data-es="Rastrea 5 competidores. Monitorea cambios de palabras clave. Observa cambios de tráfico. Actualizaciones mensuales.">Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Monthly updates.</span></p>
-      <div class="card-price">$197 <div class="card-time">/mo</div></div>
+      <p><span data-en="Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Monthly updates." data-es="Rastrea 5 competidores. Monitorea cambios de palabras clave. Observa cambios de trÃ¡fico. Actualizaciones mensuales.">Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Monthly updates.</span></p>
+      <div class="card-price">$197<span style="font-size:16px;font-weight:400;color:var(--muted)">/mo</span></div>
+      <div class="card-time"><span data-en="Monthly subscription" data-es="SuscripciÃ³n mensual">Monthly subscription</span></div>
+      <a class="card-cta" href="mailto:hello@briefops.online?subject=Monthly%20Radar%20Subscription" aria-label="Subscribe to Monthly Radar">
+        <span data-en="Subscribe Now â" data-es="Suscriburse â">Subscribe Now â</span>
+      </a>
     </div>
   </div>
 </section>
@@ -522,11 +609,11 @@ footer{
 <section class="section">
   <div class="section-pre"><span data-en="Process" data-es="Proceso">Process</span></div>
   <h2><span data-en="Three Steps" data-es="Tres Pasos">Three Steps</span></h2>
-  
+
   <div class="process-grid">
     <div class="step">
       <div class="step-num">1</div>
-      <h3><span data-en="Send Brief" data-es="Envía tu Brief">Send Brief</span></h3>
+      <h3><span data-en="Send Brief" data-es="EnvÃ­a tu Brief">Send Brief</span></h3>
       <p><span data-en="Domain, competitors, goals. Takes 5 minutes." data-es="Dominio, competidores, objetivos. Toma 5 minutos.">Domain, competitors, goals. Takes 5 minutes.</span></p>
     </div>
     <div class="step">
@@ -537,7 +624,7 @@ footer{
     <div class="step">
       <div class="step-num">3</div>
       <h3><span data-en="Download & Present" data-es="Descarga y Presenta">Download & Present</span></h3>
-      <p><span data-en="PPTX, XLSX, or PDF. One revision included. Ready tomorrow." data-es="PPTX, XLSX, o PDF. Una revisión incluida. Listo mañana.">PPTX, XLSX, or PDF. One revision included. Ready tomorrow.</span></p>
+      <p><span data-en="PPTX, XLSX, or PDF. One revision included. Ready tomorrow." data-es="PPTX, XLSX, o PDF. Una revisiÃ³n incluida. Listo maÃ±ana.">PPTX, XLSX, or PDF. One revision included. Ready tomorrow.</span></p>
     </div>
   </div>
 </section>
@@ -545,71 +632,134 @@ footer{
 <section class="section">
   <div class="section-pre"><span data-en="Questions" data-es="Preguntas">Questions</span></div>
   <h2><span data-en="Answers" data-es="Respuestas">Answers</span></h2>
-  
+
   <div class="faq-list">
     <div class="faq-item open">
-      <div class="faq-q"><span data-en="Is data live or AI-generated?" data-es="¿Son datos reales o generados por IA?">Is data live or AI-generated?</span> <span>→</span></div>
+      <div class="faq-q" role="button" aria-expanded="true" tabindex="0">
+        <span data-en="Is data live or AI-generated?" data-es="Â¿Son datos reales o generados por IA?">Is data live or AI-generated?</span>
+        <span class="faq-arrow">â</span>
+      </div>
       <div class="faq-a"><span data-en="Live. Semrush (professional SEO) and current market sources. Zero hallucinations. Every report includes sources you can verify." data-es="En vivo. Semrush (SEO profesional) y fuentes de mercado actuales. Cero alucinaciones. Cada reporte incluye fuentes que puedes verificar.">Live. Semrush (professional SEO) and current market sources. Zero hallucinations. Every report includes sources you can verify.</span></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q"><span data-en="What if I'm not satisfied?" data-es="¿Y si no estoy satisfecho?">What if I'm not satisfied?</span> <span>→</span></div>
-      <div class="faq-a"><span data-en="Full refund or we revise. No questions. Your success is our only metric." data-es="Reembolso completo o revisamos. Sin preguntas. Tu éxito es nuestra única métrica.">Full refund or we revise. No questions. Your success is our only metric.</span></div>
+      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
+        <span data-en="What if I'm not satisfied?" data-es="Â¿Y si no estoy satisfecho?">What if I'm not satisfied?</span>
+        <span class="faq-arrow">â</span>
+      </div>
+      <div class="faq-a"><span data-en="Full refund or we revise. No questions. Your success is our only metric." data-es="Reembolso completo o revisamos. Sin preguntas. Tu Ã©xito es nuestra Ãºnica mÃ©trica.">Full refund or we revise. No questions. Your success is our only metric.</span></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q"><span data-en="Can I use for investor pitches?" data-es="¿Puedo usarlo para pitches a inversores?">Can I use for investor pitches?</span> <span>→</span></div>
-      <div class="faq-a"><span data-en="Absolutely. Designed for investor presentations. Many clients close funding with them." data-es="Absolutamente. Diseñado para presentaciones de inversores. Muchos clientes cierran financiación con ellos.">Absolutely. Designed for investor presentations. Many clients close funding with them.</span></div>
+      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
+        <span data-en="Can I use for investor pitches?" data-es="Â¿Puedo usarlo para pitches a inversores?">Can I use for investor pitches?</span>
+        <span class="faq-arrow">â</span>
+      </div>
+      <div class="faq-a"><span data-en="Absolutely. Designed for investor presentations. Many clients close funding with them." data-es="Absolutamente. DiseÃ±ado para presentaciones de inversores. Muchos clientes cierran financiaciÃ³n con ellos.">Absolutely. Designed for investor presentations. Many clients close funding with them.</span></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q"><span data-en="How does this beat consultants?" data-es="¿Cómo esto vence a los consultores?">How does this beat consultants?</span> <span>→</span></div>
-      <div class="faq-a"><span data-en="Speed and price. Consultants: weeks, $5K-20K. Us: 48 hours, 80% cheaper. Same insight, fraction of cost." data-es="Velocidad y precio. Consultores: semanas, $5K-20K. Nosotros: 48 horas, 80% más barato. Mismo conocimiento, fracción del costo.">Speed and price. Consultants: weeks, $5K-20K. Us: 48 hours, 80% cheaper. Same insight, fraction of cost.</span></div>
+      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
+        <span data-en="How does this beat consultants?" data-es="Â¿CÃ³mo esto vence a los consultores?">How does this beat consultants?</span>
+        <span class="faq-arrow">â</span>
+      </div>
+      <div class="faq-a"><span data-en="Speed and price. Consultants: weeks, $5K-20K. Us: 48 hours, 80% cheaper. Same insight, fraction of cost." data-es="Velocidad y precio. Consultores: semanas, $5K-20K. Nosotros: 48 horas, 80% mÃ¡s barato. Mismo conocimiento, fracciÃ³n del costo.">Speed and price. Consultants: weeks, $5K-20K. Us: 48 hours, 80% cheaper. Same insight, fraction of cost.</span></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q"><span data-en="Can I revise?" data-es="¿Puedo revisar?">Can I revise?</span> <span>→</span></div>
+      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
+        <span data-en="Can I revise?" data-es="Â¿Puedo revisar?">Can I revise?</span>
+        <span class="faq-arrow">â</span>
+      </div>
       <div class="faq-a"><span data-en="One round included. We keep refining until happy." data-es="Una ronda incluida. Seguimos refinando hasta estar satisfechos.">One round included. We keep refining until happy.</span></div>
     </div>
   </div>
 </section>
 
 <section class="guarantee">
-  <h3><span data-en="No-Risk Guarantee" data-es="Garantía Sin Riesgo">No-Risk Guarantee</span></h3>
-  <p><span data-en="Report doesn't meet expectations? Full refund. We win when you win." data-es="¿El reporte no cumple expectativas? Reembolso completo. Ganamos cuando tú ganas.">Report doesn't meet expectations? Full refund. We win when you win.</span></p>
+  <h3><span data-en="No-Risk Guarantee" data-es="GarantÃ­a Sin Riesgo">No-Risk Guarantee</span></h3>
+  <p><span data-en="Report doesn't meet expectations? Full refund. We win when you win." data-es="Â¿El reporte no cumple expectativas? Reembolso completo. Ganamos cuando tÃº ganas.">Report doesn't meet expectations? Full refund. We win when you win.</span></p>
 </section>
 
 <section class="final-cta">
-  <h2><span data-en="Your competitors are already deciding with data." data-es="Tus competidores ya están decidiendo con datos.">Your competitors are already deciding with data.</span></h2>
-  <p><span data-en="Get your first report in 48 hours. No commitment. No BS. Real insight that moves the needle." data-es="Obtén tu primer reporte en 48 horas. Sin compromiso. Sin mentiras. Conocimiento real que mueve la aguja.">Get your first report in 48 hours. No commitment. No BS. Real insight that moves the needle.</span></p>
-  <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online'" style="margin:0 auto;display:block"><span data-en="Start Now" data-es="Comienza Ahora">Start Now</span></button>
+  <h2><span data-en="Your competitors are already deciding with data." data-es="Tus competidores ya estÃ¡n decidiendo con datos.">Your competitors are already deciding with data.</span></h2>
+  <p><span data-en="Get your first report in 48 hours. No commitment. No BS. Real insight that moves the needle." data-es="ObtÃ©n tu primer reporte en 48 horas. Sin compromiso. Sin mentiras. Conocimiento real que mueve la aguja.">Get your first report in 48 hours. No commitment. No BS. Real insight that moves the needle.</span></p>
+  <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online?subject=Report%20Request'" style="margin:0 auto;display:block" aria-label="Start your first report">
+    <span data-en="Start Now" data-es="Comienza Ahora">Start Now</span>
+  </button>
 </section>
 
 <footer>
   <div class="logo">
-    <div class="logo-icon"></div>
+    <div class="logo-icon" aria-hidden="true"></div>
     BriefOps
   </div>
-  <div>© 2026</div>
+  <div>Â© 2026</div>
   <a href="mailto:hello@briefops.online">hello@briefops.online</a>
 </footer>
 
 <script>
-let lang = 'en';
-document.getElementById('langSwitch').addEventListener('change', (e) => {
-  lang = e.target.value;
+/* ===========================================
+   FIX: Selector de idioma â versiÃ³n segura
+   Itera sÃ³lo sobre elementos hoja con data-en/data-es
+   para no borrar elementos hijo
+   =========================================== */
+let currentLang = localStorage.getItem('briefops-lang') || 'en';
+
+function applyLang(lang) {
   document.querySelectorAll('[data-en]').forEach(el => {
-    el.innerHTML = el.getAttribute(`data-${lang}`);
+    // Solo cambiar si no tiene elementos hijo (texto terminal)
+    if (el.children.length === 0) {
+      el.textContent = el.getAttribute('data-' + lang) || el.textContent;
+    }
   });
+  document.documentElement.lang = lang;
+  localStorage.setItem('briefops-lang', lang);
+  currentLang = lang;
+}
+
+const langSwitcher = document.getElementById('langSwitch');
+langSwitcher.value = currentLang;
+if (currentLang !== 'en') applyLang(currentLang);
+
+langSwitcher.addEventListener('change', function() {
+  applyLand(this.value);
 });
 
+/* ===========================================
+   IntersectionObserver para animaciones al scroll
+   =========================================== */
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if(entry.isIntersecting) entry.target.classList.add('visible');
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
-}, {threshold:0.1});
+}, { threshold: 0.1 });
 
 document.querySelectorAll('.animate-on-scroll, .card, .solution-item, .step, .faq-item, .stat').forEach(el => obs.observe(el));
 
+/* ===========================================
+   FAQ accordion con soporte de teclado
+   =========================================== */
 document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('.faq-q').addEventListener('click', () => {
-    item.classList.toggle('open');
+  const q = item.querySelector('.faq-q');
+
+  function toggleFaq() {
+    const isOpen = item.classList.contains('open');
+    // Cerrar todos
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      const btn = i.querySelector('.faq-q');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+    // Abrir el clickeado si estaba cerrado
+    if (!isOpen) {
+      item.classList.add('open');
+      q.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  q.addEventListener('click', toggleFaq);
+  q.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleFaq();
+    }
   });
 });
 </script>
