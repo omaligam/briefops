@@ -402,6 +402,27 @@ footer a:hover{text-decoration:underline}
 
 .hidden{display:none}
 
+/* FOCUS STYLES â keyboard navigation */
+:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px;
+  border-radius:4px;
+}
+button:focus-visible,a:focus-visible,select:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px;
+}
+
+/* REDUCED MOTION â accessibility (HIGH severity per UX guidelines) */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.01ms!important;
+  }
+  html{scroll-behavior:auto}
+}
+
 /* FIX: Responsivo mejorado â grillas en columna Ãºnica en mÃ³vil */
 @media(max-width:768px){
   nav{padding:16px 20px}
@@ -426,7 +447,7 @@ footer a:hover{text-decoration:underline}
 .cart-btn{
   position:relative;background:rgba(14,165,233,0.12);
   border:1px solid rgba(14,165,233,0.4);color:var(--primary);
-  width:42px;height:42px;border-radius:8px;cursor:pointer;
+  width:44px;height:44px;border-radius:8px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   font-size:20px;transition:all 0.3s;
 }
@@ -550,13 +571,13 @@ footer a:hover{text-decoration:underline}
 <section class="hero">
   <div class="hero-content">
     <h1><span data-en="Intelligence reports that move markets" data-es="Reportes de inteligencia que mueven mercados">Intelligence reports that move markets</span></h1>
-    <p data-en="Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms." data-es="Deja de adivinar. ObtÃ©n anÃ¡lisis de mercado profesional, investigaciÃ³n competitiva y documentos listos para inversionistas en 48 horas. 80% mÃ¡s barato que consultorÃ­as.">Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms.</p>
+    <p data-en="Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms." data-es="Deja de adivinar. ObtÃ©n anÃ¡lisis de mercado profesionales, investigaciÃ³n competitiva y documentos listos para inversores en 48 horas. Un 80% mÃ¡s barato que las consultoras.">Stop guessing. Get professional market analysis, competitive research, and investor-ready documents in 48 hours. 80% cheaper than consulting firms.</p>
     <div class="hero-ctas">
       <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online?subject=Report%20Request'" aria-label="Get a report now">
         <span data-en="Get Report Now" data-es="ObtÃ©n tu Reporte">Get Report Now</span>
       </button>
       <a href="#products" class="cta-secondary">
-        <span data-en="See Offerings" data-es="Ver Ofertas">See Offerings</span>
+        <span data-en="See Services" data-es="Ver Servicios">See Services</span>
       </a>
     </div>
   </div>
@@ -573,7 +594,7 @@ footer a:hover{text-decoration:underline}
   </div>
   <div class="stat">
     <div class="stat-num">$297</div>
-    <div class="stat-label"><span data-en="Starting" data-es="Desde">Starting</span></div>
+    <div class="stat-label"><span data-en="From" data-es="Desde">From</span></div>
   </div>
   <div class="stat">
     <div class="stat-num">100%</div>
@@ -583,13 +604,13 @@ footer a:hover{text-decoration:underline}
 
 <section class="section">
   <div class="section-pre"><span data-en="The Reality" data-es="La Realidad">The Reality</span></div>
-  <h2 data-en="You're flying blind" data-es="Vuelas a ciegas">You're flying blind</h2>
-  <p data-en="Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solutionâuntil now." data-es="Cada decisiÃ³n carece de datos. La investigaciÃ³n de mercado tarda semanas. Los consultores cuestan miles. La IA inventa datos. No hay soluciÃ³n... hasta ahora.">Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solutionâuntil now.</p>
+  <h2 data-en="You're flying blind" data-es="EstÃ¡s volando a ciegas">You're flying blind</h2>
+  <p data-en="Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solutionâuntil now." data-es="Cada decisiÃ³n carece de datos. La investigaciÃ³n de mercado tarda semanas. Los consultores cuestan miles. Las herramientas de IA inventan datos. No hay soluciÃ³n... hasta ahora.">Every decision lacks data. Market research takes weeks. Consultants cost thousands. AI tools hallucinate. There's no solutionâuntil now.</p>
 
   <div class="grid">
     <div class="card">
       <h3><span data-en="No Real Data" data-es="Sin Datos Reales">No Real Data</span></h3>
-      <p><span data-en="You guess at TAM, CAC, positioning. Guesses burn capital. Bad decisions stack." data-es="Adivinas sobre TAM, CAC, posicionamiento. Las adivinanzas queman capital. Las malas decisiones se acumulan.">You guess at TAM, CAC, positioning. Guesses burn capital. Bad decisions stack.</span></p>
+      <p><span data-en="You guess at TAM, CAC, positioning. Guesses burn capital. Bad decisions compound." data-es="Adivinas sobre TAM, CAC, posicionamiento. Las suposiciones queman capital. Las malas decisiones se acumulan.">You guess at TAM, CAC, positioning. Guesses burn capital. Bad decisions compound.</span></p>
     </div>
     <div class="card">
       <h3><span data-en="Consultants Are Slow" data-es="Los Consultores Son Lentos">Consultants Are Slow</span></h3>
@@ -597,7 +618,7 @@ footer a:hover{text-decoration:underline}
     </div>
     <div class="card">
       <h3><span data-en="AI Can't Be Trusted" data-es="La IA No Es Confiable">AI Can't Be Trusted</span></h3>
-      <p><span data-en="ChatGPT sounds professional but invents data. You can't present hallucinations to investors." data-es="ChatGPT suena profesional pero inventa datos. No puedes presentar alucinaciones a inversores.">ChatGPT sounds professional but invents data. You can't present hallucinations to investors.</span></p>
+      <p><span data-en="ChatGPT sounds professional but fabricates data. You can't present hallucinations to investors." data-es="ChatGPT suena profesional pero fabrica datos. No puedes presentar alucinaciones a inversores.">ChatGPT sounds professional but fabricates data. You can't present hallucinations to investors.</span></p>
     </div>
   </div>
 </section>
@@ -616,357 +637,8 @@ footer a:hover{text-decoration:underline}
     <div class="solution-item">
       <div class="check" aria-hidden="true">â</div>
       <h3><span data-en="48-Hour Delivery" data-es="Entrega en 48 Horas">48-Hour Delivery</span></h3>
-      <p><span data-en="Brief sent. Data pulled. Report delivered. No meetings. No delays. Done." data-es="Brief enviado. Datos extraÃ­dos. Reporte entregado. Sin reuniones. Sin demoras. Listo.">Brief sent. Data pulled. Report delivered. No meetings. No delays. Done.</span></p>
+      <p><span data-en="Brief sent. Data pulled. Report delivered. No meetings. No delays. Done." data-es="Brief enviado. Datos extraÃ­dos. Reporte entregado. Sin reuniones. Sin retrasos. Hecho.">Brief sent. Data pulled. Report delivered. No meetings. No delays. Done.</span></p>
     </div>
     <div class="solution-item">
       <div class="check" aria-hidden="true">â</div>
-      <h3><span data-en="Investor-Ready Format" data-es="Formato Listo para Inversores">Investor-Ready Format</span></h3>
-      <p><span data-en="PPTX, XLSX, PDF. Professional. Download and present to your board tomorrow." data-es="PPTX, XLSX, PDF. Profesional. Descarga y presenta a tu junta directiva maÃ±ana.">PPTX, XLSX, PDF. Professional. Download and present to your board tomorrow.</span></p>
-    </div>
-    <div class="solution-item">
-      <div class="check" aria-hidden="true">â</div>
-      <h3><span data-en="Human-Reviewed" data-es="Revisado por Humanos">Human-Reviewed</span></h3>
-      <p><span data-en="Not robot output. Each report checked for accuracy and quality before delivery." data-es="No es salida de robot. Cada reporte se verifica por precisiÃ³n y calidad antes de entregar.">Not robot output. Each report checked for accuracy and quality before delivery.</span></p>
-    </div>
-  </div>
-</section>
-
-<!-- FIX: Cada tarjeta de servicio ahora tiene un botÃ³n "Get This Report" -->
-<section class="section" id="products">
-  <div class="section-pre"><span data-en="Services" data-es="Servicios">Services</span></div>
-  <h2 data-en="Reports that close deals" data-es="Reportes que cierran tratos">Reports that close deals</h2>
-
-  <div class="grid">
-    <div class="card">
-      <div class="card-badge"><span data-en="Popular" data-es="Popular">Popular</span></div>
-      <h3><span data-en="SEO & Market Audit" data-es="AuditorÃ­a SEO y de Mercado">SEO & Market Audit</span></h3>
-      <p><span data-en="Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open." data-es="Entiende dÃ³nde estÃ¡s ganando y perdiendo. Identifica brechas de palabras clave. Encuentra lo que los competidores dejan abierto.">Understand where you're winning and losing. Identify keyword gaps. Find what competitors leave open.</span></p>
-      <div class="card-price">$297</div>
-      <div class="card-time">48h <span data-en="delivery" data-es="entrega">delivery</span></div>
-      <button class="add-to-cart-btn" onclick="addToCart('seo','SEO &amp; Market Audit','$297',297,'48h delivery',this)" data-en="Add to Cart ð" data-es="Agregar al Carrito ð">Add to Cart ð</button>
-    </div>
-
-    <div class="card">
-      <div class="card-badge"><span data-en="Investors" data-es="Inversores">Investors</span></div>
-      <h3><span data-en="Pitch Deck" data-es="Deck de Pitch">Pitch Deck</span></h3>
-      <p><span data-en="Market sizing, competitive landscape, business model, traction narrative, financials. Ready for VCs." data-es="Dimensionamiento de mercado, panorama competitivo, modelo de negocio, narrativa de tracciÃ³n, finanzas. Listo para VCs.">Market sizing, competitive landscape, business model, traction narrative, financials. Ready for VCs.</span></p>
-      <div class="card-price">$997</div>
-      <div class="card-time">72h <span data-en="delivery" data-es="entrega">delivery</span></div>
-      <button class="add-to-cart-btn" onclick="addToCart('pitch','Pitch Deck','$997',997,'72h delivery',this)" data-en="Add to Cart ð" data-es="Agregar al Carrito ð">Add to Cart ð</button>
-    </div>
-
-    <div class="card">
-      <div class="card-badge"><span data-en="Strategy" data-es="Estrategia">Strategy</span></div>
-      <h3><span data-en="Competitive Intelligence" data-es="Inteligencia Competitiva">Competitive Intelligence</span></h3>
-      <p><span data-en="Traffic sources, content strategy, ad spend, positioning. Know competitors better than they know themselves." data-es="Fuentes de trÃ¡fico, estrategia de contenido, gasto en publicidad, posicionamiento. Conoce a los competidores mejor que ellos mismos.">Traffic sources, content strategy, ad spend, positioning. Know competitors better than they know themselves.</span></p>
-      <div class="card-price">$497</div>
-      <div class="card-time">48h <span data-en="delivery" data-es="entrega">delivery</span></div>
-      <button class="add-to-cart-btn" onclick="addToCart('ci','Competitive Intelligence','$497',497,'48h delivery',this)" data-en="Add to Cart ð" data-es="Agregar al Carrito ð">Add to Cart ð</button>
-    </div>
-
-    <div class="card">
-      <div class="card-badge"><span data-en="Complete" data-es="Completo">Complete</span></div>
-      <h3><span data-en="Business Plan & Financials" data-es="Plan de Negocio y Finanzas">Business Plan & Financials</span></h3>
-      <p><span data-en="Full plan with market analysis. Working Excel model with 3-year projections you can edit." data-es="Plan completo con anÃ¡lisis de mercado. Modelo de Excel funcional con proyecciones de 3 aÃ±os que puedes editar.">Full plan with market analysis. Working Excel model with 3-year projections you can edit.</span></p>
-      <div class="card-price">$1,497</div>
-      <div class="card-time">72h <span data-en="delivery" data-es="entrega">delivery</span></div>
-      <button class="add-to-cart-btn" onclick="addToCart('bp','Business Plan &amp; Financials','$1,497',1497,'72h delivery',this)" data-en="Add to Cart ð" data-es="Agregar al Carrito ð">Add to Cart ð</button>
-    </div>
-
-    <div class="card">
-      <div class="card-badge"><span data-en="Research" data-es="InvestigaciÃ³n">Research</span></div>
-      <h3><span data-en="Market Research Brief" data-es="Resumen de InvestigaciÃ³n de Mercado">Market Research Brief</span></h3>
-      <p><span data-en="TAM/SAM/SOM sizing. Key players. Trends. Current data packaged for board decisions." data-es="Dimensionamiento de TAM/SAM/SOM. Jugadores clave. Tendencias. Datos actuales empaquetados para decisiones de junta.">TAM/SAM/SOM sizing. Key players. Trends. Current data packaged for board decisions.</span></p>
-      <div class="card-price">$397</div>
-      <div class="card-time">48h <span data-en="delivery" data-es="entrega">delivery</span></div>
-      <button class="add-to-cart-btn" onclick="addToCart('mr','Market Research Brief','$397',397,'48h delivery',this)" data-en="Add to Cart ð" data-es="Agregar al Carrito ð">Add to Cart ð</button>
-    </div>
-
-    <div class="card">
-      <div class="card-badge"><span data-en="Ongoing" data-es="Continuo">Ongoing</span></div>
-      <h3><span data-en="Monthly Radar" data-es="Radar Mensual">Monthly Radar</span></h3>
-      <p><span data-en="Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Monthly updates." data-es="Rastrea 5 competidores. Monitorea cambios de palabras clave. Observa cambios de trÃ¡fico. Actualizaciones mensuales.">Track 5 competitors. Monitor keyword shifts. Watch traffic changes. Monthly updates.</span></p>
-      <div class="card-price">$197<span style="font-size:16px;font-weight:400;color:var(--muted)">/mo</span></div>
-      <div class="card-time"><span data-en="Monthly subscription" data-es="SuscripciÃ³n mensual">Monthly subscription</span></div>
-      <button class="add-to-cart-btn" onclick="addToCart('radar','Monthly Radar','$197/mo',197,'Monthly subscription',this)" data-en="Subscribe ð" data-es="Suscribirse ð">Subscribe ð</button>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-pre"><span data-en="Process" data-es="Proceso">Process</span></div>
-  <h2><span data-en="Three Steps" data-es="Tres Pasos">Three Steps</span></h2>
-
-  <div class="process-grid">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h3><span data-en="Send Brief" data-es="EnvÃ­a tu Brief">Send Brief</span></h3>
-      <p><span data-en="Domain, competitors, goals. Takes 5 minutes." data-es="Dominio, competidores, objetivos. Toma 5 minutos.">Domain, competitors, goals. Takes 5 minutes.</span></p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h3><span data-en="We Research" data-es="Nosotros Investigamos">We Research</span></h3>
-      <p><span data-en="Pull live data. Analyze. Build report. Professional output guaranteed." data-es="Extraemos datos en vivo. Analizamos. Construimos el reporte. Salida profesional garantizada.">Pull live data. Analyze. Build report. Professional output guaranteed.</span></p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h3><span data-en="Download & Present" data-es="Descarga y Presenta">Download & Present</span></h3>
-      <p><span data-en="PPTX, XLSX, or PDF. One revision included. Ready tomorrow." data-es="PPTX, XLSX, o PDF. Una revisiÃ³n incluida. Listo maÃ±ana.">PPTX, XLSX, or PDF. One revision included. Ready tomorrow.</span></p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-pre"><span data-en="Questions" data-es="Preguntas">Questions</span></div>
-  <h2><span data-en="Answers" data-es="Respuestas">Answers</span></h2>
-
-  <div class="faq-list">
-    <div class="faq-item open">
-      <div class="faq-q" role="button" aria-expanded="true" tabindex="0">
-        <span data-en="Is data live or AI-generated?" data-es="Â¿Son datos reales o generados por IA?">Is data live or AI-generated?</span>
-        <span class="faq-arrow">â</span>
-      </div>
-      <div class="faq-a"><span data-en="Live. Semrush (professional SEO) and current market sources. Zero hallucinations. Every report includes sources you can verify." data-es="En vivo. Semrush (SEO profesional) y fuentes de mercado actuales. Cero alucinaciones. Cada reporte incluye fuentes que puedes verificar.">Live. Semrush (professional SEO) and current market sources. Zero hallucinations. Every report includes sources you can verify.</span></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
-        <span data-en="What if I'm not satisfied?" data-es="Â¿Y si no estoy satisfecho?">What if I'm not satisfied?</span>
-        <span class="faq-arrow">â</span>
-      </div>
-      <div class="faq-a"><span data-en="Full refund or we revise. No questions. Your success is our only metric." data-es="Reembolso completo o revisamos. Sin preguntas. Tu Ã©xito es nuestra Ãºnica mÃ©trica.">Full refund or we revise. No questions. Your success is our only metric.</span></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
-        <span data-en="Can I use for investor pitches?" data-es="Â¿Puedo usarlo para pitches a inversores?">Can I use for investor pitches?</span>
-        <span class="faq-arrow">â</span>
-      </div>
-      <div class="faq-a"><span data-en="Absolutely. Designed for investor presentations. Many clients close funding with them." data-es="Absolutamente. DiseÃ±ado para presentaciones de inversores. Muchos clientes cierran financiaciÃ³n con ellos.">Absolutely. Designed for investor presentations. Many clients close funding with them.</span></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
-        <span data-en="How does this beat consultants?" data-es="Â¿CÃ³mo esto vence a los consultores?">How does this beat consultants?</span>
-        <span class="faq-arrow">â</span>
-      </div>
-      <div class="faq-a"><span data-en="Speed and price. Consultants: weeks, $5K-20K. Us: 48 hours, 80% cheaper. Same insight, fraction of cost." data-es="Velocidad y precio. Consultores: semanas, $5K-20K. Nosotros: 48 horas, 80% mÃ¡s barato. Mismo conocimiento, fracciÃ³n del costo.">Speed and price. Consultants: weeks, $5K-20K. Us: 48 hours, 80% cheaper. Same insight, fraction of cost.</span></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" role="button" aria-expanded="false" tabindex="0">
-        <span data-en="Can I revise?" data-es="Â¿Puedo revisar?">Can I revise?</span>
-        <span class="faq-arrow">â</span>
-      </div>
-      <div class="faq-a"><span data-en="One round included. We keep refining until happy." data-es="Una ronda incluida. Seguimos refinando hasta estar satisfechos.">One round included. We keep refining until happy.</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="guarantee">
-  <h3><span data-en="No-Risk Guarantee" data-es="GarantÃ­a Sin Riesgo">No-Risk Guarantee</span></h3>
-  <p><span data-en="Report doesn't meet expectations? Full refund. We win when you win." data-es="Â¿El reporte no cumple expectativas? Reembolso completo. Ganamos cuando tÃº ganas.">Report doesn't meet expectations? Full refund. We win when you win.</span></p>
-</section>
-
-<section class="final-cta">
-  <h2><span data-en="Your competitors are already deciding with data." data-es="Tus competidores ya estÃ¡n decidiendo con datos.">Your competitors are already deciding with data.</span></h2>
-  <p><span data-en="Get your first report in 48 hours. No commitment. No BS. Real insight that moves the needle." data-es="ObtÃ©n tu primer reporte en 48 horas. Sin compromiso. Sin mentiras. Conocimiento real que mueve la aguja.">Get your first report in 48 hours. No commitment. No BS. Real insight that moves the needle.</span></p>
-  <button class="cta-primary" onclick="document.location='mailto:hello@briefops.online?subject=Report%20Request'" style="margin:0 auto;display:block" aria-label="Start your first report">
-    <span data-en="Start Now" data-es="Comienza Ahora">Start Now</span>
-  </button>
-</section>
-
-<footer>
-  <div class="logo">
-    <div class="logo-icon" aria-hidden="true"></div>
-    BriefOps
-  </div>
-  <div>Â© 2026</div>
-  <a href="mailto:hello@briefops.online">hello@briefops.online</a>
-</footer>
-
-<!-- CART DRAWER -->
-<div class="cart-overlay" id="cartOverlay"></div>
-<div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Shopping cart">
-  <div class="cart-header">
-    <h3 data-en="Your Cart" data-es="Tu Carrito">Your Cart</h3>
-    <button class="cart-close" id="cartClose" aria-label="Close cart">Ã</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty">
-      <span class="cart-empty-icon">ð</span>
-      <span data-en="Your cart is empty." data-es="Tu carrito estÃ¡ vacÃ­o.">Your cart is empty.</span>
-    </div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total">
-      <span data-en="Total" data-es="Total">Total</span>
-      <span class="cart-total-num" id="cartTotal">$0</span>
-    </div>
-    <button class="cart-checkout" id="cartCheckout" disabled>
-      <span data-en="Request Quote via Email" data-es="Solicitar CotizaciÃ³n por Email">Request Quote via Email</span>
-    </button>
-  </div>
-</div>
-
-<script>
-/* ===========================================
-   CART
-   =========================================== */
-var currentLang = localStorage.getItem('briefops-lang') || 'en';
-var cart = {};
-
-function openCart() {
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeCart() {
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('cartToggle').addEventListener('click', openCart);
-document.getElementById('cartClose').addEventListener('click', closeCart);
-document.getElementById('cartOverlay').addEventListener('click', closeCart);
-
-function addToCart(id, name, priceStr, priceNum, delivery, btn) {
-  cart[id] = { name: name, priceStr: priceStr, priceNum: priceNum, delivery: delivery };
-  renderCart();
-  btn.textContent = currentLang === 'es' ? 'â En Carrito' : 'â In Cart';
-  btn.classList.add('added');
-  btn.disabled = true;
-  openCart();
-}
-
-function removeFromCart(id) {
-  delete cart[id];
-  document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
-    var oc = btn.getAttribute('onclick') || '';
-    if (oc.indexOf("'" + id + "'") !== -1) {
-      btn.classList.remove('added');
-      btn.disabled = false;
-      btn.textContent = currentLang === 'es'
-        ? (id === 'radar' ? 'Suscribirse ð' : 'Agregar al Carrito ð')
-        : (id === 'radar' ? 'Subscribe ð' : 'Add to Cart ð');
-    }
-  });
-  renderCart();
-}
-
-function renderCart() {
-  var items = Object.entries(cart);
-  var container = document.getElementById('cartItems');
-  var totalEl = document.getElementById('cartTotal');
-  var checkoutBtn = document.getElementById('cartCheckout');
-  var countEl = document.getElementById('cartCount');
-
-  if (items.length === 0) {
-    container.innerHTML = '<div class="cart-empty"><span class="cart-empty-icon">ð</span><span>' +
-      (currentLang === 'es' ? 'Tu carrito estÃ¡ vacÃ­o.' : 'Your cart is empty.') + '</span></div>';
-    totalEl.textContent = '$0';
-    checkoutBtn.disabled = true;
-    countEl.textContent = '0';
-    countEl.classList.remove('show');
-    return;
-  }
-
-  var total = 0;
-  container.innerHTML = items.map(function(entry) {
-    var id = entry[0]; var item = entry[1];
-    total += item.priceNum;
-    return '<div class="cart-item">' +
-      '<div class="cart-item-info">' +
-        '<div class="cart-item-name">' + item.name + '</div>' +
-        '<div class="cart-item-delivery">' + item.delivery + '</div>' +
-      '</div>' +
-      '<div style="display:flex;align-items:center;gap:8px">' +
-        '<span class="cart-item-price">' + item.priceStr + '</span>' +
-        '<button class="cart-item-remove" onclick="removeFromCart(\'' + id + '\')" aria-label="Remove">Ã</button>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-
-  totalEl.textContent = '$' + total.toLocaleString();
-  checkoutBtn.disabled = false;
-  countEl.textContent = items.length;
-  countEl.classList.add('show');
-}
-
-document.getElementById('cartCheckout').addEventListener('click', function() {
-  var items = Object.values(cart);
-  if (!items.length) return;
-  var lines = items.map(function(i) { return '- ' + i.name + ': ' + i.priceStr + ' (' + i.delivery + ')'; }).join('\n');
-  var total = items.reduce(function(s, i) { return s + i.priceNum; }, 0);
-  var subject = encodeURIComponent('BriefOps Order Request');
-  var body = encodeURIComponent('Hello BriefOps,\n\nI would like to order:\n\n' + lines + '\n\nTotal: $' + total.toLocaleString() + '\n\nPlease send a payment link.\n\nThank you!');
-  window.location.href = 'mailto:hello@briefops.online?subject=' + subject + '&body=' + body;
-});
-
-/* ===========================================
-   FIX: Selector de idioma â versiÃ³n segura
-   Itera sÃ³lo sobre elementos hoja con data-en/data-es
-   para no borrar elementos hijo
-   =========================================== */
-
-function applyLang(lang) {
-  document.querySelectorAll('[data-en]').forEach(el => {
-    // Solo cambiar si no tiene elementos hijo (texto terminal)
-    if (el.children.length === 0) {
-      el.textContent = el.getAttribute('data-' + lang) || el.textContent;
-    }
-  });
-  document.documentElement.lang = lang;
-  localStorage.setItem('briefops-lang', lang);
-  currentLang = lang;
-}
-
-const langSwitcher = document.getElementById('langSwitch');
-langSwitcher.value = currentLang;
-if (currentLang !== 'en') applyLang(currentLang);
-
-langSwitcher.addEventListener('change', function() {
-  applyLang(this.value);
-});
-
-/* ===========================================
-   IntersectionObserver para animaciones al scroll
-   =========================================== */
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.animate-on-scroll, .card, .solution-item, .step, .faq-item, .stat').forEach(el => obs.observe(el));
-
-/* ===========================================
-   FAQ accordion con soporte de teclado
-   =========================================== */
-document.querySelectorAll('.faq-item').forEach(item => {
-  const q = item.querySelector('.faq-q');
-
-  function toggleFaq() {
-    const isOpen = item.classList.contains('open');
-    // Cerrar todos
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      const btn = i.querySelector('.faq-q');
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-    });
-    // Abrir el clickeado si estaba cerrado
-    if (!isOpen) {
-      item.classList.add('open');
-      q.setAttribute('aria-expanded', 'true');
-    }
-  }
-
-  q.addEventListener('click', toggleFaq);
-  q.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleFaq();
-    }
-  });
-});
-</script>
-
-</body>
-</html>
+      <h3><span data-en="InvVW2#äçfW7F÷"Õ&VGf÷&ÖCÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%EÂÅ5ÂDbâ&öfW76öæÂf÷&ÖBâF÷væÆöBæB&W6VçBFò÷W"&ö&BFöÖ÷'&÷râ"FFÖW3Ò%EÂÅ5ÂDbâf÷&ÖFò&öfW6öæÂâFW66&v&W<:çFÆòGR§VçFF&V7FfÖ;æâ#åEÂÅ5ÂDbâ&öfW76öæÂf÷&ÖBâF÷væÆöBæB&W6VçBFò÷W"&ö&BFöÖ÷'&÷rãÂ÷7ããÂ÷à¢ÂöFcà¢ÆFb6Æ73Ò'6öÇWFöâÖFVÒ#à¢ÆFb6Æ73Ò&6V6²"&ÖFFVãÒ'G'VR#î)É3ÂöFcà¢Æ3ãÇ7âFFÖVãÒ$VÖâÕ&WfWvVB"FFÖW3Ò%&Wf6Fò÷"VÖæ÷2#äVÖâÕ&WfWvVCÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ$æ÷B&r÷WGWBâV6&W÷'B2&WfWvVBf÷"67W&7æBVÆG&Vf÷&RFVÆfW'â"FFÖW3Ò$æòW26ÆF7'VFFRâ6F&W÷'FRW2&Wf6Fò÷"&V66;6â6ÆFBçFW2FR7RVçG&Vvâ#äæ÷B&r÷WGWBâV6&W÷'B2&WfWvVBf÷"67W&7æBVÆG&Vf÷&RFVÆfW'ãÂ÷7ããÂ÷à¢ÂöFcà¢ÂöFcà£Â÷6V7Föãà £ÂÒÒd¢6FF&¦WFFR6W'f6ò÷&FVæRVâ&÷L;6â$vWBF2&W÷'B"ÒÓà£Ç6V7Föâ6Æ73Ò'6V7Föâ"CÒ'&öGV7G2#à¢ÆFb6Æ73Ò'6V7Föâ×&R#ãÇ7âFFÖVãÒ%6W'f6W2"FFÖW3Ò%6W'f6÷2#å6W'f6W3Â÷7ããÂöFcà¢Æ"FFÖVãÒ%&W÷'G2FB6Æ÷6RFVÇ2"FFÖW3Ò%&W÷'FW2VR6W'&âG&F÷2#å&W÷'G2FB6Æ÷6RFVÇ3Âö#à ¢ÆFb6Æ73Ò&w&B#à¢ÆFb6Æ73Ò&6&B#à¢ÆFb6Æ73Ò&6&BÖ&FvR#ãÇ7âFFÖVãÒ%÷VÆ""FFÖW3Ò%÷VÆ"#å÷VÆ#Â÷7ããÂöFcà¢Æ3ãÇ7âFFÖVãÒ%4TòbÖ&¶WBVFB"FFÖW3Ò$VFF÷,:Ö4TòFRÖW&6Fò#å4TòbÖ&¶WBVFCÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%VæFW'7FæBvW&R÷Rw&RvæææræBÆ÷6ærâFVçFg¶Wv÷&Bv2âfæBvB6ö×WFF÷'2ÆVfR÷Vââ"FFÖW3Ò$VçFVæFRL;6æFRW7L:2vææFòW&FVæFòâFVçFf6'&V62FRÆ'&26ÆfRâVæ7VVçG&ÆòVRÆ÷26ö×WFF÷&W2FV¦â&W'Fòâ#åVæFW'7FæBvW&R÷Rw&RvæææræBÆ÷6ærâFVçFg¶Wv÷&Bv2âfæBvB6ö×WFF÷'2ÆVfR÷VâãÂ÷7ããÂ÷à¢ÆFb6Æ73Ò&6&B×&6R#âC#sÂöFcà¢ÆFb6Æ73Ò&6&B×FÖR#ãCÇ7âFFÖVãÒ&FVÆfW'"FFÖW3Ò&VçG&Vv#æFVÆfW'Â÷7ããÂöFcà¢Æ'WGFöâ6Æ73Ò&FB×FòÖ6'BÖ'Fâ"öæ6Æ6³Ò&FEFô6'Bw6VòrÂu4Tòf×²Ö&¶WBVFBrÂrC#rrÃ#rÂsCFVÆfW'rÇF2"FFÖVãÒ$FBFò6'B	ù¹""FFÖW3Ò$w&Vv"Â6'&Fò	ù¹"#äFBFò6'B	ù¹#Âö'WGFöãà¢ÂöFcà ¢ÆFb6Æ73Ò&6&B#à¢ÆFb6Æ73Ò&6&BÖ&FvR#ãÇ7âFFÖVãÒ$çfW7F÷'2"FFÖW3Ò$çfW'6÷&W2#äçfW7F÷'3Â÷7ããÂöFcà¢Æ3ãÇ7âFFÖVãÒ%F6FV6²"FFÖW3Ò$FV6²FRF6#åF6FV6³Â÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ$Ö&¶WB6¦ærÂ6ö×WFFfRÆæG66RÂ'W6æW72ÖöFVÂÂG&7Föâæ'&FfRÂfææ6Ç2âçfW7F÷"×&VGâ"FFÖW3Ò$FÖVç6öæÖVçFòFRÖW&6FòÂæ÷&Ö6ö×WFFfòÂÖöFVÆòFRæVvö6òÂæ'&FfFRG&66;6âfæç¦2âÆ7Fò&çfW'6÷&W2â#äÖ&¶WB6¦ærÂ6ö×WFFfRÆæG66RÂ'W6æW72ÖöFVÂÂG&7Föâæ'&FfRÂfææ6Ç2âçfW7F÷"×&VGãÂ÷7ããÂ÷à¢ÆFb6Æ73Ò&6&B×&6R#âCsÂöFcà¢ÆFb6Æ73Ò&6&B×FÖR#ãs&Ç7âFFÖVãÒ&FVÆfW'"FFÖW3Ò&VçG&Vv#æFVÆfW'Â÷7ããÂöFcà¢Æ'WGFöâ6Æ73Ò&FB×FòÖ6'BÖ'Fâ"öæ6Æ6³Ò&FEFô6'BwF6rÂuF6FV6²rÂrCrrÃrÂss&FVÆfW'rÇF2"FFÖVãÒ$FBFò6'B	ù¹""FFÖW3Ò$w&Vv"Â6'&Fò	ù¹"#äFBFò6'B	ù¹#Âö'WGFöãà¢ÂöFcà ¢ÆFb6Æ73Ò&6&B#à¢ÆFb6Æ73Ò&6&BÖ&FvR#ãÇ7âFFÖVãÒ%7G&FVw"FFÖW3Ò$W7G&FVv#å7G&FVwÂ÷7ããÂöFcà¢Æ3ãÇ7âFFÖVãÒ$6ö×WFFfRçFVÆÆvVæ6R"FFÖW3Ò$çFVÆvVæ66ö×WFFf#ä6ö×WFFfRçFVÆÆvVæ6SÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%G&ff26÷W&6W2Â6öçFVçB7G&FVwÂB7VæBÂ÷6Föæærâ¶æ÷r÷W"6ö×WFF÷'2&WGFW"FâFW¶æ÷rFV×6VÇfW2â"FFÖW3Ò$gVVçFW2FRG,:f6òÂW7G&FVvFR6öçFVæFòÂçfW'6;6âV&Æ6F&÷66öæÖVçFòâ6öæö6RGW26ö×WFF÷&W2ÖV¦÷"FRÆòVRVÆÆ÷26R6öæö6Vâ<:ÒÖ6Ö÷2â#åG&ff26÷W&6W2Â6öçFVçB7G&FVwÂB7VæBÂ÷6Föæærâ¶æ÷r÷W"6ö×WFF÷'2&WGFW"FâFW¶æ÷rFV×6VÇfW2ãÂ÷7ããÂ÷à¢ÆFb6Æ73Ò&6&B×&6R#âCCsÂöFcà¢ÆFb6Æ73Ò&6&B×FÖR#ãCÇ7âFFÖVãÒ&FVÆfW'"FFÖW3Ò&VçG&Vv#æFVÆfW'Â÷7ããÂöFcà¢Æ'WGFöâ6Æ73Ò&FB×FòÖ6'BÖ'Fâ"öæ6Æ6³Ò&FEFô6'Bv6rÂt6ö×WFFfRçFVÆÆvVæ6RrÂrCCrrÃCrÂsCFVÆfW'rÇF2"FFÖVãÒ$FBFò6'B	ù¹""FFÖW3Ò$w&Vv"Â6'&Fò	ù¹"#äFBFò6'B	ù¹#Âö'WGFöãà¢ÂöFcà ¢ÆFb6Æ73Ò&6&B#à¢ÆFb6Æ73Ò&6&BÖ&FvR#ãÇ7âFFÖVãÒ$6ö×ÆWFR"FFÖW3Ò$6ö×ÆWFò#ä6ö×ÆWFSÂ÷7ããÂöFcà¢Æ3ãÇ7âFFÖVãÒ$'W6æW72Æâbfææ6Ç2"FFÖW3Ò%ÆâFRæVvö6òfæç¦2#ä'W6æW72Æâbfææ6Ç3Â÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ$gVÆÂ'W6æW72ÆâvFÖ&¶WBæÇ62âv÷&¶ærW6VÂÖöFVÂvFVFF&ÆR2×V"&ö¦V7Föç2â"FFÖW3Ò%ÆâFRæVvö6ò6ö×ÆWFò6öâì:Æ62FRÖW&6FòâÖöFVÆòFRW6VÂgVæ6öæÂ6öâ&÷V66öæW2VFF&ÆW22;÷2â#ägVÆÂ'W6æW72ÆâvFÖ&¶WBæÇ62âv÷&¶ærW6VÂÖöFVÂvFVFF&ÆR2×V"&ö¦V7Föç2ãÂ÷7ããÂ÷à¢ÆFb6Æ73Ò&6&B×&6R#âCÃCsÂöFcà¢ÆFb6Æ73Ò&6&B×FÖR#ãs&Ç7âFFÖVãÒ&FVÆfW'"FFÖW3Ò&VçG&Vv#æFVÆfW'Â÷7ããÂöFcà¢Æ'WGFöâ6Æ73Ò&FB×FòÖ6'BÖ'Fâ"öæ6Æ6³Ò&FEFô6'Bv'rÂt'W6æW72Æâf×²fææ6Ç2rÂrCÃCrrÃCrÂss&FVÆfW'rÇF2"FFÖVãÒ$FBFò6'B	ù¹""FFÖW3Ò$w&Vv"Â6'&Fò	ù¹"#äFBFò6'B	ù¹#Âö'WGFöãà¢ÂöFcà ¢ÆFb6Æ73Ò&6&B#à¢ÆFb6Æ73Ò&6&BÖ&FvR#ãÇ7âFFÖVãÒ%&W6V&6"FFÖW3Ò$çfW7Fv6;6â#å&W6V&6Â÷7ããÂöFcà¢Æ3ãÇ7âFFÖVãÒ$Ö&¶WB&W6V&6'&Vb"FFÖW3Ò%&W7VÖVâFRçfW7Fv6;6âFRÖW&6Fò#äÖ&¶WB&W6V&6'&VcÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%DÒõ4Òõ4ôÒ6¦ærâ¶WÆW'2âG&VæG2â7W'&VçBFF7G'V7GW&VBf÷"&ö&BÖÆWfVÂFV66öç2â"FFÖW3Ò$FÖVç6öæÖVçFòFRDÒõ4Òõ4ôÒâ7F÷&W26ÆfRâFVæFVæ62âFF÷27GVÆW2W7G'V7GW&F÷2&FV66öæW2FR§VçFF&V7Ffâ#åDÒõ4Òõ4ôÒ6¦ærâ¶WÆW'2âG&VæG2â7W'&VçBFF7G'V7GW&VBf÷"&ö&BÖÆWfVÂFV66öç2ãÂ÷7ããÂ÷à¢ÆFb6Æ73Ò&6&B×&6R#âC3sÂöFcà¢ÆFb6Æ73Ò&6&B×FÖR#ãCÇ7âFFÖVãÒ&FVÆfW'"FFÖW3Ò&VçG&Vv#æFVÆfW'Â÷7ããÂöFcà¢Æ'WGFöâ6Æ73Ò&FB×FòÖ6'BÖ'Fâ"öæ6Æ6³Ò&FEFô6'Bv×"rÂtÖ&¶WB&W6V&6'&VbrÂrC3rrÃ3rÂsCFVÆfW'rÇF2"FFÖVãÒ$FBFò6'B	ù¹""FFÖW3Ò$w&Vv"Â6'&Fò	ù¹"#äFBFò6'B	ù¹#Âö'WGFöãà¢ÂöFcà ¢ÆFb6Æ73Ò&6&B#à¢ÆFb6Æ73Ò&6&BÖ&FvR#ãÇ7âFFÖVãÒ$öævöær"FFÖW3Ò$6öçFçVò#äöævöæsÂ÷7ããÂöFcà¢Æ3ãÇ7âFFÖVãÒ$ÖöçFÇ&F""FFÖW3Ò%&F"ÖVç7VÂ#äÖöçFÇ&F#Â÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%G&6²WFòR6ö×WFF÷'2âÖöæF÷"¶Wv÷&B6gG2æBG&ff26ævW2âFVÆfW&VBÖöçFÇâ"FFÖW3Ò%&7G&V7FR6ö×WFF÷&W2âÖöæF÷&V6Ö&÷2FRÆ'&26ÆfRFRG,:f6òâVçG&VvFòÖVç7VÆÖVçFRâ#åG&6²WFòR6ö×WFF÷'2âÖöæF÷"¶Wv÷&B6gG2æBG&ff26ævW2âFVÆfW&VBÖöçFÇãÂ÷7ããÂ÷à¢ÆFb6Æ73Ò&6&B×&6R#âCsÇ7â7GÆSÒ&föçB×6¦S£g¶föçB×vVvC£C¶6öÆ÷#§f"ÒÖ×WFVB#âöÖóÂ÷7ããÂöFcà¢ÆFb6Æ73Ò&6&B×FÖR#ãÇ7âFFÖVãÒ$ÖöçFÇ7V'67&Föâ"FFÖW3Ò%7W67&6;6âÖVç7VÂ#äÖöçFÇ7V'67&FöãÂ÷7ããÂöFcà¢Æ'WGFöâ6Æ73Ò&FB×FòÖ6'BÖ'Fâ"öæ6Æ6³Ò&FEFô6'Bw&F"rÂtÖöçFÇ&F"rÂrCröÖòrÃrÂtÖöçFÇ7V'67&FöârÇF2"FFÖVãÒ%7V'67&&R	ù¹""FFÖW3Ò%7W67&&'6R	ù¹"#å7V'67&&R	ù¹#Âö'WGFöãà¢ÂöFcà¢ÂöFcà£Â÷6V7Föãà £Ç6V7Föâ6Æ73Ò'6V7Föâ#à¢ÆFb6Æ73Ò'6V7Föâ×&R#ãÇ7âFFÖVãÒ%&ö6W72"FFÖW3Ò%&ö6W6ò#å&ö6W73Â÷7ããÂöFcà¢Æ#ãÇ7âFFÖVãÒ%F&VR7FW2"FFÖW3Ò%G&W26÷2#åF&VR7FW3Â÷7ããÂö#à ¢ÆFb6Æ73Ò'&ö6W72Öw&B#à¢ÆFb6Æ73Ò'7FW#à¢ÆFb6Æ73Ò'7FWÖçVÒ#ãÂöFcà¢Æ3ãÇ7âFFÖVãÒ%6VæB'&Vb"FFÖW3Ò$Vçl:ÖGR'&Vb#å6VæB'&VcÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ$FöÖâÂ6ö×WFF÷'2ÂvöÇ2âF¶W2RÖçWFW2â"FFÖW3Ò$FöÖæòÂ6ö×WFF÷&W2Âö&¦WFf÷2âFöÖRÖçWF÷2â#äFöÖâÂ6ö×WFF÷'2ÂvöÇ2âF¶W2RÖçWFW2ãÂ÷7ããÂ÷à¢ÂöFcà¢ÆFb6Æ73Ò'7FW#à¢ÆFb6Æ73Ò'7FWÖçVÒ#ã#ÂöFcà¢Æ3ãÇ7âFFÖVãÒ%vR&W6V&6"FFÖW3Ò$æ÷6÷G&÷2çfW7FvÖ÷2#åvR&W6V&6Â÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%VÆÂÆfRFFâæÇ¦Râ'VÆB&W÷'Bâ&öfW76öæÂVÆGwV&çFVVBâ"FFÖW3Ò$WG&VÖ÷2FF÷2VâffòâæÆ¦Ö÷2â6öç7G'VÖ÷2VÂ&W÷'FRâ6ÆFB&öfW6öæÂv&çF¦Fâ#åVÆÂÆfRFFâæÇ¦Râ'VÆB&W÷'Bâ&öfW76öæÂVÆGwV&çFVVBãÂ÷7ããÂ÷à¢ÂöFcà¢ÆFb6Æ73Ò'7FW#à¢ÆFb6Æ73Ò'7FWÖçVÒ#ã3ÂöFcà¢Æ3ãÇ7âFFÖVãÒ$F÷væÆöBb&W6VçB"FFÖW3Ò$FW66&v&W6VçF#äF÷væÆöBb&W6VçCÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%EÂÅ5Â÷"DbâöæR&Wf6öâæ6ÇVFVBâ&VGFöÖ÷'&÷râ"FFÖW3Ò%EÂÅ5ÂòDbâVæ&Wf6;6âæ6ÇVFâÆ7FòÖ;æâ#åEÂÅ5Â÷"DbâöæR&Wf6öâæ6ÇVFVBâ&VGFöÖ÷'&÷rãÂ÷7ããÂ÷à¢ÂöFcà¢ÂöFcà£Â÷6V7Föãà £Ç6V7Föâ6Æ73Ò'6V7Föâ#à¢ÆFb6Æ73Ò'6V7Föâ×&R#ãÇ7âFFÖVãÒ%VW7Föç2"FFÖW3Ò%&VwVçF2#åVW7Föç3Â÷7ããÂöFcà¢Æ#ãÇ7âFFÖVãÒ$ç7vW'2"FFÖW3Ò%&W7VW7F2#äç7vW'3Â÷7ããÂö#à ¢ÆFb6Æ73Ò&fÖÆ7B#à¢ÆFb6Æ73Ò&fÖFVÒ÷Vâ#à¢ÆFb6Æ73Ò&f×"&öÆSÒ&'WGFöâ"&ÖWæFVCÒ'G'VR"F&æFWÒ##à¢Ç7âFFÖVãÒ$2FFÆfR÷"ÖvVæW&FVCò"FFÖW3Ò,+õ6öâFF÷2&VÆW2òvVæW&F÷2÷"ò#ä2FFÆfR÷"ÖvVæW&FVCóÂ÷7ãà¢Ç7â6Æ73Ò&fÖ'&÷r#î(i#Â÷7ãà¢ÂöFcà¢ÆFb6Æ73Ò&fÖ#ãÇ7âFFÖVãÒ$ÆfRâ6V×'W6&öfW76öæÂ4TòæB7W'&VçBÖ&¶WB6÷W&6W2â¦W&òÆÇV6æFöç2âWfW'&W÷'Bæ6ÇVFW26÷W&6W2÷R6âfW&gâ"FFÖW3Ò$Vâffòâ6V×'W64Tò&öfW6öæÂgVVçFW2FRÖW&6Fò7GVÆW2â6W&òÇV6æ6öæW2â6F&W÷'FRæ6ÇWRgVVçFW2VRVVFW2fW&f6"â#äÆfRâ6V×'W6&öfW76öæÂ4TòæB7W'&VçBÖ&¶WB6÷W&6W2â¦W&òÆÇV6æFöç2âWfW'&W÷'Bæ6ÇVFW26÷W&6W2÷R6âfW&gãÂ÷7ããÂöFcà¢ÂöFcà¢ÆFb6Æ73Ò&fÖFVÒ#à¢ÆFb6Æ73Ò&f×"&öÆSÒ&'WGFöâ"&ÖWæFVCÒ&fÇ6R"F&æFWÒ##à¢Ç7âFFÖVãÒ%vBbvÒæ÷B6F6fVCò"FFÖW3Ò,+õ6æòW7F÷6F6fV6óò#åvBbvÒæ÷B6F6fVCóÂ÷7ãà¢Ç7â6Æ73Ò&fÖ'&÷r#î(i#Â÷7ãà¢ÂöFcà¢ÆFb6Æ73Ò&fÖ#ãÇ7âFFÖVãÒ$gVÆÂ&VgVæB÷"g&VR&Wf6öââæòVW7Föç26¶VBâ÷W"6F6f7Föâ2÷W"öæÇÖV7W&Röb7V66W72â"FFÖW3Ò%&VVÖ&öÇ6ò6ö×ÆWFòò&Wf6;6âw&GVFâ6â&VwVçF2âGR6F6f66;6âW2çVW7G&;¦æ6ÖVFFFR:Fòâ#ägVÆÂ&VgVæB÷"g&VR&Wf6öââæòVW7Föç26¶VBâ÷W"6F6f7Föâ2÷W"öæÇÖV7W&Röb7V66W72ãÂ÷7ããÂöFcà¢ÂöFcà¢ÆFb6Æ73Ò&fÖFVÒ#à¢ÆFb6Æ73Ò&f×"&öÆSÒ&'WGFöâ"&ÖWæFVCÒ&fÇ6R"F&æFWÒ##à¢Ç7âFFÖVãÒ$6âW6Rf÷"çfW7F÷"F6W3ò"FFÖW3Ò,+õVVFòW6&Æò&F6W2çfW'6÷&W3ò#ä6âW6Rf÷"çfW7F÷"F6W3óÂ÷7ãà¢Ç7â6Æ73Ò&fÖ'&÷r#î(i#Â÷7ãà¢ÂöFcà¢ÆFb6Æ73Ò&fÖ#ãÇ7âFFÖVãÒ$'6öÇWFVÇâFW6væVBf÷"çfW7F÷"&W6VçFFöç2âÖç6ÆVçG26Æ÷6RgVæFærvFFVÒâ"FFÖW3Ò$'6öÇWFÖVçFRâF6\;Fò&&W6VçF6öæW2FRçfW'6÷&W2â×V6÷26ÆVçFW26W'&âfææ66;6â6öâVÆÆ÷2â#ä'6öÇWFVÇâFW6væVBf÷"çfW7F÷"&W6VçFFöç2âÖç6ÆVçG26Æ÷6RgVæFærvFFVÒãÂ÷7ããÂöFcà¢ÂöFcà¢ÆFb6Æ73Ò&fÖFVÒ#à¢ÆFb6Æ73Ò&f×"&öÆSÒ&'WGFöâ"&ÖWæFVCÒ&fÇ6R"F&æFWÒ##à¢Ç7âFFÖVãÒ$÷rFò÷R6ö×&RFò6öç7VÇFçG3ò"FFÖW3Ò,+ôVâ\:6RFfW&Væ6âFRÆ÷26öç7VÇF÷&W3ò#ä÷rFò÷R6ö×&RFò6öç7VÇFçG3óÂ÷7ãà¢Ç7â6Æ73Ò&fÖ'&÷r#î(i#Â÷7ãà¢ÂöFcà¢ÆFb6Æ73Ò&fÖ#ãÇ7âFFÖVãÒ%7VVBæB&6Râ6öç7VÇFçG2F¶RvVV·2æB6&vRCT¾(	2C#²âvRFVÆfW"âC÷W'2BRÆW72â6ÖRFWFÂg&7FöâöbFR6÷7Bâ"FFÖW3Ò%fVÆö6FB&V6òâÆ÷26öç7VÇF÷&W2F&Fâ6VÖæ26ö'&âVçG&RCT²C#²âæ÷6÷G&÷2VçG&VvÖ÷2VâC÷&2VâRÜ:2&&FòâÆÖ6Ö&ögVæFFBÂVæg&66;6âFVÂ6÷7Fòâ#å7VVBæB&6Râ6öç7VÇFçG2F¶RvVV·2æB6&vRCT¾(	2C#²âvRFVÆfW"âC÷W'2BRÆW72â6ÖRFWFÂg&7FöâöbFR6÷7BãÂ÷7ããÂöFcà¢ÂöFcà¢ÆFb6Æ73Ò&fÖFVÒ#à¢ÆFb6Æ73Ò&f×"&öÆSÒ&'WGFöâ"&ÖWæFVCÒ&fÇ6R"F&æFWÒ##à¢Ç7âFFÖVãÒ$6â&WVW7B&Wf6öç3ò"FFÖW3Ò,+õVVFò6öÆ6F"&Wf6öæW3ò#ä6â&WVW7B&Wf6öç3óÂ÷7ãà¢Ç7â6Æ73Ò&fÖ'&÷r#î(i#Â÷7ãà¢ÂöFcà¢ÆFb6Æ73Ò&fÖ#ãÇ7âFFÖVãÒ$öæR&Wf6öâæ6ÇVFVBâvR¶VW&VfæærVçFÂ÷Rw&R6F6fVBâ"FFÖW3Ò%Væ&Wf6;6âæ6ÇVFâ6VwVÖ÷2&VfææFò7FVRW7L:26F6fV6òâ#äöæR&Wf6öâæ6ÇVFVBâvR¶VW&VfæærVçFÂ÷Rw&R6F6fVBãÂ÷7ããÂöFcà¢ÂöFcà¢ÂöFcà£Â÷6V7Föãà £Ç6V7Föâ6Æ73Ò&wV&çFVR#à¢Æ3ãÇ7âFFÖVãÒ$æòÕ&6²wV&çFVR"FFÖW3Ò$v&çL:Ö6â&W6vò#äæòÕ&6²wV&çFVSÂ÷7ããÂö3à¢ÇãÇ7âFFÖVãÒ%&W÷'BFöW6âwBÖVWBWV7FFöç3ògVÆÂ&VgVæBâvRvâvVâ÷Rvââ"FFÖW3Ò,+ôVÂ&W÷'FRæò7V×ÆRWV7FFf3ò&VVÖ&öÇ6ò6ö×ÆWFòâvæÖ÷27VæFòL;¢væ2â#å&W÷'BFöW6âwBÖVWBWV7FFöç3ògVÆÂ&VgVæBâvRvâvVâ÷RvâãÂ÷7ããÂ÷à£Â÷6V7Föãà £Ç6V7Föâ6Æ73Ò&fæÂÖ7F#à¢Æ#ãÇ7âFFÖVãÒ%÷W"6ö×WFF÷'2&RÇ&VGFV6FærvFFFâ"FFÖW3Ò%GW26ö×WFF÷&W2W7L:âFV6FVæFò6öâFF÷2â#å÷W"6ö×WFF÷'2&RÇ&VGFV6FærvFFFãÂ÷7ããÂö#à¢ÇãÇ7âFFÖVãÒ$vWB÷W"f'7B&W÷'BâC÷W'2âæò6öÖÖFÖVçBâæòfÇVfbâ&VÂç6vBFBÖ÷fW2FRæVVFÆRâ"FFÖW3Ò$ö'L:âGR&ÖW"&W÷'FRVâC÷&2â6â6ö×&öÖ6òâ6â&öFV÷2â6öæö6ÖVçFò&VÂVR×VWfRÆwV¦â#ävWB÷W"f'7B&W÷'BâC÷W'2âæò6öÖÖFÖVçBâæòfÇVfbâ&VÂç6vBFBÖ÷fW2FRæVVFÆRãÂ÷7ããÂ÷à¢Æ'WGFöâ6Æ73Ò&7F×&Ö'"öæ6Æ6³Ò&Fö7VÖVçBæÆö6FöãÒvÖÇFó¦VÆÆô'&Vf÷2æöæÆæS÷7V&¦V7CÕ&W÷'BS#&WVW7Br"7GÆSÒ&Ö&vã£WFó¶F7Æ¦&Æö6²"&ÖÆ&VÃÒ%7F'B÷W"f'7B&W÷'B#à¢Ç7âFFÖVãÒ%7F'Bæ÷r"FFÖW3Ò$6öÖVç¦÷&#å7F'Bæ÷sÂ÷7ãà¢Âö'WGFöãà£Â÷6V7Föãà £Æfö÷FW#à¢ÆFb6Æ73Ò&Æövò#à¢ÆFb6Æ73Ò&ÆövòÖ6öâ"&ÖFFVãÒ'G'VR#ãÂöFcà¢'&Vd÷0¢ÂöFcà¢ÆFcì*##cÂöFcà¢Æ&VcÒ&ÖÇFó¦VÆÆô'&Vf÷2æöæÆæR"FFÆSÒ$VÖÂW2#æVÆÆô'&Vf÷2æöæÆæSÂöà£Âöfö÷FW#à £ÂÒÒ4%BE$tU"ÒÓà£ÆFb6Æ73Ò&6'BÖ÷fW&Æ"CÒ&6'D÷fW&Æ#ãÂöFcà£ÆFb6Æ73Ò&6'BÖG&vW""CÒ&6'DG&vW""&öÆSÒ&FÆör"&ÖÆ&VÃÒ%6÷ær6'B#à¢ÆFb6Æ73Ò&6'BÖVFW"#à¢Æ2FFÖVãÒ%÷W"6'B"FFÖW3Ò%GR6'&Fò#å÷W"6'CÂö3à¢Æ'WGFöâ6Æ73Ò&6'BÖ6Æ÷6R"CÒ&6'D6Æ÷6R"&ÖÆ&VÃÒ$6Æ÷6R6'B#ì9sÂö'WGFöãà¢ÂöFcà¢ÆFb6Æ73Ò&6'BÖFV×2"CÒ&6'DFV×2"&ÖÆfSÒ'öÆFR"&ÖFöÖ3Ò'G'VR#à¢ÆFb6Æ73Ò&6'BÖV×G#à¢Ç7â6Æ73Ò&6'BÖV×GÖ6öâ#ï	ù¹#Â÷7ãà¢Ç7âFFÖVãÒ%÷W"6'B2V×Gâ"FFÖW3Ò%GR6'&FòW7L:f<:Öòâ#å÷W"6'B2V×GãÂ÷7ãà¢ÂöFcà¢ÂöFcà¢ÆFb6Æ73Ò&6'BÖfö÷FW"#à¢ÆFb6Æ73Ò&6'B×F÷FÂ#à¢Ç7âFFÖVãÒ%F÷FÂ"FFÖW3Ò%F÷FÂ#åF÷FÃÂ÷7ãà¢Ç7â6Æ73Ò&6'B×F÷FÂÖçVÒ"CÒ&6'EF÷FÂ#âCÂ÷7ãà¢ÂöFcà¢Æ'WGFöâ6Æ73Ò&6'BÖ6V6¶÷WB"CÒ&6'D6V6¶÷WB"F6&ÆVCà¢Ç7âFFÖVãÒ%&WVW7BV÷FRfVÖÂ"FFÖW3Ò%6öÆ6F"6÷F¦6;6â÷"VÖÂ#å&WVW7BV÷FRfVÖÃÂ÷7ãà¢Âö'WGFöãà¢ÂöFcà£ÂöFcà £Ç67&Cà¢ò¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÐ¢4%@¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÒ¢ð§f"7W'&VçDÆærÒÆö6Å7F÷&vRævWDFVÒv'&Vf÷2ÖÆærrÇÂvVâs°§f"6'BÒ·Ó° ¦gVæ7Föâ÷Vä6'B°¢Fö7VÖVçBævWDVÆVÖVçD'Bv6'DG&vW"ræ6Æ74Æ7BæFBv÷Vâr°¢Fö7VÖVçBævWDVÆVÖVçD'Bv6'D÷fW&Æræ6Æ74Æ7BæFBv÷Vâr°¢Fö7VÖVçBæ&öGç7GÆRæ÷fW&fÆ÷rÒvFFVâs°§Ð¦gVæ7Föâ6Æ÷6T6'B°¢Fö7VÖVçBævWDVÆVÖVçD'Bv6'DG&vW"ræ6Æ74Æ7Bç&VÖ÷fRv÷Vâr°¢Fö7VÖVçBævWDVÆVÖVçD'Bv6'D÷fW&Æræ6Æ74Æ7Bç&VÖ÷fRv÷Vâr°¢Fö7VÖVçBæ&öGç7GÆRæ÷fW&fÆ÷rÒrs°§Ð ¦Fö7VÖVçBævWDVÆVÖVçD'Bv6'EFövvÆRræFDWfVçDÆ7FVæW"v6Æ6²rÂ÷Vä6'B°¦Fö7VÖVçBævWDVÆVÖVçD'Bv6'D6Æ÷6RræFDWfVçDÆ7FVæW"v6Æ6²rÂ6Æ÷6T6'B°¦Fö7VÖVçBævWDVÆVÖVçD'Bv6'D÷fW&ÆræFDWfVçDÆ7FVæW"v6Æ6²rÂ6Æ÷6T6'B° ¦gVæ7FöâFEFô6'BBÂæÖRÂ&6U7G"Â&6TçVÒÂFVÆfW'Â'Fâ°¢6'E¶EÒÒ²æÖS¢æÖRÂ&6U7G#¢&6U7G"Â&6TçVÓ¢&6TçVÒÂFVÆfW'¢FVÆfW'Ó°¢&VæFW$6'B°¢'FâçFWD6öçFVçBÒ7W'&VçDÆærÓÓÒvW2rò~)É2Vâ6'&Fòr¢~)É2â6'Bs°¢'Fâæ6Æ74Æ7BæFBvFFVBr°¢'FâæF6&ÆVBÒG'VS°¢÷Vä6'B°§Ð ¦gVæ7Föâ&VÖ÷fTg&öÔ6'BB°¢FVÆWFR6'E¶EÓ°¢Fö7VÖVçBçVW'6VÆV7F÷$ÆÂræFB×FòÖ6'BÖ'Fâræf÷$V6gVæ7Föâ'Fâ°¢f"ö2Ò'FâævWDGG&'WFRvöæ6Æ6²rÇÂrs°¢bö2ææFWöb"r"²B²"r"ÓÒÓ°¢'Fâæ6Æ74Æ7Bç&VÖ÷fRvFFVBr°¢'FâæF6&ÆVBÒfÇ6S°¢'FâçFWD6öçFVçBÒ7W'&VçDÆærÓÓÒvW2p¢òBÓÓÒw&F"ròu7W67&'W,:×6R	ù¹"r¢tw&Vv"Â6'&Fò	ù¹"r¢¢BÓÓÒw&F"ròu7V'67&&R	ù¹"r¢tFBFò6'B	ù¹"r°¢Ð¢Ò°¢&VæFW$6'B°§Ð ¦gVæ7Föâ&VæFW$6'B°¢f"FV×2Òö&¦V7BæVçG&W26'B°¢f"6öçFæW"ÒFö7VÖVçBævWDVÆVÖVçD'Bv6'DFV×2r°¢f"F÷FÄVÂÒFö7VÖVçBævWDVÆVÖVçD'Bv6'EF÷FÂr°¢f"6V6¶÷WD'FâÒFö7VÖVçBævWDVÆVÖVçD'Bv6'D6V6¶÷WBr°¢f"6÷VçDVÂÒFö7VÖVçBævWDVÆVÖVçD'Bv6'D6÷VçBr° ¢bFV×2æÆVæwFÓÓÒ°¢6öçFæW"æææW$DÔÂÒsÆFb6Æ73Ò&6'BÖV×G#ãÇ7â6Æ73Ò&6'BÖV×GÖ6öâ#ï	ù¹#Â÷7ããÇ7ãâr°¢7W'&VçDÆærÓÓÒvW2ròuGR6'&FòW7L:f<:Öòâr¢u÷W"6'B2V×Gâr²sÂ÷7ããÂöFcâr°¢F÷FÄVÂçFWD6öçFVçBÒrCs°¢6V6¶÷WD'FâæF6&ÆVBÒG'VS°¢6÷VçDVÂçFWD6öçFVçBÒss°¢6÷VçDVÂæ6Æ74Æ7Bç&VÖ÷fRw6÷rr°¢&WGW&ã°¢Ð ¢f"F÷FÂÒ°¢6öçFæW"æææW$DÔÂÒFV×2æÖgVæ7FöâVçG'°¢f"BÒVçG'³Ó²f"FVÒÒVçG'³Ó°¢F÷FÂ³ÒFVÒç&6TçVÓ°¢&WGW&âsÆFb6Æ73Ò&6'BÖFVÒ#âr°¢sÆFb6Æ73Ò&6'BÖFVÒÖæfò#âr°¢sÆFb6Æ73Ò&6'BÖFVÒÖæÖR#âr²FVÒææÖR²sÂöFcâr°¢sÆFb6Æ73Ò&6'BÖFVÒÖFVÆfW'#âr²FVÒæFVÆfW'²sÂöFcâr°¢sÂöFcâr°¢sÆFb7GÆSÒ&F7Æ¦fÆW¶ÆvâÖFV×3¦6VçFW#¶v£#âr°¢sÇ7â6Æ73Ò&6'BÖFVÒ×&6R#âr²FVÒç&6U7G"²sÂ÷7ãâr°¢sÆ'WGFöâ6Æ73Ò&6'BÖFVÒ×&VÖ÷fR"öæ6Æ6³Ò'&VÖ÷fTg&öÔ6'BÂrr²B²uÂr"&ÖÆ&VÃÒ%&VÖ÷fR#ì9sÂö'WGFöãâr°¢sÂöFcâr°¢sÂöFcâs°¢Òæ¦öârr° ¢F÷FÄVÂçFWD6öçFVçBÒrBr²F÷FÂçFôÆö6ÆU7G&ær°¢6V6¶÷WD'FâæF6&ÆVBÒfÇ6S°¢6÷VçDVÂçFWD6öçFVçBÒFV×2æÆVæwF°¢6÷VçDVÂæ6Æ74Æ7BæFBw6÷rr°§Ð ¦Fö7VÖVçBævWDVÆVÖVçD'Bv6'D6V6¶÷WBræFDWfVçDÆ7FVæW"v6Æ6²rÂgVæ7Föâ°¢f"FV×2Òö&¦V7BçfÇVW26'B°¢bFV×2æÆVæwF&WGW&ã°¢f"ÆæW2ÒFV×2æÖgVæ7Föâ²&WGW&ârÒr²ææÖR²s¢r²ç&6U7G"²rr²æFVÆfW'²rs²Òæ¦öâuÆâr°¢f"F÷FÂÒFV×2ç&VGV6RgVæ7Föâ2Â²&WGW&â2²ç&6TçVÓ²ÒÂ°¢f"7V&¦V7BÒVæ6öFUU$6ö×öæVçBt'&Vd÷2÷&FW"&WVW7Br°¢f"&öGÒVæ6öFUU$6ö×öæVçBtVÆÆò'&Vd÷2ÅÆåÆäv÷VÆBÆ¶RFò÷&FW#¥ÆåÆâr²ÆæW2²uÆåÆåF÷FÃ¢Br²F÷FÂçFôÆö6ÆU7G&ær²uÆåÆåÆV6R6VæBÖVçBÆæ²åÆåÆåFæ²÷Rr°¢væF÷ræÆö6Föâæ&VbÒvÖÇFó¦VÆÆô'&Vf÷2æöæÆæS÷7V&¦V7CÒr²7V&¦V7B²rf&öGÒr²&öG°§Ò° ¢ò¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÐ¢d¢6VÆV7F÷"FRFöÖ(	BfW'6;6â6VwW&¢FW&<;6Æò6ö'&RVÆVÖVçF÷2ö¦6öâFFÖVâöFFÖW0¢&æò&÷'&"VÆVÖVçF÷2¦ð¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÒ¢ð ¦gVæ7FöâÇÆærÆær°¢Fö7VÖVçBçVW'6VÆV7F÷$ÆÂu¶FFÖVåÒræf÷$V6VÂÓâ°¢òò6öÆò6Ö&"6æòFVæRVÆVÖVçF÷2¦òFWFòFW&ÖæÂ¢bVÂæ6ÆG&VâæÆVæwFÓÓÒ°¢VÂçFWD6öçFVçBÒVÂævWDGG&'WFRvFFÒr²ÆærÇÂVÂçFWD6öçFVçC°¢Ð¢Ò°¢Fö7VÖVçBæFö7VÖVçDVÆVÖVçBæÆærÒÆæs°¢Æö6Å7F÷&vRç6WDFVÒv'&Vf÷2ÖÆærrÂÆær°¢7W'&VçDÆærÒÆæs°§Ð ¦6öç7BÆæu7vF6W"ÒFö7VÖVçBævWDVÆVÖVçD'BvÆæu7vF6r°¦Ææu7vF6W"çfÇVRÒ7W'&VçDÆæs°¦b7W'&VçDÆærÓÒvVârÇÆær7W'&VçDÆær° ¦Ææu7vF6W"æFDWfVçDÆ7FVæW"v6ævRrÂgVæ7Föâ°¢ÇÆærF2çfÇVR°§Ò° ¢ò¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÐ¢çFW'6V7Föäö'6W'fW"&æÖ6öæW2Â67&öÆÀ¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÒ¢ð¦6öç7Bö'2ÒæWrçFW'6V7Föäö'6W'fW"VçG&W2Óâ°¢VçG&W2æf÷$V6VçG'Óâ°¢bVçG'æ4çFW'6V7FærVçG'çF&vWBæ6Æ74Æ7BæFBwf6&ÆRr°¢Ò°§ÒÂ²F&W6öÆC¢ãÒ° ¦Fö7VÖVçBçVW'6VÆV7F÷$ÆÂrææÖFRÖöâ×67&öÆÂÂæ6&BÂç6öÇWFöâÖFVÒÂç7FWÂæfÖFVÒÂç7FBræf÷$V6VÂÓâö'2æö'6W'fRVÂ° ¢ò¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÐ¢d66÷&Föâ6öâ6÷÷'FRFRFV6ÆFð¢ÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÒ¢ð¦Fö7VÖVçBçVW'6VÆV7F÷$ÆÂræfÖFVÒræf÷$V6FVÒÓâ°¢6öç7BÒFVÒçVW'6VÆV7F÷"ræf×r° ¢gVæ7FöâFövvÆTf°¢6öç7B4÷VâÒFVÒæ6Æ74Æ7Bæ6öçFç2v÷Vâr°¢òò6W'&"FöF÷0¢Fö7VÖVçBçVW'6VÆV7F÷$ÆÂræfÖFVÒræf÷$V6FVÒÓâ°¢6öç7BÒFVÒçVW'6VÆV7F÷"ræf×r°¢b4÷Vâ°¢FVÒæ6Æ74Æ7BæFBv÷Vâr°¢ç6WDGG&'WFRv&ÖWæFVBrÂwG'VRr°¢ÒVÇ6R°¢FVÒæ6Æ74Æ7Bç&VÖ÷fRv÷Vâr°¢ç6WDGG&'WFRv&ÖWæFVBrÂvfÇ6Rr°¢Ð¢Ò°§Ð ¢æFDWfVçDÆ7FVæW"v6Æ6²rÂFövvÆTf°¢æFDWfVçDÆ7FVæW"v¶WF÷vârÂgVæ7FöâR°¢bRæ¶WÓÓÒtVçFW"rÇÂRæ¶WÓÓÒrr°¢Rç&WfVçDFVfVÇB°¢FövvÆTf°¢Ð¢Ò°§Ò°£Â÷67&Cà£Âö&öGà£ÂöFÖÃ
