@@ -210,16 +210,81 @@ footer{
 .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 footer a{color:var(--primary);text-decoration:none}
 
+/* ===== KINETIC TYPE (letter-by-letter) ===== */
+.char{
+  display:inline-block;opacity:0;
+  transform:translateY(0.8em) rotate(6deg) scale(0.8);
+  transition:transform 0.6s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease;
+  will-change:transform,opacity;
+}
+.chars-in .char{opacity:1;transform:translateY(0) rotate(0) scale(1)}
+.hero h1 .char:hover{
+  transform:translateY(-0.08em) scale(1.08);
+  transition:transform 0.15s ease;
+  color:var(--primary);
+}
+
+/* ===== MARQUEE TICKER ===== */
+.marquee{
+  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:22px 0;position:relative;z-index:10;background:rgba(14,165,233,0.03);
+}
+.marquee-track{
+  display:flex;gap:56px;width:max-content;
+  animation:marquee 28s linear infinite;
+}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-item{
+  font-size:20px;font-weight:700;letter-spacing:-0.5px;white-space:nowrap;
+  color:var(--muted);display:flex;align-items:center;gap:56px;
+}
+.marquee-item .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  display:inline-block;flex-shrink:0;
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== SCROLL CHOREOGRAPHY ===== */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity 0.8s ease,transform 0.9s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-stagger>*{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.8s cubic-bezier(0.22,1,0.36,1)}
+.reveal-stagger.visible>*{opacity:1;transform:translateY(0)}
+.reveal-stagger.visible>*:nth-child(1){transition-delay:0.05s}
+.reveal-stagger.visible>*:nth-child(2){transition-delay:0.15s}
+.reveal-stagger.visible>*:nth-child(3){transition-delay:0.25s}
+.reveal-stagger.visible>*:nth-child(4){transition-delay:0.35s}
+.reveal-stagger.visible>*:nth-child(5){transition-delay:0.45s}
+.reveal-stagger.visible>*:nth-child(6){transition-delay:0.55s}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+.progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;z-index:2000;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  box-shadow:0 0 12px rgba(14,165,233,0.6);
+}
+
+/* ===== CARD TILT ===== */
+.card{transform-style:preserve-3d;perspective:800px}
+
+@media(prefers-reduced-motion:reduce){
+  .char{opacity:1;transform:none;transition:none}
+  .marquee-track{animation:none}
+  .reveal,.reveal-stagger>*{opacity:1;transform:none;transition:none}
+}
+
 @media(max-width:768px){
   .hero{padding:70px 0 50px}
   .section{padding:60px 0}
   .stats{padding:44px 0;gap:28px}
   .nav-cta{display:none}
+  .marquee-item{font-size:16px}
 }
 </style>
 </head>
 <body>
 
+<div class="progress" id="progress"></div>
 <div class="float-1"></div>
 <div class="float-2"></div>
 <div class="float-3"></div>
@@ -246,8 +311,12 @@ footer a{color:var(--primary);text-decoration:none}
   </div>
 </header>
 
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee-track"></div>
+</div>
+
 <div class="wrap">
-  <section class="stats">
+  <section class="stats reveal-stagger">
     <div class="stat"><div class="stat-num">48h</div><div class="stat-label" data-en="Standard delivery" data-es="Entrega estándar">Entrega estándar</div></div>
     <div class="stat"><div class="stat-num">$297</div><div class="stat-label" data-en="Starting price" data-es="Precio inicial">Precio inicial</div></div>
     <div class="stat"><div class="stat-num">100%</div><div class="stat-label" data-en="Verifiable data" data-es="Datos verificables">Datos verificables</div></div>
@@ -257,11 +326,11 @@ footer a{color:var(--primary);text-decoration:none}
 
 <section class="section">
   <div class="wrap">
-    <div class="section-pre" data-en="What is BriefOps" data-es="Qué es BriefOps">Qué es BriefOps</div>
-    <h2 data-en="A research team on demand, without hiring one" data-es="Un equipo de investigación bajo demanda, sin contratar uno">Un equipo de investigación bajo demanda, sin contratar uno</h2>
-    <p class="lead" data-en="You send us a short brief: your website, your competitors, and what you need to decide. We pull live data from professional tools like Semrush, analyze it, and deliver a finished document — a slide deck, a spreadsheet, or a PDF report — ready to present to your board, your investors, or your team." data-es="Nos envías un brief corto: tu sitio web, tus competidores y qué necesitas decidir. Nosotros extraemos datos reales de herramientas profesionales como Semrush, los analizamos y te entregamos un documento terminado — una presentación, una hoja de cálculo o un reporte en PDF — listo para presentar a tu junta, tus inversionistas o tu equipo.">Nos envías un brief corto: tu sitio web, tus competidores y qué necesitas decidir. Nosotros extraemos datos reales de herramientas profesionales como Semrush, los analizamos y te entregamos un documento terminado — una presentación, una hoja de cálculo o un reporte en PDF — listo para presentar a tu junta, tus inversionistas o tu equipo.</p>
+    <div class="section-pre reveal" data-en="What is BriefOps" data-es="Qué es BriefOps">Qué es BriefOps</div>
+    <h2 class="reveal" data-en="A research team on demand, without hiring one" data-es="Un equipo de investigación bajo demanda, sin contratar uno">Un equipo de investigación bajo demanda, sin contratar uno</h2>
+    <p class="lead reveal" data-en="You send us a short brief: your website, your competitors, and what you need to decide. We pull live data from professional tools like Semrush, analyze it, and deliver a finished document — a slide deck, a spreadsheet, or a PDF report — ready to present to your board, your investors, or your team." data-es="Nos envías un brief corto: tu sitio web, tus competidores y qué necesitas decidir. Nosotros extraemos datos reales de herramientas profesionales como Semrush, los analizamos y te entregamos un documento terminado — una presentación, una hoja de cálculo o un reporte en PDF — listo para presentar a tu junta, tus inversionistas o tu equipo.">Nos envías un brief corto: tu sitio web, tus competidores y qué necesitas decidir. Nosotros extraemos datos reales de herramientas profesionales como Semrush, los analizamos y te entregamos un documento terminado — una presentación, una hoja de cálculo o un reporte en PDF — listo para presentar a tu junta, tus inversionistas o tu equipo.</p>
 
-    <div class="solution-grid">
+    <div class="solution-grid reveal-stagger">
       <div class="solution-item">
         <div class="check">✓</div>
         <h3 data-en="Live Semrush data" data-es="Datos reales de Semrush">Datos reales de Semrush</h3>
@@ -288,11 +357,11 @@ footer a{color:var(--primary);text-decoration:none}
 
 <section class="section" id="products">
   <div class="wrap">
-    <div class="section-pre" data-en="Services & Prices" data-es="Servicios y Precios">Servicios y Precios</div>
-    <h2 data-en="Pick a report. Send your brief. Receive it in days." data-es="Elige un reporte. Envía tu brief. Recíbelo en días.">Elige un reporte. Envía tu brief. Recíbelo en días.</h2>
-    <p class="lead" data-en="Fixed prices, no surprises. Payment via PayPal or bank transfer — we send you the payment link after you order." data-es="Precios fijos, sin sorpresas. Pago vía PayPal o transferencia bancaria — te enviamos el link de pago después de tu pedido.">Precios fijos, sin sorpresas. Pago vía PayPal o transferencia bancaria — te enviamos el link de pago después de tu pedido.</p>
+    <div class="section-pre reveal" data-en="Services & Prices" data-es="Servicios y Precios">Servicios y Precios</div>
+    <h2 class="reveal" data-en="Pick a report. Send your brief. Receive it in days." data-es="Elige un reporte. Envía tu brief. Recíbelo en días.">Elige un reporte. Envía tu brief. Recíbelo en días.</h2>
+    <p class="lead reveal" data-en="Fixed prices, no surprises. Payment via PayPal or bank transfer — we send you the payment link after you order." data-es="Precios fijos, sin sorpresas. Pago vía PayPal o transferencia bancaria — te enviamos el link de pago después de tu pedido.">Precios fijos, sin sorpresas. Pago vía PayPal o transferencia bancaria — te enviamos el link de pago después de tu pedido.</p>
 
-    <div class="grid">
+    <div class="grid reveal-stagger">
       <div class="card">
         <span class="card-badge" data-en="Most popular" data-es="Más popular">Más popular</span>
         <h3 data-en="SEO & Digital Audit" data-es="Auditoría SEO y Digital">Auditoría SEO y Digital</h3>
@@ -346,9 +415,9 @@ footer a{color:var(--primary);text-decoration:none}
 
 <section class="section">
   <div class="wrap">
-    <div class="section-pre" data-en="How it works" data-es="Cómo funciona">Cómo funciona</div>
-    <h2 data-en="Three steps, zero meetings" data-es="Tres pasos, cero juntas">Tres pasos, cero juntas</h2>
-    <div class="process-grid">
+    <div class="section-pre reveal" data-en="How it works" data-es="Cómo funciona">Cómo funciona</div>
+    <h2 class="reveal" data-en="Three steps, zero meetings" data-es="Tres pasos, cero juntas">Tres pasos, cero juntas</h2>
+    <div class="process-grid reveal-stagger">
       <div class="step">
         <div class="step-num">1</div>
         <h3 data-en="Send your brief" data-es="Envía tu brief">Envía tu brief</h3>
@@ -370,9 +439,9 @@ footer a{color:var(--primary);text-decoration:none}
 
 <section class="section">
   <div class="wrap">
-    <div class="section-pre" data-en="Common questions" data-es="Preguntas frecuentes">Preguntas frecuentes</div>
-    <h2 data-en="Answers" data-es="Respuestas">Respuestas</h2>
-    <div class="faq-list">
+    <div class="section-pre reveal" data-en="Common questions" data-es="Preguntas frecuentes">Preguntas frecuentes</div>
+    <h2 class="reveal" data-en="Answers" data-es="Respuestas">Respuestas</h2>
+    <div class="faq-list reveal">
       <div class="faq-item open">
         <div class="faq-q"><span data-en="Is the data real or AI-generated?" data-es="¿Los datos son reales o generados por IA?">¿Los datos son reales o generados por IA?</span><span class="arrow">→</span></div>
         <div class="faq-a" data-en="Real. We use Semrush (professional SEO platform) and current market sources. Every report cites sources you can verify yourself." data-es="Reales. Usamos Semrush (plataforma profesional de SEO) y fuentes de mercado actuales. Cada reporte cita fuentes que puedes verificar tú mismo.">Reales. Usamos Semrush (plataforma profesional de SEO) y fuentes de mercado actuales. Cada reporte cita fuentes que puedes verificar tú mismo.</div>
@@ -399,7 +468,7 @@ footer a{color:var(--primary);text-decoration:none}
 
 <section class="section">
   <div class="wrap">
-    <div class="guarantee">
+    <div class="guarantee reveal">
       <h3 data-en="Zero-risk guarantee" data-es="Garantía sin riesgo">Garantía sin riesgo</h3>
       <p data-en="If your report doesn't meet expectations, we revise it or refund you in full. We only win when you win." data-es="Si tu reporte no cumple tus expectativas, lo revisamos o te reembolsamos completo. Solo ganamos cuando tú ganas.">Si tu reporte no cumple tus expectativas, lo revisamos o te reembolsamos completo. Solo ganamos cuando tú ganas.</p>
     </div>
@@ -407,7 +476,7 @@ footer a{color:var(--primary);text-decoration:none}
 </section>
 
 <section class="final-cta">
-  <div class="wrap">
+  <div class="wrap reveal">
     <h2 data-en="Your competitors are already deciding with data" data-es="Tus competidores ya están decidiendo con datos">Tus competidores ya están decidiendo con datos</h2>
     <p data-en="Order your first report today and have it on your desk in 48 hours." data-es="Pide tu primer reporte hoy y tenlo en tu escritorio en 48 horas.">Pide tu primer reporte hoy y tenlo en tu escritorio en 48 horas.</p>
     <a class="cta-primary order-link" data-product="" href="#" data-en="Order Your Report Now" data-es="Pide tu Reporte Ahora">Pide tu Reporte Ahora</a>
@@ -466,6 +535,102 @@ function setLang(lang) {
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   try { localStorage.setItem('briefops_lang', lang); } catch(e) {}
   refreshOrderLinks();
+  if (typeof splitHeroLetters === 'function') splitHeroLetters();
+  if (typeof buildMarquee === 'function') buildMarquee();
+}
+
+// ===== KINETIC TYPOGRAPHY (letter-by-letter hero) =====
+function splitHeroLetters() {
+  var h1 = document.querySelector('.hero h1');
+  if (!h1) return;
+  h1.classList.remove('chars-in');
+  h1.querySelectorAll('span[data-en]').forEach(function(span){
+    var text = span.textContent;
+    span.innerHTML = '';
+    var i = 0;
+    text.split(' ').forEach(function(word, wi, arr){
+      var w = document.createElement('span');
+      w.style.display = 'inline-block';
+      w.style.whiteSpace = 'nowrap';
+      word.split('').forEach(function(ch){
+        var c = document.createElement('span');
+        c.className = 'char';
+        c.textContent = ch;
+        c.style.transitionDelay = (i * 0.028) + 's';
+        w.appendChild(c);
+        i++;
+      });
+      span.appendChild(w);
+      if (wi < arr.length - 1) span.appendChild(document.createTextNode(' '));
+    });
+  });
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){ h1.classList.add('chars-in'); });
+  });
+}
+
+// ===== MARQUEE (bilingual) =====
+var marqueeItems = {
+  es: ['Auditoría SEO','Inteligencia Competitiva','Pitch Decks','Planes de Negocio','Investigación de Mercado','Datos reales de Semrush','Entrega en 48 horas'],
+  en: ['SEO Audits','Competitive Intelligence','Pitch Decks','Business Plans','Market Research','Live Semrush Data','48-Hour Delivery']
+};
+function buildMarquee() {
+  var track = document.getElementById('marquee-track');
+  if (!track) return;
+  var items = marqueeItems[currentLang];
+  var half = '<div class="marquee-item">' + items.map(function(t){return '<span>'+t+'</span><span class="dot"></span>'}).join('') + '</div>';
+  track.innerHTML = half + half; // duplicated for seamless loop
+}
+
+// ===== SCROLL REVEALS =====
+var revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el){ revealObs.observe(el); });
+
+// ===== ANIMATED COUNTERS =====
+function animateCounter(el) {
+  var raw = el.textContent.trim();
+  var m = raw.match(/^(\$?)(\d+)(.*)$/);
+  if (!m) return;
+  var prefix = m[1], target = parseInt(m[2],10), suffix = m[3];
+  var start = null, dur = 1400;
+  function tick(ts){
+    if (!start) start = ts;
+    var p = Math.min((ts - start)/dur, 1);
+    var eased = 1 - Math.pow(1-p, 3);
+    el.textContent = prefix + Math.round(target*eased) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+var statObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if (e.isIntersecting) { animateCounter(e.target); statObs.unobserve(e.target); }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('.stat-num').forEach(function(el){ statObs.observe(el); });
+
+// ===== SCROLL PROGRESS BAR =====
+window.addEventListener('scroll', function(){
+  var h = document.documentElement;
+  var p = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('progress').style.width = p + '%';
+}, {passive:true});
+
+// ===== CARD TILT ON HOVER =====
+if (window.matchMedia('(hover:hover)').matches) {
+  document.querySelectorAll('.card').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left)/r.width - 0.5;
+      var y = (e.clientY - r.top)/r.height - 0.5;
+      card.style.transform = 'translateY(-6px) rotateX(' + (-y*5) + 'deg) rotateY(' + (x*5) + 'deg)';
+    });
+    card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+  });
 }
 
 // ===== FAQ ACCORDION =====
