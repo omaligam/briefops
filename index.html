@@ -76,6 +76,8 @@ nav{
 .hero>*,.night-inner,.contact>*{position:relative;z-index:2}
 /* paper sections become translucent so the blue mesh shows through (option A) */
 .paper{background:rgba(232,226,208,0.35)!important}
+.paper::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(232,163,61,0.42),rgba(255,216,155,0.35));mix-blend-mode:multiply}
+.paper>*{position:relative;z-index:1}
 .paper::before{opacity:0.3}
 /* solid cream backing behind text blocks -> mesh shows in gaps, text stays ultra crisp */
 .paper .paper-inner{position:relative}
