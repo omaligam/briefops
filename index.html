@@ -1,399 +1,504 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>BriefOps — Inteligencia de mercado en 48 horas</title>
-<meta name="theme-color" content="#05060a">
-<meta name="description" content="Reportes de inteligencia de mercado con datos reales de Semrush, entregados en 48 horas. 80% más barato que una consultoría.">
+<title>BriefOps — Market Intelligence Terminal</title>
+<meta name="theme-color" content="#1a1a8f">
+<meta name="description" content="Market intelligence reports with real Semrush data, delivered in 48 hours. 80% cheaper than a consulting firm.">
 <link rel="canonical" href="https://briefops.online">
-<meta property="og:title" content="BriefOps — Inteligencia de mercado en 48 horas">
-<meta property="og:description" content="Reportes de inteligencia con datos reales, entregados en 48 horas.">
+<meta property="og:title" content="BriefOps — Market Intelligence Terminal">
+<meta property="og:description" content="Market intelligence reports with real data, delivered in 48 hours.">
 <meta property="og:url" content="https://briefops.online">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=VT323&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 :root{
-  --bg:#05060a;--fg:#f4f0ff;
-  --magenta:#ff2e97;--cyan:#0ff4f4;--purple:#7b2ff7;--amber:#ffb800;
-  --dim:#9a92b8;--grid:rgba(123,47,247,0.18);--line:rgba(255,46,151,0.2);
+  --paper:#e8e2d0;--ink:#1a1712;--boot:#2020a8;--boot2:#1a1a8f;
+  --cream:#f0e6c8;--glow:#ffd89b;--amber:#e8a33d;--rust:#c1502e;
+  --night:#0a0a0d;--dim:#8a8578;
 }
-::selection{background:var(--magenta);color:#05060a}
-body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden}
-.display{font-family:'Space Grotesk',sans-serif}
+::selection{background:var(--amber);color:var(--night)}
+body{font-family:'Space Mono',monospace;background:var(--night);color:var(--cream);line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 0%,transparent 60vh,rgba(5,6,10,0.72) 105vh,rgba(5,6,10,0.9) 100%)}
-.sun-glow{position:fixed;top:18vh;left:50%;transform:translateX(-50%);width:70vw;max-width:760px;height:70vw;max-height:760px;border-radius:50%;background:radial-gradient(circle,rgba(255,46,151,0.28),rgba(123,47,247,0.12) 45%,transparent 68%);z-index:0;pointer-events:none;filter:blur(20px);animation:sunPulse 6s ease-in-out infinite}
-@keyframes sunPulse{0%,100%{opacity:0.8;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
-.crt{position:fixed;inset:0;z-index:60;pointer-events:none;mix-blend-mode:overlay;opacity:0.5}
-.crt::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.25) 0px,rgba(0,0,0,0.25) 1px,transparent 2px,transparent 3px)}
-.crt::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(5,6,10,0.55) 100%)}
-@keyframes flicker{0%,100%{opacity:0.5}50%{opacity:0.42}97%{opacity:0.5}98%{opacity:0.3}}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 5vw;backdrop-filter:blur(8px);background:linear-gradient(180deg,rgba(5,6,10,0.85),transparent)}
-.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:1px;color:var(--fg);text-shadow:0 0 12px var(--magenta)}
-.logo b{color:var(--magenta)}
-.nav-right{display:flex;gap:8px;align-items:center}
-.lang-btn{background:none;border:1px solid var(--line);color:var(--fg);padding:7px 13px;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;cursor:pointer;transition:all 0.25s;letter-spacing:0.1em}
-.lang-btn.active{background:var(--magenta);color:#05060a;border-color:var(--magenta);box-shadow:0 0 16px rgba(255,46,151,0.6)}
-.lang-btn:hover{border-color:var(--magenta)}
-.nav-cta{border:1px solid var(--cyan);color:var(--cyan);padding:9px 20px;border-radius:2px;font-size:12px;font-weight:700;letter-spacing:0.08em;transition:all 0.3s;text-transform:uppercase;background:rgba(15,244,244,0.05)}
-.nav-cta:hover{background:var(--cyan);color:#05060a;box-shadow:0 0 24px rgba(15,244,244,0.6)}
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:12vh 5vw 0;position:relative;z-index:5}
-.kicker{font-size:12px;letter-spacing:0.35em;text-transform:uppercase;color:var(--cyan);margin-bottom:28px;display:flex;align-items:center;gap:14px}
-.kicker::before{content:'';width:40px;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
-.blink{animation:blink 1.1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.hero h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(40px,8.5vw,124px);line-height:0.98;letter-spacing:-0.03em;max-width:16ch;text-wrap:balance}
-.hero h1 .neon-m{color:var(--magenta);text-shadow:0 0 8px var(--magenta),0 0 28px rgba(255,46,151,0.7),0 0 52px rgba(255,46,151,0.4);animation:neonFlicker 4s infinite}
-.hero h1 .neon-c{color:var(--cyan);text-shadow:0 0 8px var(--cyan),0 0 28px rgba(15,244,244,0.7),0 0 52px rgba(15,244,244,0.4)}
-@keyframes neonFlicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:0.7}94%{opacity:1}96%{opacity:0.85}97%{opacity:1}}
-.hero-meta{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-top:5vh;flex-wrap:wrap}
-.hero-sub{font-size:14px;color:var(--dim);max-width:52ch;line-height:1.8}
-.hero-sub b{color:var(--fg)}
-.scroll-hint{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:12px;white-space:nowrap}
-.scroll-hint .box{width:10px;height:10px;border:1px solid var(--amber);box-shadow:0 0 8px var(--amber);animation:boxPulse 1.5s ease-in-out infinite}
-@keyframes boxPulse{0%,100%{opacity:0.3}50%{opacity:1}}
-.ticker{position:relative;z-index:5;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;background:rgba(255,46,151,0.04);margin-top:6vh}
-.ticker-track{display:flex;gap:44px;width:max-content;animation:tick 26s linear infinite}
-.ticker:hover .ticker-track{animation-play-state:paused}
-.ticker-item{font-size:14px;font-weight:500;letter-spacing:0.05em;color:var(--dim);display:flex;align-items:center;gap:44px;text-transform:uppercase;white-space:nowrap}
-.ticker-item .s{color:var(--cyan);text-shadow:0 0 8px rgba(15,244,244,0.5)}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-section{position:relative;z-index:5;padding:15vh 5vw}
-.eyebrow{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--magenta);margin-bottom:30px;display:flex;align-items:center;gap:14px;text-shadow:0 0 10px rgba(255,46,151,0.5)}
-.eyebrow::before{content:'▸';color:var(--cyan)}
-.big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,5vw,66px);letter-spacing:-0.02em;line-height:1.05;max-width:22ch;margin-bottom:40px;text-wrap:balance}
-.body-lg{font-family:'JetBrains Mono',monospace;font-size:clamp(14px,1.5vw,17px);color:var(--dim);max-width:60ch;line-height:1.9}
-.body-lg b{color:var(--fg);font-weight:500}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start}
-.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;border-top:1px solid var(--grid);border-bottom:1px solid var(--grid);padding:7vh 0}
-.trust-item{border-left:1px solid var(--grid);padding-left:20px}
-.trust-item .n{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,4.5vw,66px);font-weight:700;letter-spacing:-0.02em;color:var(--cyan);text-shadow:0 0 20px rgba(15,244,244,0.5)}
-.trust-item .l{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:0.12em;margin-top:8px}
-.svc-list{border-top:1px solid var(--line)}
-.svc{display:grid;grid-template-columns:auto 1fr auto auto;gap:24px;align-items:baseline;padding:34px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding 0.4s cubic-bezier(0.22,1,0.36,1),background 0.3s;position:relative}
-.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(255,46,151,0.08),transparent);transition:width 0.4s;z-index:-1}
-.svc:hover{padding-left:24px}
-.svc:hover::before{width:100%}
-.svc-idx{font-size:12px;color:var(--magenta);font-weight:700}
-.svc-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,3.2vw,40px);font-weight:700;letter-spacing:-0.01em;transition:color 0.3s,text-shadow 0.3s}
-.svc:hover .svc-name{color:var(--cyan);text-shadow:0 0 20px rgba(15,244,244,0.5)}
-.svc-price{font-size:clamp(13px,1.5vw,17px);color:var(--amber);white-space:nowrap;font-weight:500}
-.svc-arrow{font-size:clamp(16px,2vw,24px);color:var(--dim);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),color 0.3s}
-.svc:hover .svc-arrow{transform:translateX(8px);color:var(--magenta)}
-.svc-desc{grid-column:2/-1;font-size:13px;color:var(--dim);max-width:64ch;line-height:1.8;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1),opacity 0.4s,margin 0.5s}
-.svc:hover .svc-desc,.svc.open .svc-desc{max-height:200px;opacity:1;margin-top:12px}
-.svc-order{grid-column:2/-1;display:none;font-size:12px;font-weight:700;color:#05060a;background:var(--cyan);padding:11px 24px;border-radius:2px;justify-self:start;text-transform:uppercase;letter-spacing:0.06em;transition:box-shadow 0.3s}
-.svc-order:hover{box-shadow:0 0 24px rgba(15,244,244,0.6)}
-.svc:hover .svc-order,.svc.open .svc-order{display:inline-block;margin-top:16px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:4vw;margin-top:7vh}
-.step-num{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--magenta);border:1px solid var(--line);width:46px;height:46px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(255,46,151,0.2) inset}
-.step h3{font-family:'Space Grotesk',sans-serif;font-size:clamp(17px,2vw,24px);font-weight:700;letter-spacing:-0.01em;margin:20px 0 12px}
-.step p{font-size:13px;color:var(--dim);line-height:1.8}
-.faq-item{border-bottom:1px solid var(--line);padding:26px 0}
-.faq-q{display:flex;justify-content:space-between;align-items:center;gap:24px;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:clamp(16px,2vw,23px);font-weight:500;transition:color 0.3s}
-.faq-q:hover{color:var(--cyan)}
-.faq-q .plus{font-size:22px;color:var(--magenta);transition:transform 0.4s;flex-shrink:0}
-.faq-item.open .plus{transform:rotate(45deg)}
-.faq-a{font-size:13px;color:var(--dim);line-height:1.85;max-width:66ch;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1),opacity 0.4s,margin 0.4s}
-.faq-item.open .faq-a{max-height:320px;opacity:1;margin-top:16px}
-.final{min-height:80svh;display:flex;flex-direction:column;justify-content:center}
-.final h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,8vw,112px);font-weight:700;letter-spacing:-0.03em;line-height:1;margin-bottom:6vh;max-width:14ch;text-wrap:balance}
-.final h2 .g{background:linear-gradient(90deg,var(--magenta),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.cta-big{display:inline-flex;align-items:center;gap:16px;background:var(--magenta);color:#05060a;font-family:'Space Grotesk',sans-serif;font-size:clamp(15px,1.8vw,21px);font-weight:700;padding:20px 42px;border-radius:2px;align-self:flex-start;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s;text-transform:uppercase;letter-spacing:0.04em;box-shadow:0 0 30px rgba(255,46,151,0.4)}
-.cta-big:hover{transform:scale(1.05);box-shadow:0 0 50px rgba(255,46,151,0.7)}
-.cta-big .a{transition:transform 0.35s}
-.cta-big:hover .a{transform:translateX(6px)}
-footer{position:relative;z-index:5;border-top:1px solid var(--line);padding:8vh 5vw;display:grid;grid-template-columns:2fr 1fr 1fr;gap:5vw}
-footer h4{font-size:11px;text-transform:uppercase;letter-spacing:0.2em;color:var(--magenta);margin-bottom:18px;font-weight:700}
-footer a{display:block;font-size:14px;margin-bottom:10px;transition:color 0.3s}
-footer a:hover{color:var(--cyan)}
-.foot-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,46px);letter-spacing:-0.02em;text-shadow:0 0 16px var(--magenta)}
-.foot-logo b{color:var(--magenta)}
-.foot-tag{font-size:13px;color:var(--dim);margin-top:12px;max-width:38ch;line-height:1.8}
-.copyright{grid-column:1/-1;font-size:11px;color:var(--dim);margin-top:6vh;padding-top:24px;border-top:1px solid var(--grid);letter-spacing:0.05em}
-.reveal{opacity:0;transform:translateY(46px);transition:opacity 0.9s ease,transform 1s cubic-bezier(0.22,1,0.36,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-stagger>*{opacity:0;transform:translateY(36px);transition:opacity 0.8s ease,transform 0.9s cubic-bezier(0.22,1,0.36,1)}
-.reveal-stagger.visible>*{opacity:1;transform:translateY(0)}
-.reveal-stagger.visible>*:nth-child(1){transition-delay:0.05s}
-.reveal-stagger.visible>*:nth-child(2){transition-delay:0.13s}
-.reveal-stagger.visible>*:nth-child(3){transition-delay:0.21s}
-.reveal-stagger.visible>*:nth-child(4){transition-delay:0.29s}
-.reveal-stagger.visible>*:nth-child(5){transition-delay:0.37s}
-.reveal-stagger.visible>*:nth-child(6){transition-delay:0.45s}
-.hero h1{opacity:0;transform:translateY(50px);animation:heroIn 1.1s cubic-bezier(0.22,1,0.36,1) 0.3s forwards}
-.hero .kicker{opacity:0;animation:fadeIn 0.8s ease 0.1s forwards}
-.hero-meta{opacity:0;animation:fadeIn 1s ease 1s forwards}
-@keyframes heroIn{to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{to{opacity:1}}
-@media(prefers-reduced-motion:reduce){
-  .reveal,.reveal-stagger>*{opacity:1;transform:none;transition:none}
-  .hero h1,.hero-meta,.hero .kicker{opacity:1;transform:none;animation:none}
-  .ticker-track{animation:none}.sun-glow{animation:none}
-  .blink,.neon-m,.scroll-hint .box{animation:none}
+.serif{font-family:'Playfair Display',Georgia,serif}
+
+/* ===== CHROMATIC ABERRATION UTILITY ===== */
+@keyframes chroma{0%,100%{text-shadow:-1px 0 rgba(255,0,80,0.5),1px 0 rgba(0,255,255,0.5)}50%{text-shadow:-2px 0 rgba(255,0,80,0.4),2px 0 rgba(0,255,255,0.4)}}
+
+/* ===== BOOT SCREEN ===== */
+#boot{
+  position:fixed;inset:0;z-index:9999;background:var(--boot);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'VT323',monospace;color:var(--cream);text-align:center;
+  transition:opacity 0.6s ease,visibility 0.6s;padding:20px;
 }
-@media(max-width:900px){
-  .two-col{grid-template-columns:1fr}.steps{grid-template-columns:1fr}
-  .trust{grid-template-columns:repeat(2,1fr)}footer{grid-template-columns:1fr}
-  .svc{grid-template-columns:auto 1fr auto;row-gap:4px}
-  .svc-price{grid-column:2;font-size:13px}
-  .svc-arrow{grid-row:1;grid-column:3}
-  .svc-desc,.svc-order{grid-column:1/-1}
+#boot.done{opacity:0;visibility:hidden;pointer-events:none}
+.boot-logo{display:flex;align-items:center;gap:16px;margin-bottom:24px;filter:drop-shadow(0 0 4px rgba(255,216,155,0.6))}
+.boot-bars{width:44px;height:44px;background:linear-gradient(0deg,var(--rust) 0 20%,var(--amber) 20% 40%,var(--glow) 40% 60%,var(--cream) 60% 80%,#8fd0ff 80% 100%);border-radius:50%}
+.boot-title{font-size:clamp(52px,12vw,96px);letter-spacing:4px;line-height:1;text-shadow:2px 2px 0 rgba(0,0,0,0.3)}
+.boot-sub{font-size:clamp(20px,4vw,28px);margin-bottom:40px;line-height:1.3;opacity:0.9}
+.boot-bar{width:min(80vw,360px);height:34px;border:3px solid var(--cream);padding:4px;display:flex;gap:3px;overflow:hidden}
+.boot-bar span{flex:1;background:var(--cream);opacity:0;animation:fill 0.09s steps(1) forwards}
+.boot-copy{font-size:clamp(15px,3vw,20px);margin-top:36px;line-height:1.4;opacity:0.85}
+@keyframes fill{to{opacity:1}}
+@keyframes scan{0%{background-position:0 0}100%{background-position:0 4px}}
+
+/* ===== CRT SCANLINES GLOBAL ===== */
+.scan-overlay{position:fixed;inset:0;z-index:200;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.12) 0 1px,transparent 1px 3px);mix-blend-mode:multiply;opacity:0.4}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:150;display:flex;
+  justify-content:space-between;align-items:center;padding:16px 5vw;
+  background:rgba(10,10,13,0.82);backdrop-filter:blur(6px);border-bottom:1px solid rgba(240,230,200,0.12);
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-bars{width:30px;height:30px;background:linear-gradient(0deg,var(--rust) 0 20%,var(--amber) 20% 40%,var(--glow) 40% 60%,#9fe0a0 60% 80%,#8fd0ff 80% 100%);border-radius:50%;flex-shrink:0}
+.logo-word{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:24px;letter-spacing:1px;color:var(--cream);text-shadow:0 0 12px rgba(255,216,155,0.4)}
+.nav-right{display:flex;gap:10px;align-items:center}
+.lang-btn{background:none;border:1px solid rgba(240,230,200,0.25);color:var(--cream);padding:6px 12px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.25s;letter-spacing:0.1em}
+.lang-btn.active{background:var(--amber);color:var(--night);border-color:var(--amber)}
+.lang-btn:hover{border-color:var(--amber)}
+.cart-btn{position:relative;background:none;border:1px solid var(--amber);color:var(--amber);padding:6px 14px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.3s;letter-spacing:0.05em}
+.cart-btn:hover{background:var(--amber);color:var(--night)}
+.cart-count{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;background:var(--rust);color:var(--cream);border-radius:50%;font-size:11px;margin-left:6px}
+.cart-btn.has-items{background:var(--amber);color:var(--night)}
+
+/* ===== HERO (night + glow) ===== */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 5vw 60px;position:relative;
+  background:radial-gradient(ellipse at 50% 40%,rgba(60,40,90,0.35),transparent 70%),var(--night);
+}
+.hero-kicker{font-family:'VT323',monospace;font-size:clamp(18px,3vw,24px);color:var(--amber);letter-spacing:0.3em;margin-bottom:20px;text-transform:uppercase}
+.hero h1{
+  font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(56px,15vw,180px);
+  line-height:0.92;letter-spacing:-0.02em;color:var(--cream);
+  text-shadow:0 0 20px rgba(255,216,155,0.5),0 0 60px rgba(255,216,155,0.25);margin-bottom:28px;
+}
+.hero h1 .glitch{animation:chroma 3s infinite}
+.hero-sub{font-family:'Playfair Display',serif;font-size:clamp(18px,2.4vw,26px);max-width:30ch;line-height:1.5;color:var(--glow);margin-bottom:44px;font-style:italic}
+.scroll-inspect{font-family:'VT323',monospace;font-size:clamp(20px,3.5vw,30px);color:var(--cream);letter-spacing:0.05em;margin-bottom:20px}
+.hands{display:flex;gap:24px;justify-content:center;font-size:32px}
+.hands span{animation:bounce 1.4s ease-in-out infinite}
+.hands span:nth-child(2){animation-delay:0.2s}
+.hands span:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ===== PAPER SECTION ===== */
+.paper{background:var(--paper);color:var(--ink);position:relative;padding:14vh 5vw}
+.paper::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.015) 0 2px,transparent 2px 4px);pointer-events:none}
+.paper-inner{max-width:900px;margin:0 auto;position:relative}
+.paper-eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--rust);margin-bottom:20px;border-bottom:2px solid var(--ink);padding-bottom:10px;display:inline-block}
+.paper h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(34px,6vw,68px);line-height:1.02;letter-spacing:-0.02em;margin-bottom:32px;text-wrap:balance}
+.paper .cols{column-count:2;column-gap:40px;font-family:'Playfair Display',serif;font-size:clamp(15px,1.7vw,18px);line-height:1.7}
+.paper .cols p{margin-bottom:16px;break-inside:avoid}
+@media(max-width:700px){.paper .cols{column-count:1}}
+
+/* ===== NIGHT SECTION ===== */
+.night-sec{padding:14vh 5vw;position:relative;background:var(--night)}
+.night-inner{max-width:1100px;margin:0 auto}
+.night-eyebrow{font-family:'VT323',monospace;font-size:clamp(18px,3vw,24px);letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:24px}
+.night-sec h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(34px,6vw,72px);line-height:1;letter-spacing:-0.02em;margin-bottom:16px;color:var(--cream);text-shadow:0 0 24px rgba(255,216,155,0.35)}
+
+/* ===== SERVICE / CATALOG ROWS ===== */
+.catalog{margin-top:8vh;border-top:2px solid rgba(240,230,200,0.2)}
+.item{
+  display:grid;grid-template-columns:auto 1fr auto auto;gap:20px;align-items:center;
+  padding:30px 0;border-bottom:1px solid rgba(240,230,200,0.15);
+  transition:padding 0.35s cubic-bezier(0.22,1,0.36,1),background 0.3s;position:relative;
+}
+.item:hover{padding-left:20px;background:linear-gradient(90deg,rgba(232,163,61,0.06),transparent)}
+.item-idx{font-family:'VT323',monospace;font-size:22px;color:var(--amber)}
+.item-info h3{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,34px);font-weight:700;letter-spacing:-0.01em;color:var(--cream);transition:color 0.3s}
+.item:hover .item-info h3{color:var(--glow)}
+.item-info p{font-size:12px;color:var(--dim);margin-top:6px;max-width:52ch;line-height:1.6}
+.item-price{font-family:'VT323',monospace;font-size:clamp(24px,3vw,34px);color:var(--glow);white-space:nowrap;text-align:right}
+.item-price small{display:block;font-family:'Space Mono',monospace;font-size:11px;color:var(--dim)}
+.add-btn{
+  background:var(--amber);color:var(--night);border:none;padding:11px 18px;
+  font-family:'Space Mono',monospace;font-size:12px;font-weight:700;cursor:pointer;
+  transition:all 0.25s;white-space:nowrap;letter-spacing:0.03em;
+}
+.add-btn:hover{background:var(--glow);transform:scale(1.05)}
+.add-btn.added{background:#6fae6f;color:var(--night)}
+@media(max-width:760px){
+  .item{grid-template-columns:auto 1fr;row-gap:12px}
+  .item-price{grid-column:2;text-align:left}
+  .add-btn{grid-column:1/-1;width:100%}
+}
+
+/* ===== TRUST BAR ===== */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:6vh;border-top:1px solid rgba(240,230,200,0.15);border-bottom:1px solid rgba(240,230,200,0.15);padding:5vh 0}
+.trust-item{text-align:center}
+.trust-item .n{font-family:'VT323',monospace;font-size:clamp(40px,6vw,64px);color:var(--glow);line-height:1;text-shadow:0 0 20px rgba(255,216,155,0.4)}
+.trust-item .l{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-top:8px}
+@media(max-width:600px){.trust{grid-template-columns:repeat(2,1fr);gap:32px}}
+
+/* ===== STEPS ===== */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:5vw;margin-top:7vh}
+.step-n{font-family:'VT323',monospace;font-size:48px;color:var(--amber);line-height:1}
+.step h3{font-family:'Playfair Display',serif;font-size:clamp(18px,2.4vw,26px);font-weight:700;margin:14px 0 10px;color:var(--cream)}
+.step p{font-size:13px;color:var(--dim);line-height:1.7}
+@media(max-width:760px){.steps{grid-template-columns:1fr;gap:5vh}}
+
+/* ===== FAQ ===== */
+.faq-item{border-bottom:1px solid var(--ink);padding:22px 0}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;font-family:'Playfair Display',serif;font-size:clamp(17px,2.4vw,26px);font-weight:700;transition:color 0.3s}
+.faq-q:hover{color:var(--rust)}
+.faq-q .pl{font-family:'VT323',monospace;font-size:28px;transition:transform 0.3s;flex-shrink:0}
+.faq-item.open .pl{transform:rotate(45deg)}
+.faq-a{font-family:'Playfair Display',serif;font-size:clamp(15px,1.7vw,18px);line-height:1.7;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1),opacity 0.4s,margin 0.4s}
+.faq-item.open .faq-a{max-height:320px;opacity:1;margin-top:14px}
+
+/* ===== CONTACT (night, big serif) ===== */
+.contact{min-height:80svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12vh 5vw;background:radial-gradient(ellipse at 50% 50%,rgba(60,40,90,0.3),transparent 70%),var(--night)}
+.contact h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(60px,16vw,200px);line-height:0.9;color:var(--cream);text-shadow:0 0 24px rgba(255,216,155,0.5);margin-bottom:24px}
+.contact h2 .glitch{animation:chroma 3s infinite}
+.contact p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(17px,2.4vw,24px);color:var(--glow);max-width:34ch;margin-bottom:36px;line-height:1.5}
+.contact-links{display:flex;flex-direction:column;gap:16px;align-items:center;font-family:'Playfair Display',serif}
+.contact-links .big-link{font-size:clamp(22px,3.5vw,36px);color:var(--cream);border-bottom:2px solid var(--amber);padding-bottom:4px;transition:color 0.3s}
+.contact-links .big-link:hover{color:var(--amber)}
+
+/* ===== FOOTER (boot-screen style) ===== */
+footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT323',monospace;position:relative}
+.foot-inner{max-width:900px;margin:0 auto;text-align:center}
+.foot-logo{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:18px}
+.foot-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(32px,6vw,56px);letter-spacing:2px}
+.foot-sub{font-size:clamp(18px,3vw,24px);line-height:1.4;margin-bottom:24px;opacity:0.9}
+.foot-cols{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;font-size:clamp(16px,2.5vw,20px);margin-bottom:30px}
+.foot-cols a{display:block;margin-bottom:8px;border-bottom:1px solid transparent;transition:border 0.3s}
+.foot-cols a:hover{border-bottom-color:var(--glow)}
+.foot-copy{font-size:clamp(14px,2.2vw,18px);opacity:0.75;line-height:1.5;border-top:1px solid rgba(240,230,200,0.3);padding-top:20px}
+
+/* ===== CART DRAWER ===== */
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(90vw,420px);background:var(--paper);color:var(--ink);z-index:140;transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,0.4);padding-top:64px}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:24px;border-bottom:2px solid var(--ink)}
+.cart-head h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:900}
+.cart-close{background:none;border:none;font-family:'VT323',monospace;font-size:32px;cursor:pointer;color:var(--ink);line-height:1}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px}
+.cart-empty{font-family:'Space Mono',monospace;font-size:13px;color:#6b6558;text-align:center;margin-top:40px;line-height:1.7}
+.cart-line{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 0;border-bottom:1px solid rgba(26,23,18,0.15)}
+.cart-line-info{flex:1}
+.cart-line-name{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;line-height:1.2}
+.cart-line-price{font-family:'Space Mono',monospace;font-size:13px;color:#6b6558;margin-top:4px}
+.cart-remove{background:none;border:none;color:var(--rust);font-family:'Space Mono',monospace;font-size:11px;font-weight:700;cursor:pointer;text-decoration:underline;flex-shrink:0}
+.cart-foot{padding:24px;border-top:2px solid var(--ink)}
+.cart-total{display:flex;justify-content:space-between;font-family:'Playfair Display',serif;font-weight:900;font-size:22px;margin-bottom:8px}
+.cart-note{font-family:'Space Mono',monospace;font-size:11px;color:#6b6558;line-height:1.6;margin-bottom:18px}
+.cart-checkout{width:100%;background:var(--ink);color:var(--paper);border:none;padding:16px;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.05em;transition:background 0.3s}
+.cart-checkout:hover{background:var(--rust)}
+.cart-checkout:disabled{opacity:0.4;cursor:not-allowed}
+.cart-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:130;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s}
+.cart-backdrop.open{opacity:1;visibility:visible}
+
+/* ===== REVEALS ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.9s ease,transform 1s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .hands span,.hero h1 .glitch,.contact h2 .glitch{animation:none}
 }
 </style>
 </head>
 <body>
 
-<canvas id="gl"></canvas>
-<div class="scrim"></div>
-<div class="sun-glow"></div>
-<div class="crt" style="animation:flicker 6s infinite"></div>
+<!-- BOOT SCREEN -->
+<div id="boot">
+  <div class="boot-logo">
+    <div class="boot-bars"></div>
+    <div class="boot-title serif" style="font-style:italic">SHADER</div>
+  </div>
+  <div class="boot-sub">BriefOps Intelligence Terminal<br>Version 2.026</div>
+  <div class="boot-bar" id="bootbar"></div>
+  <div class="boot-copy">Copyright (c) BriefOps, 2026.<br>All Rights Reserved.</div>
+</div>
+
+<div class="scan-overlay"></div>
 
 <nav>
-  <div class="logo">BRIEF<b>OPS</b></div>
+  <div class="logo"><div class="logo-bars"></div><div class="logo-word">BriefOps</div></div>
   <div class="nav-right">
-    <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
     <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-    <a class="nav-cta order-link" data-product="" href="#" data-en="Order report" data-es="Pedir reporte">Pedir reporte</a>
+    <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+    <button class="cart-btn" id="cartBtn" onclick="toggleCart()"><span data-en="Cart" data-es="Carrito">Cart</span> <span class="cart-count" id="cartCount">0</span></button>
   </div>
 </nav>
 
+<!-- HERO -->
 <header class="hero">
-  <div class="kicker"><span data-en="Market Intelligence Terminal" data-es="Terminal de Inteligencia de Mercado">Terminal de Inteligencia de Mercado</span><span class="blink">_</span></div>
-  <h1><span data-en="Real market data," data-es="Datos reales de mercado,">Datos reales de mercado,</span> <span class="neon-m" data-en="in 48 hours." data-es="en 48 horas.">en 48 horas.</span></h1>
-  <div class="hero-meta">
-    <p class="hero-sub" data-en="BriefOps builds the documents your decisions depend on — market research, competitive analysis, pitch decks — with live Semrush data and human review. At 20% of a consulting firm's price." data-es="BriefOps construye los documentos de los que dependen tus decisiones — investigación de mercado, análisis competitivo, pitch decks — con datos reales de Semrush y revisión humana. Al 20% del precio de una consultoría.">BriefOps construye los documentos de los que dependen tus decisiones — investigación de mercado, análisis competitivo, pitch decks — con datos reales de Semrush y revisión humana. Al 20% del precio de una consultoría.</p>
-    <div class="scroll-hint"><span class="box"></span><span data-en="Scroll to inspect" data-es="Scroll para explorar">Scroll para explorar</span></div>
-  </div>
+  <div class="hero-kicker" data-en="A Market Intelligence Studio" data-es="Un Estudio de Inteligencia de Mercado">A Market Intelligence Studio</div>
+  <h1 class="serif"><span data-en="Good" data-es="Buenos">Good</span> <span class="glitch" data-en="data." data-es="datos.">data.</span></h1>
+  <p class="hero-sub" data-en="Real market intelligence, delivered in 48 hours. Let's crunch the numbers." data-es="Inteligencia de mercado real, entregada en 48 horas. Hagamos los números.">Real market intelligence, delivered in 48 hours. Let's crunch the numbers.</p>
+  <div class="scroll-inspect" data-en="Scroll to Inspect Our Reports" data-es="Scroll para Inspeccionar Nuestros Reportes">Scroll to Inspect Our Reports</div>
+  <div class="hands"><span>☞</span><span>☞</span><span>☞</span></div>
 </header>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker-track"></div></div>
-
-<section>
-  <div class="eyebrow" data-en="What we do" data-es="Qué hacemos">Qué hacemos</div>
-  <div class="two-col">
-    <h2 class="big reveal" data-en="A research team on demand. Zero meetings, zero six-week timelines." data-es="Un equipo de investigación bajo demanda. Cero juntas, cero plazos de seis semanas.">Un equipo de investigación bajo demanda. Cero juntas, cero plazos de seis semanas.</h2>
-    <p class="body-lg reveal" data-en="You send a short brief: your website, your competitors, and what you need to decide. We pull live data from professional tools, analyze it, and deliver a finished document — deck, spreadsheet, or PDF — ready for your board, your investors, or your team. Every figure cites a source you can verify. We are not a six-week consultancy. We don't do discovery workshops." data-es="Nos envías un brief corto: tu sitio web, tus competidores y qué necesitas decidir. Extraemos datos reales de herramientas profesionales, los analizamos y entregamos un documento terminado — presentación, hoja de cálculo o PDF — listo para tu junta, tus inversionistas o tu equipo. Cada cifra cita una fuente verificable. No somos una consultoría de seis semanas. No hacemos talleres de descubrimiento.">Nos envías un brief corto: tu sitio web, tus competidores y qué necesitas decidir. Extraemos datos reales de herramientas profesionales, los analizamos y entregamos un documento terminado — presentación, hoja de cálculo o PDF — listo para tu junta, tus inversionistas o tu equipo. Cada cifra cita una fuente verificable. No somos una consultoría de seis semanas. No hacemos talleres de descubrimiento.</p>
-  </div>
-</section>
-
-<section style="padding-top:0;padding-bottom:0">
-  <div class="trust reveal-stagger">
-    <div class="trust-item"><div class="n">48h</div><div class="l" data-en="Standard delivery" data-es="Entrega estándar">Entrega estándar</div></div>
-    <div class="trust-item"><div class="n">$297</div><div class="l" data-en="Starting price" data-es="Precio inicial">Precio inicial</div></div>
-    <div class="trust-item"><div class="n">100%</div><div class="l" data-en="Verifiable data" data-es="Datos verificables">Datos verificables</div></div>
-    <div class="trust-item"><div class="n">×1</div><div class="l" data-en="Revision included" data-es="Revisión incluida">Revisión incluida</div></div>
-  </div>
-</section>
-
-<section id="services">
-  <div class="eyebrow" data-en="Services — Fixed prices" data-es="Servicios — Precios fijos">Servicios — Precios fijos</div>
-  <h2 class="big reveal" data-en="Pick a report. Receive it in days." data-es="Elige un reporte. Recíbelo en días.">Elige un reporte. Recíbelo en días.</h2>
-  <div class="svc-list reveal">
-    <div class="svc">
-      <span class="svc-idx">01</span>
-      <span class="svc-name" data-en="SEO &amp; Digital Audit" data-es="Auditoría SEO y Digital">Auditoría SEO y Digital</span>
-      <span class="svc-price">$297 · 48h</span><span class="svc-arrow">→</span>
-      <p class="svc-desc" data-en="Where you're winning and losing online. Keyword gaps, technical issues, and the opportunities your competitors leave open." data-es="Dónde estás ganando y perdiendo en digital. Brechas de keywords, problemas técnicos y las oportunidades que tus competidores dejan abiertas.">Dónde estás ganando y perdiendo en digital. Brechas de keywords, problemas técnicos y las oportunidades que tus competidores dejan abiertas.</p>
-      <a class="svc-order order-link" data-product="Auditoría SEO y Digital ($297)" href="#" data-en="Order this report" data-es="Pedir este reporte">Pedir este reporte</a>
-    </div>
-    <div class="svc">
-      <span class="svc-idx">02</span>
-      <span class="svc-name" data-en="Market Research" data-es="Investigación de Mercado">Investigación de Mercado</span>
-      <span class="svc-price">$397 · 48h</span><span class="svc-arrow">→</span>
-      <p class="svc-desc" data-en="Market size (TAM/SAM/SOM), key players, trends, and current data — packaged for board-level decisions." data-es="Tamaño de mercado (TAM/SAM/SOM), jugadores clave, tendencias y datos actuales — empaquetado para decisiones de dirección.">Tamaño de mercado (TAM/SAM/SOM), jugadores clave, tendencias y datos actuales — empaquetado para decisiones de dirección.</p>
-      <a class="svc-order order-link" data-product="Investigación de Mercado ($397)" href="#" data-en="Order this report" data-es="Pedir este reporte">Pedir este reporte</a>
-    </div>
-    <div class="svc">
-      <span class="svc-idx">03</span>
-      <span class="svc-name" data-en="Competitive Intelligence" data-es="Inteligencia Competitiva">Inteligencia Competitiva</span>
-      <span class="svc-price">$497 · 48h</span><span class="svc-arrow">→</span>
-      <p class="svc-desc" data-en="Your competitors' traffic sources, content strategy, ad spend, and positioning. Know them better than they know themselves." data-es="Las fuentes de tráfico, estrategia de contenido, inversión publicitaria y posicionamiento de tus competidores. Conócelos mejor que ellos mismos.">Las fuentes de tráfico, estrategia de contenido, inversión publicitaria y posicionamiento de tus competidores. Conócelos mejor que ellos mismos.</p>
-      <a class="svc-order order-link" data-product="Inteligencia Competitiva ($497)" href="#" data-en="Order this report" data-es="Pedir este reporte">Pedir este reporte</a>
-    </div>
-    <div class="svc">
-      <span class="svc-idx">04</span>
-      <span class="svc-name" data-en="Investor Pitch Deck" data-es="Pitch Deck para Inversionistas">Pitch Deck para Inversionistas</span>
-      <span class="svc-price">$997 · 72h</span><span class="svc-arrow">→</span>
-      <p class="svc-desc" data-en="Market sizing, competitive landscape, business model, traction narrative, and financials — a deck ready for VCs." data-es="Tamaño de mercado, panorama competitivo, modelo de negocio, narrativa de tracción y finanzas — un deck listo para VCs.">Tamaño de mercado, panorama competitivo, modelo de negocio, narrativa de tracción y finanzas — un deck listo para VCs.</p>
-      <a class="svc-order order-link" data-product="Pitch Deck para Inversionistas ($997)" href="#" data-en="Order this report" data-es="Pedir este reporte">Pedir este reporte</a>
-    </div>
-    <div class="svc">
-      <span class="svc-idx">05</span>
-      <span class="svc-name" data-en="Business Plan + Financials" data-es="Plan de Negocio + Finanzas">Plan de Negocio + Finanzas</span>
-      <span class="svc-price">$1,497 · 72h</span><span class="svc-arrow">→</span>
-      <p class="svc-desc" data-en="Full business plan with market analysis, plus a working Excel model with 3-year projections you can edit yourself." data-es="Plan de negocio completo con análisis de mercado, más un modelo de Excel funcional con proyecciones a 3 años que puedes editar tú mismo.">Plan de negocio completo con análisis de mercado, más un modelo de Excel funcional con proyecciones a 3 años que puedes editar tú mismo.</p>
-      <a class="svc-order order-link" data-product="Plan de Negocio + Finanzas ($1,497)" href="#" data-en="Order this report" data-es="Pedir este reporte">Pedir este reporte</a>
-    </div>
-    <div class="svc">
-      <span class="svc-idx">06</span>
-      <span class="svc-name" data-en="Monthly Radar" data-es="Radar Mensual">Radar Mensual</span>
-      <span class="svc-price">$197 / mes</span><span class="svc-arrow">→</span>
-      <p class="svc-desc" data-en="We track 5 competitors for you: keyword shifts, traffic changes, and new moves. A fresh report every month." data-es="Rastreamos 5 competidores por ti: cambios de keywords, variaciones de tráfico y movimientos nuevos. Un reporte nuevo cada mes.">Rastreamos 5 competidores por ti: cambios de keywords, variaciones de tráfico y movimientos nuevos. Un reporte nuevo cada mes.</p>
-      <a class="svc-order order-link" data-product="Radar Mensual ($197/mes)" href="#" data-en="Order this report" data-es="Pedir este reporte">Pedir este reporte</a>
+<!-- PAPER: WHAT WE DO -->
+<section class="paper">
+  <div class="paper-inner">
+    <span class="paper-eyebrow" data-en="For Companies Serious About Data" data-es="Para Empresas que Van en Serio con los Datos">For Companies Serious About Data</span>
+    <h2 class="reveal" data-en="Making Market Research More Playful, Powerful, and Fast" data-es="Haciendo la Investigación de Mercado Más Ágil, Poderosa y Rápida">Making Market Research More Playful, Powerful, and Fast</h2>
+    <div class="cols reveal">
+      <p data-en="BriefOps is a market intelligence studio. You send a short brief — your website, your competitors, and what you need to decide. We pull live data from professional tools like Semrush, analyze it, and deliver a finished document ready for your board, your investors, or your team." data-es="BriefOps es un estudio de inteligencia de mercado. Nos envías un brief corto — tu sitio web, tus competidores y qué necesitas decidir. Extraemos datos reales de herramientas profesionales como Semrush, los analizamos y entregamos un documento terminado listo para tu junta, tus inversionistas o tu equipo.">BriefOps is a market intelligence studio. You send a short brief — your website, your competitors, and what you need to decide. We pull live data from professional tools like Semrush, analyze it, and deliver a finished document ready for your board, your investors, or your team.</p>
+      <p data-en="Every figure cites a source you can verify. We are not a six-week consultancy. We don't do discovery workshops or account managers. We merge professional data tools with expert analysis and human review to build reports that appreciate your decisions — at 20% of a consulting firm's price. Review our catalog, crunch the numbers, and you'll see the trajectory points one way: up." data-es="Cada cifra cita una fuente que puedes verificar. No somos una consultoría de seis semanas. No hacemos talleres de descubrimiento ni gerentes de cuenta. Combinamos herramientas profesionales de datos con análisis experto y revisión humana para construir reportes que mejoran tus decisiones — al 20% del precio de una consultoría. Revisa nuestro catálogo, haz los números, y verás que la trayectoria apunta a un solo lugar: arriba.">Every figure cites a source you can verify. We are not a six-week consultancy. We don't do discovery workshops or account managers. We merge professional data tools with expert analysis and human review to build reports that appreciate your decisions — at 20% of a consulting firm's price. Review our catalog, crunch the numbers, and you'll see the trajectory points one way: up.</p>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="eyebrow" data-en="How it works" data-es="Cómo funciona">Cómo funciona</div>
-  <h2 class="big reveal" data-en="Three steps. Zero calls." data-es="Tres pasos. Cero llamadas.">Tres pasos. Cero llamadas.</h2>
-  <div class="steps reveal-stagger">
-    <div class="step"><div class="step-num">01</div><h3 data-en="Send your brief" data-es="Envía tu brief">Envía tu brief</h3><p data-en="Click any order button. Your email opens with a template: website, competitors, goal. Five minutes." data-es="Haz clic en cualquier botón de pedido. Se abre tu correo con una plantilla: sitio web, competidores, objetivo. Cinco minutos.">Haz clic en cualquier botón de pedido. Se abre tu correo con una plantilla: sitio web, competidores, objetivo. Cinco minutos.</p></div>
-    <div class="step"><div class="step-num">02</div><h3 data-en="We confirm and research" data-es="Confirmamos e investigamos">Confirmamos e investigamos</h3><p data-en="We reply within hours with your payment link — PayPal or bank transfer. Once confirmed, we pull live data and build." data-es="Respondemos en horas con tu link de pago — PayPal o transferencia. Al confirmarse, extraemos datos reales y construimos.">Respondemos en horas con tu link de pago — PayPal o transferencia. Al confirmarse, extraemos datos reales y construimos.</p></div>
-    <div class="step"><div class="step-num">03</div><h3 data-en="Receive and present" data-es="Recibe y presenta">Recibe y presenta</h3><p data-en="Your document arrives by email in 48–72 hours: PPTX, XLSX, or PDF. One revision round included. Full refund if it misses." data-es="Tu documento llega por correo en 48–72 horas: PPTX, XLSX o PDF. Incluye una ronda de revisión. Reembolso completo si no cumple.">Tu documento llega por correo en 48–72 horas: PPTX, XLSX o PDF. Incluye una ronda de revisión. Reembolso completo si no cumple.</p></div>
+<!-- NIGHT: CATALOG WITH CART -->
+<section class="night-sec" id="catalog">
+  <div class="night-inner">
+    <div class="night-eyebrow" data-en="The Catalog — Fixed Prices, USD" data-es="El Catálogo — Precios Fijos, USD">The Catalog — Fixed Prices, USD</div>
+    <h2 class="reveal" data-en="Pick your reports. Add to cart." data-es="Elige tus reportes. Agrégalos al carrito.">Pick your reports. Add to cart.</h2>
+
+    <div class="catalog reveal">
+      <div class="item">
+        <div class="item-idx">01</div>
+        <div class="item-info">
+          <h3 data-en="SEO &amp; Digital Audit" data-es="Auditoría SEO y Digital">SEO &amp; Digital Audit</h3>
+          <p data-en="Where you're winning and losing online. Keyword gaps, technical issues, and the opportunities competitors leave open. Delivered in 48h." data-es="Dónde estás ganando y perdiendo en digital. Brechas de keywords, problemas técnicos y las oportunidades que los competidores dejan abiertas. Entrega en 48h.">Where you're winning and losing online. Keyword gaps, technical issues, and the opportunities competitors leave open. Delivered in 48h.</p>
+        </div>
+        <div class="item-price">$297<small>USD · 48h</small></div>
+        <button class="add-btn" data-sku="seo" data-name="SEO &amp; Digital Audit" data-price="297" onclick="addToCart(this)"><span data-en="Add" data-es="Agregar">Add</span></button>
+      </div>
+
+      <div class="item">
+        <div class="item-idx">02</div>
+        <div class="item-info">
+          <h3 data-en="Market Research Brief" data-es="Investigación de Mercado">Market Research Brief</h3>
+          <p data-en="Market size (TAM/SAM/SOM), key players, trends, and current data — packaged for board-level decisions. Delivered in 48h." data-es="Tamaño de mercado (TAM/SAM/SOM), jugadores clave, tendencias y datos actuales — empaquetado para decisiones de dirección. Entrega en 48h.">Market size (TAM/SAM/SOM), key players, trends, and current data — packaged for board-level decisions. Delivered in 48h.</p>
+        </div>
+        <div class="item-price">$397<small>USD · 48h</small></div>
+        <button class="add-btn" data-sku="research" data-name="Market Research Brief" data-price="397" onclick="addToCart(this)"><span data-en="Add" data-es="Agregar">Add</span></button>
+      </div>
+
+      <div class="item">
+        <div class="item-idx">03</div>
+        <div class="item-info">
+          <h3 data-en="Competitive Intelligence" data-es="Inteligencia Competitiva">Competitive Intelligence</h3>
+          <p data-en="Your competitors' traffic sources, content strategy, ad spend, and positioning. Know them better than they know themselves. Delivered in 48h." data-es="Las fuentes de tráfico, estrategia de contenido, inversión publicitaria y posicionamiento de tus competidores. Conócelos mejor que ellos mismos. Entrega en 48h.">Your competitors' traffic sources, content strategy, ad spend, and positioning. Know them better than they know themselves. Delivered in 48h.</p>
+        </div>
+        <div class="item-price">$497<small>USD · 48h</small></div>
+        <button class="add-btn" data-sku="compintel" data-name="Competitive Intelligence" data-price="497" onclick="addToCart(this)"><span data-en="Add" data-es="Agregar">Add</span></button>
+      </div>
+
+      <div class="item">
+        <div class="item-idx">04</div>
+        <div class="item-info">
+          <h3 data-en="Investor Pitch Deck" data-es="Pitch Deck para Inversionistas">Investor Pitch Deck</h3>
+          <p data-en="Market sizing, competitive landscape, business model, traction narrative, and financials — a deck ready for VCs. Delivered in 72h." data-es="Tamaño de mercado, panorama competitivo, modelo de negocio, narrativa de tracción y finanzas — un deck listo para VCs. Entrega en 72h.">Market sizing, competitive landscape, business model, traction narrative, and financials — a deck ready for VCs. Delivered in 72h.</p>
+        </div>
+        <div class="item-price">$997<small>USD · 72h</small></div>
+        <button class="add-btn" data-sku="pitch" data-name="Investor Pitch Deck" data-price="997" onclick="addToCart(this)"><span data-en="Add" data-es="Agregar">Add</span></button>
+      </div>
+
+      <div class="item">
+        <div class="item-idx">05</div>
+        <div class="item-info">
+          <h3 data-en="Business Plan + Financials" data-es="Plan de Negocio + Finanzas">Business Plan + Financials</h3>
+          <p data-en="Full business plan with market analysis, plus a working Excel model with 3-year projections you can edit yourself. Delivered in 72h." data-es="Plan de negocio completo con análisis de mercado, más un modelo de Excel funcional con proyecciones a 3 años que puedes editar tú mismo. Entrega en 72h.">Full business plan with market analysis, plus a working Excel model with 3-year projections you can edit yourself. Delivered in 72h.</p>
+        </div>
+        <div class="item-price">$1,497<small>USD · 72h</small></div>
+        <button class="add-btn" data-sku="bizplan" data-name="Business Plan + Financials" data-price="1497" onclick="addToCart(this)"><span data-en="Add" data-es="Agregar">Add</span></button>
+      </div>
+
+      <div class="item">
+        <div class="item-idx">06</div>
+        <div class="item-info">
+          <h3 data-en="Monthly Radar" data-es="Radar Mensual">Monthly Radar</h3>
+          <p data-en="We track 5 competitors for you: keyword shifts, traffic changes, and new moves. A fresh report every month." data-es="Rastreamos 5 competidores por ti: cambios de keywords, variaciones de tráfico y movimientos nuevos. Un reporte nuevo cada mes.">We track 5 competitors for you: keyword shifts, traffic changes, and new moves. A fresh report every month.</p>
+        </div>
+        <div class="item-price">$197<small>USD · /mo</small></div>
+        <button class="add-btn" data-sku="radar" data-name="Monthly Radar" data-price="197" onclick="addToCart(this)"><span data-en="Add" data-es="Agregar">Add</span></button>
+      </div>
+    </div>
+
+    <div class="trust reveal">
+      <div class="trust-item"><div class="n">48h</div><div class="l" data-en="Standard delivery" data-es="Entrega estándar">Standard delivery</div></div>
+      <div class="trust-item"><div class="n">100%</div><div class="l" data-en="Verifiable data" data-es="Datos verificables">Verifiable data</div></div>
+      <div class="trust-item"><div class="n">x1</div><div class="l" data-en="Revision included" data-es="Revisión incluida">Revision included</div></div>
+      <div class="trust-item"><div class="n">USD</div><div class="l" data-en="PayPal or transfer" data-es="PayPal o transferencia">PayPal or transfer</div></div>
+    </div>
   </div>
 </section>
 
-<section>
-  <div class="eyebrow" data-en="Questions" data-es="Preguntas">Preguntas</div>
-  <div class="faq-wrap reveal">
-    <div class="faq-item open"><div class="faq-q"><span data-en="Is the data real or AI-generated?" data-es="¿Los datos son reales o generados por IA?">¿Los datos son reales o generados por IA?</span><span class="plus">+</span></div><p class="faq-a" data-en="Real. We use Semrush — a professional SEO platform — and current market sources. Every report cites sources you can verify yourself." data-es="Reales. Usamos Semrush — plataforma profesional de SEO — y fuentes de mercado actuales. Cada reporte cita fuentes que puedes verificar tú mismo.">Reales. Usamos Semrush — plataforma profesional de SEO — y fuentes de mercado actuales. Cada reporte cita fuentes que puedes verificar tú mismo.</p></div>
-    <div class="faq-item"><div class="faq-q"><span data-en="How do I pay?" data-es="¿Cómo pago?">¿Cómo pago?</span><span class="plus">+</span></div><p class="faq-a" data-en="After you send your brief, we reply with a PayPal link or bank transfer details (Mexico and international). Work starts once payment is confirmed." data-es="Después de enviar tu brief, respondemos con un link de PayPal o datos de transferencia (México e internacional). El trabajo inicia al confirmarse el pago.">Después de enviar tu brief, respondemos con un link de PayPal o datos de transferencia (México e internacional). El trabajo inicia al confirmarse el pago.</p></div>
-    <div class="faq-item"><div class="faq-q"><span data-en="What if I'm not satisfied?" data-es="¿Y si no quedo satisfecho?">¿Y si no quedo satisfecho?</span><span class="plus">+</span></div><p class="faq-a" data-en="Full refund or we revise until it's right. Your call. One revision round is included in every report." data-es="Reembolso completo o revisamos hasta que quede bien. Tú decides. Cada reporte incluye una ronda de revisión.">Reembolso completo o revisamos hasta que quede bien. Tú decides. Cada reporte incluye una ronda de revisión.</p></div>
-    <div class="faq-item"><div class="faq-q"><span data-en="Can I use it with investors?" data-es="¿Puedo usarlo con inversionistas?">¿Puedo usarlo con inversionistas?</span><span class="plus">+</span></div><p class="faq-a" data-en="Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check." data-es="Sí — exactamente para eso están diseñados el Pitch Deck y el Plan de Negocio, con datos verificables que los inversionistas pueden comprobar.">Sí — exactamente para eso están diseñados el Pitch Deck y el Plan de Negocio, con datos verificables que los inversionistas pueden comprobar.</p></div>
-    <div class="faq-item"><div class="faq-q"><span data-en="Why cheaper than a consulting firm?" data-es="¿Por qué más barato que una consultoría?">¿Por qué más barato que una consultoría?</span><span class="plus">+</span></div><p class="faq-a" data-en="No offices, no account managers, no six-week timelines. Professional data tools plus AI-assisted analysis plus human review — the same insight at a fraction of the cost, in days." data-es="Sin oficinas, sin gerentes de cuenta, sin plazos de seis semanas. Herramientas profesionales de datos más análisis asistido por IA más revisión humana — el mismo conocimiento a una fracción del costo, en días.">Sin oficinas, sin gerentes de cuenta, sin plazos de seis semanas. Herramientas profesionales de datos más análisis asistido por IA más revisión humana — el mismo conocimiento a una fracción del costo, en días.</p></div>
+<!-- PAPER: HOW IT WORKS -->
+<section class="paper">
+  <div class="paper-inner">
+    <span class="paper-eyebrow" data-en="The Process" data-es="El Proceso">The Process</span>
+    <h2 class="reveal" data-en="Three steps. Zero calls. Pick up the phone, or just add to cart." data-es="Tres pasos. Cero llamadas. Levanta el teléfono, o solo agrega al carrito.">Three steps. Zero calls. Pick up the phone, or just add to cart.</h2>
+    <div class="steps reveal">
+      <div class="step"><div class="step-n">01</div><h3 data-en="Add &amp; check out" data-es="Agrega y ordena">Add &amp; check out</h3><p data-en="Add reports to your cart and check out. Your email opens with your order and a brief template: website, competitors, goal." data-es="Agrega reportes a tu carrito y ordena. Se abre tu correo con tu pedido y una plantilla de brief: sitio web, competidores, objetivo.">Add reports to your cart and check out. Your email opens with your order and a brief template: website, competitors, goal.</p></div>
+      <div class="step"><div class="step-n">02</div><h3 data-en="We confirm &amp; research" data-es="Confirmamos e investigamos">We confirm &amp; research</h3><p data-en="We reply within hours with your payment link — PayPal or bank transfer, in USD. Once confirmed, we pull live data and build." data-es="Respondemos en horas con tu link de pago — PayPal o transferencia, en USD. Al confirmarse, extraemos datos reales y construimos.">We reply within hours with your payment link — PayPal or bank transfer, in USD. Once confirmed, we pull live data and build.</p></div>
+      <div class="step"><div class="step-n">03</div><h3 data-en="Receive &amp; present" data-es="Recibe y presenta">Receive &amp; present</h3><p data-en="Your document arrives by email in 48–72 hours: PPTX, XLSX, or PDF. One revision included. Full refund if it misses." data-es="Tu documento llega por correo en 48–72 horas: PPTX, XLSX o PDF. Una revisión incluida. Reembolso completo si no cumple.">Your document arrives by email in 48–72 hours: PPTX, XLSX, or PDF. One revision included. Full refund if it misses.</p></div>
+    </div>
   </div>
 </section>
 
-<section class="final">
-  <div class="eyebrow" data-en="Ready when you are" data-es="Listos cuando tú lo estés">Listos cuando tú lo estés</div>
-  <h2><span data-en="Your competitors already decide with" data-es="Tus competidores ya deciden con">Tus competidores ya deciden con</span> <span class="g" data-en="data." data-es="datos.">datos.</span></h2>
-  <a class="cta-big order-link" data-product="" href="#"><span data-en="Order your report" data-es="Pide tu reporte">Pide tu reporte</span><span class="a">→</span></a>
+<!-- PAPER: FAQ -->
+<section class="paper">
+  <div class="paper-inner">
+    <span class="paper-eyebrow" data-en="Frequently Asked" data-es="Preguntas Frecuentes">Frequently Asked</span>
+    <h2 class="reveal" style="margin-bottom:40px" data-en="The Fine Print" data-es="La Letra Chica">The Fine Print</h2>
+    <div class="reveal">
+      <div class="faq-item open"><div class="faq-q"><span data-en="Is the data real or AI-generated?" data-es="¿Los datos son reales o generados por IA?">Is the data real or AI-generated?</span><span class="pl">+</span></div><p class="faq-a" data-en="Real. We use Semrush — a professional SEO platform — and current market sources. Every report cites sources you can verify yourself." data-es="Reales. Usamos Semrush — plataforma profesional de SEO — y fuentes de mercado actuales. Cada reporte cita fuentes que puedes verificar tú mismo.">Real. We use Semrush — a professional SEO platform — and current market sources. Every report cites sources you can verify yourself.</p></div>
+      <div class="faq-item"><div class="faq-q"><span data-en="How do I pay?" data-es="¿Cómo pago?">How do I pay?</span><span class="pl">+</span></div><p class="faq-a" data-en="After checkout, we reply with a PayPal link or bank transfer details, always in USD. Work starts once payment is confirmed." data-es="Después de ordenar, respondemos con un link de PayPal o datos de transferencia, siempre en USD. El trabajo inicia al confirmarse el pago.">After checkout, we reply with a PayPal link or bank transfer details, always in USD. Work starts once payment is confirmed.</p></div>
+      <div class="faq-item"><div class="faq-q"><span data-en="What if I'm not satisfied?" data-es="¿Y si no quedo satisfecho?">What if I'm not satisfied?</span><span class="pl">+</span></div><p class="faq-a" data-en="Full refund or we revise until it's right. Your call. One revision round is included in every report." data-es="Reembolso completo o revisamos hasta que quede bien. Tú decides. Cada reporte incluye una ronda de revisión.">Full refund or we revise until it's right. Your call. One revision round is included in every report.</p></div>
+      <div class="faq-item"><div class="faq-q"><span data-en="Can I use it with investors?" data-es="¿Puedo usarlo con inversionistas?">Can I use it with investors?</span><span class="pl">+</span></div><p class="faq-a" data-en="Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check." data-es="Sí — exactamente para eso están diseñados el Pitch Deck y el Plan de Negocio, con datos verificables que los inversionistas pueden comprobar.">Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check.</p></div>
+      <div class="faq-item"><div class="faq-q"><span data-en="Why cheaper than a consulting firm?" data-es="¿Por qué más barato que una consultoría?">Why cheaper than a consulting firm?</span><span class="pl">+</span></div><p class="faq-a" data-en="No offices, no account managers, no six-week timelines. Professional data tools plus expert analysis plus human review — the same insight at a fraction of the cost, in days." data-es="Sin oficinas, sin gerentes de cuenta, sin plazos de seis semanas. Herramientas profesionales de datos más análisis experto más revisión humana — el mismo conocimiento a una fracción del costo, en días.">No offices, no account managers, no six-week timelines. Professional data tools plus expert analysis plus human review — the same insight at a fraction of the cost, in days.</p></div>
+    </div>
+  </div>
 </section>
 
+<!-- CONTACT -->
+<section class="contact">
+  <h2 class="serif"><span data-en="Good" data-es="Buen">Good</span> <span class="glitch" data-en="buy." data-es="trato.">buy.</span></h2>
+  <p data-en="Contact us about your project or general enquiries. Let's interface — email us today!" data-es="Contáctanos sobre tu proyecto o dudas generales. Hagamos interfaz — ¡escríbenos hoy!">Contact us about your project or general enquiries. Let's interface — email us today!</p>
+  <div class="contact-links">
+    <a class="big-link" href="mailto:hello@briefops.online">hello@briefops.online</a>
+    <a class="big-link" href="#catalog" data-en="Browse the catalog" data-es="Ver el catálogo">Browse the catalog</a>
+  </div>
+</section>
+
+<!-- FOOTER (boot style) -->
 <footer>
-  <div>
-    <div class="foot-logo">BRIEF<b>OPS</b></div>
-    <p class="foot-tag" data-en="Market intelligence reports with real data, delivered in 48 hours." data-es="Reportes de inteligencia de mercado con datos reales, entregados en 48 horas.">Reportes de inteligencia de mercado con datos reales, entregados en 48 horas.</p>
+  <div class="foot-inner">
+    <div class="foot-logo"><div class="boot-bars" style="width:34px;height:34px"></div><div class="foot-title serif" style="font-style:italic">BriefOps</div></div>
+    <div class="foot-sub">Market Intelligence Terminal<br>Version 2.026</div>
+    <div class="foot-cols">
+      <div>
+        <a href="mailto:hello@briefops.online">hello@briefops.online</a>
+        <a href="#catalog" data-en="The Catalog" data-es="El Catálogo">The Catalog</a>
+      </div>
+      <div>
+        <a href="#catalog">SEO Audit — $297</a>
+        <a href="#catalog" data-en="Competitive Intel — $497" data-es="Intel Competitiva — $497">Competitive Intel — $497</a>
+        <a href="#catalog">Pitch Deck — $997</a>
+      </div>
+    </div>
+    <div class="foot-copy">Copyright (c) BriefOps Sweden-free AB, 2026.<br>All Rights Reserved. All prices in USD.</div>
   </div>
-  <div>
-    <h4 data-en="Contact" data-es="Contacto">Contacto</h4>
-    <a href="mailto:hello@briefops.online">hello@briefops.online</a>
-    <a class="order-link" data-product="" href="#" data-en="Order a report" data-es="Pedir un reporte">Pedir un reporte</a>
-  </div>
-  <div>
-    <h4 data-en="Services" data-es="Servicios">Servicios</h4>
-    <a href="#services">Auditoría SEO — $297</a>
-    <a href="#services">Intel Competitiva — $497</a>
-    <a href="#services">Pitch Deck — $997</a>
-  </div>
-  <div class="copyright">© 2026 BRIEFOPS · briefops.online</div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- CART DRAWER -->
+<div class="cart-backdrop" id="cartBackdrop" onclick="toggleCart()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3 data-en="Your Order" data-es="Tu Pedido">Your Order</h3>
+    <button class="cart-close" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span data-en="Total" data-es="Total">Total</span><span id="cartTotal">$0 USD</span></div>
+    <p class="cart-note" data-en="Checkout opens your email with the order. We reply with a payment link (PayPal or transfer, USD)." data-es="Ordenar abre tu correo con el pedido. Respondemos con un link de pago (PayPal o transferencia, USD).">Checkout opens your email with the order. We reply with a payment link (PayPal or transfer, USD).</p>
+    <button class="cart-checkout" id="cartCheckout" onclick="checkout()" disabled data-en="Checkout via Email" data-es="Ordenar por Correo">Checkout via Email</button>
+  </div>
+</aside>
+
 <script>
-var currentLang='es';
-var emailTemplates={
-  es:{subject:'Pedido de reporte — ',body:'Hola BriefOps,\n\nQuiero pedir el siguiente reporte: {PRODUCT}\n\nMi informacion:\n- Sitio web: \n- Competidores principales (2-5): \n- Que necesito decidir / objetivo del reporte: \n- Formato preferido (PPTX / XLSX / PDF): \n\nQuedo atento al link de pago.\n\nGracias'},
-  en:{subject:'Report order — ',body:'Hi BriefOps,\n\nI want to order the following report: {PRODUCT}\n\nMy information:\n- Website: \n- Main competitors (2-5): \n- What I need to decide / goal of the report: \n- Preferred format (PPTX / XLSX / PDF): \n\nLooking forward to the payment link.\n\nThanks'}
-};
-function buildMailto(product){
-  var t=emailTemplates[currentLang];
-  var prod=product||(currentLang==='es'?'(escribe aqui el reporte que quieres)':'(write here the report you want)');
-  return 'mailto:hello@briefops.online?subject='+encodeURIComponent(t.subject+(product||''))+'&body='+encodeURIComponent(t.body.replace('{PRODUCT}',prod));
-}
-function refreshOrderLinks(){
-  document.querySelectorAll('.order-link').forEach(function(a){a.setAttribute('href',buildMailto(a.getAttribute('data-product')));});
-}
-var tickerItems={
-  es:['Auditoría SEO','Inteligencia Competitiva','Pitch Decks','Planes de Negocio','Investigación de Mercado','Datos de Semrush','Entrega en 48h'],
-  en:['SEO Audits','Competitive Intelligence','Pitch Decks','Business Plans','Market Research','Semrush Data','48h Delivery']
-};
-function buildTicker(){
-  var track=document.getElementById('ticker-track');if(!track)return;
-  var half='<div class="ticker-item">'+tickerItems[currentLang].map(function(t){return '<span>'+t+'</span><span class="s">✦</span>'}).join('')+'</div>';
-  track.innerHTML=half+half;
-}
+// ================= BOOT SCREEN =================
+(function(){
+  var bar=document.getElementById('bootbar');
+  var N=22;
+  for(var i=0;i<N;i++){var s=document.createElement('span');s.style.animationDelay=(i*0.09)+'s';bar.appendChild(s);}
+  var total=N*0.09*1000+400;
+  setTimeout(function(){document.getElementById('boot').classList.add('done');},total);
+  // safety: never trap the user
+  setTimeout(function(){document.getElementById('boot').classList.add('done');},4000);
+})();
+
+// ================= BILINGUAL =================
+var currentLang='en';
 function setLang(lang){
   currentLang=lang;document.documentElement.lang=lang;
   document.querySelectorAll('[data-en]').forEach(function(el){
-    var txt=el.getAttribute('data-'+lang);if(txt!==null)el.textContent=txt;
+    var t=el.getAttribute('data-'+lang);
+    if(t!==null) el.innerHTML=t;
   });
-  document.getElementById('btn-es').classList.toggle('active',lang==='es');
   document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-es').classList.toggle('active',lang==='es');
   try{localStorage.setItem('briefops_lang',lang);}catch(e){}
-  refreshOrderLinks();buildTicker();
+  renderCart();
 }
+
+// ================= CART =================
+var cart=[];
+var LABELS={
+  en:{empty:'Your cart is empty.<br>Add reports from the catalog.',cart:'Cart',total:'Total',checkoutSubject:'BriefOps order — ',
+      bodyIntro:'Hi BriefOps,\n\nI would like to order the following reports:\n',
+      bodyFields:'\nMy information:\n- Website: \n- Main competitors (2-5): \n- What I need to decide / goal: \n- Preferred format (PPTX / XLSX / PDF): \n\nPlease send me the payment link (PayPal or transfer, USD).\n\nThanks'},
+  es:{empty:'Tu carrito está vacío.<br>Agrega reportes del catálogo.',cart:'Carrito',total:'Total',checkoutSubject:'Pedido BriefOps — ',
+      bodyIntro:'Hola BriefOps,\n\nQuiero pedir los siguientes reportes:\n',
+      bodyFields:'\nMi información:\n- Sitio web: \n- Competidores principales (2-5): \n- Qué necesito decidir / objetivo: \n- Formato preferido (PPTX / XLSX / PDF): \n\nEnvíenme el link de pago (PayPal o transferencia, USD).\n\nGracias'}
+};
+function fmt(n){return '$'+n.toLocaleString('en-US')+' USD';}
+function addToCart(btn){
+  var sku=btn.getAttribute('data-sku');
+  if(cart.some(function(i){return i.sku===sku;})){openCart();return;}
+  cart.push({sku:sku,name:btn.getAttribute('data-name'),price:parseInt(btn.getAttribute('data-price'),10)});
+  var orig=btn.innerHTML;
+  btn.classList.add('added');btn.innerHTML=currentLang==='es'?'✓ Agregado':'✓ Added';
+  setTimeout(function(){btn.classList.remove('added');btn.innerHTML='<span data-en="Add" data-es="Agregar">'+(currentLang==='es'?'Agregar':'Add')+'</span>';},1200);
+  renderCart();flashCart();
+}
+function removeFromCart(sku){cart=cart.filter(function(i){return i.sku!==sku;});renderCart();}
+function renderCart(){
+  var L=LABELS[currentLang];
+  var wrap=document.getElementById('cartItems');
+  var count=cart.length;
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('cartBtn').classList.toggle('has-items',count>0);
+  document.getElementById('cartCheckout').disabled=count===0;
+  if(count===0){wrap.innerHTML='<div class="cart-empty">'+L.empty+'</div>';document.getElementById('cartTotal').textContent=fmt(0);return;}
+  var total=0;
+  wrap.innerHTML=cart.map(function(i){
+    total+=i.price;
+    var rm=currentLang==='es'?'Quitar':'Remove';
+    return '<div class="cart-line"><div class="cart-line-info"><div class="cart-line-name">'+i.name+'</div><div class="cart-line-price">'+fmt(i.price)+'</div></div><button class="cart-remove" onclick="removeFromCart(\''+i.sku+'\')">'+rm+'</button></div>';
+  }).join('');
+  document.getElementById('cartTotal').textContent=fmt(total);
+}
+function toggleCart(){
+  var d=document.getElementById('cartDrawer'),b=document.getElementById('cartBackdrop');
+  var open=d.classList.toggle('open');b.classList.toggle('open',open);
+}
+function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartBackdrop').classList.add('open');}
+function flashCart(){var c=document.getElementById('cartBtn');c.style.transform='scale(1.12)';setTimeout(function(){c.style.transform='';},200);}
+function checkout(){
+  if(cart.length===0)return;
+  var L=LABELS[currentLang];
+  var lines=cart.map(function(i){return '- '+i.name+' ('+fmt(i.price)+')';}).join('\n');
+  var total=cart.reduce(function(s,i){return s+i.price;},0);
+  var totalLine=(currentLang==='es'?'\nTotal: ':'\nTotal: ')+fmt(total)+'\n';
+  var subject=L.checkoutSubject+cart.map(function(i){return i.name;}).join(', ');
+  var body=L.bodyIntro+lines+'\n'+totalLine+L.bodyFields;
+  window.location.href='mailto:hello@briefops.online?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+}
+
+// ================= FAQ =================
 document.querySelectorAll('.faq-q').forEach(function(q){
   q.addEventListener('click',function(){q.parentElement.classList.toggle('open');});
 });
-if(!window.matchMedia('(hover:hover)').matches){
-  document.querySelectorAll('.svc').forEach(function(s){
-    s.addEventListener('click',function(e){if(e.target.closest('.svc-order'))return;s.classList.toggle('open');});
-  });
-}
+
+// ================= REVEALS =================
 var obs=new IntersectionObserver(function(entries){
   entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
-},{threshold:0.12});
-document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el){obs.observe(el);});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-(function(){
-  var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(typeof THREE==='undefined')return;
-  var canvas=document.getElementById('gl');var renderer;
-  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});}
-  catch(e){canvas.style.display='none';return;}
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  var scene=new THREE.Scene();
-  scene.fog=new THREE.Fog(0x05060a,6,26);
-  var camera=new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight,0.1,100);
-  camera.position.set(0,1.6,7);camera.lookAt(0,1.2,0);
-  var COLS=64,ROWS=80,SP=0.6;
-  var geo=new THREE.BufferGeometry();var verts=[];
-  for(var r=0;r<ROWS;r++){for(var c=0;c<COLS;c++){verts.push((c-COLS/2)*SP,0,(r-ROWS/2)*SP);}}
-  var idx=[];
-  for(var r=0;r<ROWS-1;r++){for(var c=0;c<COLS-1;c++){var a=r*COLS+c;idx.push(a,a+1);idx.push(a,a+COLS);}}
-  geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
-  geo.setIndex(idx);
-  var mat=new THREE.LineBasicMaterial({color:0xff2e97,transparent:true,opacity:0.55});
-  var grid=new THREE.LineSegments(geo,mat);scene.add(grid);
-  var geo2=geo.clone();
-  var mat2=new THREE.LineBasicMaterial({color:0x0ff4f4,transparent:true,opacity:0.28});
-  var grid2=new THREE.LineSegments(geo2,mat2);grid2.position.y=-0.05;scene.add(grid2);
-  var mouseX=0,scrollY=0;
-  if(!reduced){
-    window.addEventListener('mousemove',function(e){mouseX=(e.clientX/window.innerWidth-0.5);},{passive:true});
-    window.addEventListener('scroll',function(){scrollY=window.scrollY;},{passive:true});
-  }
-  window.addEventListener('resize',function(){
-    camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth,window.innerHeight);
-  });
-  function wave(pos,t,off){
-    var p=pos.array;var i=0;
-    for(var r=0;r<ROWS;r++){for(var c=0;c<COLS;c++){
-      var x=p[i],z=p[i+2];
-      p[i+1]=Math.sin(x*0.4+t)*0.5+Math.cos(z*0.3+t*0.7)*0.6+Math.sin((x+z)*0.2+t*0.4)*0.4+off;
-      i+=3;
-    }}
-    pos.needsUpdate=true;
-  }
-  var t=0;
-  function frame(){
-    t+=reduced?0:0.014;
-    wave(geo.attributes.position,t,0);
-    wave(geo2.attributes.position,t+0.5,-0.05);
-    grid.position.z=(t*1.2)%SP;grid2.position.z=(t*1.2)%SP;
-    camera.position.x+=(mouseX*1.2-camera.position.x)*0.03;
-    camera.position.y=1.6-Math.min(scrollY*0.0009,1.2);
-    camera.lookAt(0,1.0,0);
-    renderer.render(scene,camera);
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
-
+// ================= INIT =================
 (function(){
   var saved=null;try{saved=localStorage.getItem('briefops_lang');}catch(e){}
-  var browser=(navigator.language||'es').slice(0,2)==='en'?'en':'es';
+  var browser=(navigator.language||'en').slice(0,2)==='es'?'es':'en';
   setLang(saved==='en'||saved==='es'?saved:browser);
+  renderCart();
 })();
 </script>
 </body>
