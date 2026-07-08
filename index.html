@@ -76,8 +76,6 @@ nav{
 .hero>*,.night-inner,.contact>*{position:relative;z-index:2}
 /* paper sections become translucent so the blue mesh shows through (option A) */
 .paper{background:rgba(232,226,208,0.35)!important}
-.paper::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(232,163,61,0.42),rgba(255,216,155,0.35));mix-blend-mode:multiply}
-.paper>*{position:relative;z-index:1}
 .paper::before{opacity:0.3}
 /* solid cream backing behind text blocks -> mesh shows in gaps, text stays ultra crisp */
 .paper .paper-inner{position:relative}
@@ -581,9 +579,28 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
     }
     g.attributes.position.needsUpdate=true;
   }
+  // colors: blue for dark sections, amber for cream (paper) sections
+  var COL_BLUE=new THREE.Color(0x3a3ad8), COL_BLUE2=new THREE.Color(0x8fb0ff);
+  var COL_AMBER=new THREE.Color(0xe8a33d), COL_AMBER2=new THREE.Color(0xffd89b);
+  var curBlend=0; // 0 = blue, 1 = amber
+  function overPaper(){
+    // is the vertical center of the viewport currently over a .paper section?
+    var mid=window.innerHeight*0.5;
+    var papers=document.querySelectorAll('.paper');
+    for(var i=0;i<papers.length;i++){
+      var r=papers[i].getBoundingClientRect();
+      if(r.top<=mid && r.bottom>=mid) return true;
+    }
+    return false;
+  }
   var t=0;
   function loop(){
     t+=reduced?0:0.013;
+    // smoothly blend toward amber when over paper, blue otherwise
+    var target=overPaper()?1:0;
+    curBlend+=(target-curBlend)*0.08;
+    mat.color.copy(COL_BLUE).lerp(COL_AMBER,curBlend);
+    mat2.color.copy(COL_BLUE2).lerp(COL_AMBER2,curBlend);
     wave(geo,t,0);
     wave(geo2,t+0.5,-0.05);
     grid.position.z=(t*1.2)%SP;grid2.position.z=(t*1.2)%SP;
