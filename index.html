@@ -74,9 +74,24 @@ nav{
 #bgGrid{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .hero,.night-sec,.contact{position:relative;z-index:1}
 .hero>*,.night-inner,.contact>*{position:relative;z-index:2}
-/* paper sections: solid clean cream (mesh sits behind, hidden where paper is) */
-.paper{background:var(--paper)!important}
+/* paper sections: SOLID clean cream + built-in animated amber grid (always clean, no gray) */
+.paper{background:var(--paper)!important;position:relative;overflow:hidden}
 .paper::before{opacity:1}
+.paper .amber-grid{
+  content:'';position:absolute;left:8%;right:8%;top:12%;bottom:8%;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(232,163,61,0.22) 1.5px,transparent 1.5px),
+    linear-gradient(90deg,rgba(200,120,40,0.18) 1.5px,transparent 1.5px);
+  background-size:54px 54px;
+  transform:perspective(500px) rotateX(64deg) scale(1.3);
+  transform-origin:50% 80%;
+  animation:amberflow 3.2s linear infinite;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 20%,transparent 75%);
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 20%,transparent 75%);
+  opacity:0.8;
+}
+@keyframes amberflow{from{background-position:0 0}to{background-position:0 52px}}
+.paper .paper-inner{position:relative;z-index:1}
 .paper .cols{column-gap:40px}
 .logo-word{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:24px;letter-spacing:1px;color:var(--cream);text-shadow:0 0 12px rgba(255,216,155,0.4)}
 .nav-right{display:flex;gap:10px;align-items:center}
@@ -262,7 +277,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 </header>
 
 <!-- PAPER: WHAT WE DO -->
-<section class="paper">
+<section class="paper"><div class="amber-grid"></div>
   <div class="paper-inner">
     <span class="paper-eyebrow" data-en="For Companies Serious About Data" data-es="Para Empresas que Van en Serio con los Datos">For Companies Serious About Data</span>
     <h2 class="reveal" data-en="Making Market Research More Playful, Powerful, and Fast" data-es="Haciendo la Investigación de Mercado Más Ágil, Poderosa y Rápida">Making Market Research More Playful, Powerful, and Fast</h2>
@@ -351,7 +366,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 </section>
 
 <!-- PAPER: HOW IT WORKS -->
-<section class="paper">
+<section class="paper"><div class="amber-grid"></div>
   <div class="paper-inner">
     <span class="paper-eyebrow" data-en="The Process" data-es="El Proceso">The Process</span>
     <h2 class="reveal" data-en="Three steps. Zero calls. Pick up the phone, or just add to cart." data-es="Tres pasos. Cero llamadas. Levanta el teléfono, o solo agrega al carrito.">Three steps. Zero calls. Pick up the phone, or just add to cart.</h2>
@@ -364,7 +379,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 </section>
 
 <!-- PAPER: FAQ -->
-<section class="paper">
+<section class="paper"><div class="amber-grid"></div>
   <div class="paper-inner">
     <span class="paper-eyebrow" data-en="Frequently Asked" data-es="Preguntas Frecuentes">Frequently Asked</span>
     <h2 class="reveal" style="margin-bottom:40px" data-en="The Fine Print" data-es="La Letra Chica">The Fine Print</h2>
@@ -570,28 +585,9 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
     }
     g.attributes.position.needsUpdate=true;
   }
-  // colors: blue for dark sections, amber for cream (paper) sections
-  var COL_BLUE=new THREE.Color(0x3a3ad8), COL_BLUE2=new THREE.Color(0x8fb0ff);
-  var COL_AMBER=new THREE.Color(0xe8a33d), COL_AMBER2=new THREE.Color(0xffd89b);
-  var curBlend=0; // 0 = blue, 1 = amber
-  function overPaper(){
-    // is the vertical center of the viewport currently over a .paper section?
-    var mid=window.innerHeight*0.5;
-    var papers=document.querySelectorAll('.paper');
-    for(var i=0;i<papers.length;i++){
-      var r=papers[i].getBoundingClientRect();
-      if(r.top<=mid && r.bottom>=mid) return true;
-    }
-    return false;
-  }
   var t=0;
   function loop(){
     t+=reduced?0:0.013;
-    // smoothly blend toward amber when over paper, blue otherwise
-    var target=overPaper()?1:0;
-    curBlend+=(target-curBlend)*0.08;
-    mat.color.copy(COL_BLUE).lerp(COL_AMBER,curBlend);
-    mat2.color.copy(COL_BLUE2).lerp(COL_AMBER2,curBlend);
     wave(geo,t,0);
     wave(geo2,t+0.5,-0.05);
     grid.position.z=(t*1.2)%SP;grid2.position.z=(t*1.2)%SP;
