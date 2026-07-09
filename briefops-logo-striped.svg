@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 150" role="img" aria-label="BriefOps">
+  <defs>
+    <!-- horizontal stripe mask: white bars = visible, black gaps = hidden -->
+    <pattern id="stripes" width="600" height="14" patternUnits="userSpaceOnUse">
+      <rect width="600" height="14" fill="#000"/>
+      <rect width="600" height="9" fill="#fff"/>
+    </pattern>
+    <mask id="stripeMask">
+      <rect width="600" height="150" fill="url(#stripes)"/>
+    </mask>
+  </defs>
+  <text x="0" y="112"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-weight="700" font-size="130" letter-spacing="-2"
+        fill="currentColor" mask="url(#stripeMask)">BriefOps</text>
+</svg>
