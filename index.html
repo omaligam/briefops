@@ -137,6 +137,9 @@ nav{
 }
 .item:hover{padding-left:20px;background:linear-gradient(90deg,rgba(232,163,61,0.06),transparent)}
 .item-idx{font-family:'VT323',monospace;font-size:22px;color:var(--amber)}
+.item-entry{background:linear-gradient(90deg,rgba(232,163,61,0.1),transparent);border-left:3px solid var(--amber);padding-left:16px!important}
+.item-entry .item-idx{font-size:26px}
+.item-badge{display:inline-block;margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--amber);background:rgba(232,163,61,0.12);padding:4px 10px;letter-spacing:0.03em}
 .item-info h3{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,34px);font-weight:700;letter-spacing:-0.01em;color:var(--cream);transition:color 0.3s}
 .item:hover .item-info h3{color:var(--glow)}
 .item-info p{font-size:12px;color:var(--dim);margin-top:6px;max-width:52ch;line-height:1.6}
@@ -173,6 +176,27 @@ nav{
 .method-cta{margin-top:6vh;border:1px solid rgba(240,230,200,0.2);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:linear-gradient(90deg,rgba(232,163,61,0.08),transparent)}
 .method-cta-title{font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--cream)}
 .method-cta-sub{font-size:13px;color:var(--dim);margin-top:6px;max-width:48ch}
+/* comparison table */
+.compare{margin-top:6vh}
+.compare-table{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace}
+.compare-table th{text-align:left;padding:16px 14px;font-size:clamp(13px,1.6vw,16px);border-bottom:2px solid rgba(240,230,200,0.3)}
+.compare-table th:nth-child(2){color:var(--amber);font-size:clamp(16px,2vw,20px);font-family:'Playfair Display',serif;font-style:italic;font-weight:900}
+.compare-table th:nth-child(3){color:var(--dim)}
+.compare-table td{padding:14px;font-size:clamp(12px,1.5vw,14px);border-bottom:1px solid rgba(240,230,200,0.12);vertical-align:top}
+.compare-table td:first-child{color:var(--dim);text-transform:uppercase;letter-spacing:0.05em;font-size:11px}
+.compare-table td.good{color:var(--glow)}
+.compare-table td.good::before{content:"✓ ";color:#6fae6f;font-weight:700}
+.compare-table td.bad{color:#c98}
+.compare-table td.neutral{color:var(--cream);opacity:0.7}
+.compare-note{margin-top:24px;font-family:'Playfair Display',serif;font-size:clamp(14px,1.7vw,17px);color:var(--dim);line-height:1.7;max-width:70ch}
+@media(max-width:600px){.compare-table td:first-child{display:block;padding-bottom:2px;border:none}.compare-table{font-size:11px}}
+/* guarantees */
+.guarantees{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:5vh}
+.guarantee{display:flex;gap:14px;align-items:flex-start}
+.g-ico{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700}
+.guarantee h3{font-family:'Playfair Display',serif;font-size:clamp(17px,2.2vw,21px);font-weight:700;color:var(--ink);margin-bottom:4px}
+.guarantee p{font-size:13px;color:#4a453d;line-height:1.6}
+@media(max-width:700px){.guarantees{grid-template-columns:1fr}}
 @media(max-width:760px){.method-grid{grid-template-columns:1fr;gap:18px}.method-cta{flex-direction:column;align-items:flex-start}}
 .step-n{font-family:'VT323',monospace;font-size:48px;color:var(--amber);line-height:1}
 .step h3{font-family:'Playfair Display',serif;font-size:clamp(18px,2.4vw,26px);font-weight:700;margin:14px 0 10px;color:var(--cream)}
@@ -186,7 +210,7 @@ nav{
 .faq-q .pl{font-family:'VT323',monospace;font-size:28px;transition:transform 0.3s;flex-shrink:0}
 .faq-item.open .pl{transform:rotate(45deg)}
 .faq-a{font-family:'Playfair Display',serif;font-size:clamp(15px,1.7vw,18px);line-height:1.7;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1),opacity 0.4s,margin 0.4s}
-.faq-item.open .faq-a{max-height:320px;opacity:1;margin-top:14px}
+.faq-item.open .faq-a{max-height:420px;opacity:1;margin-top:14px}
 
 /* ===== CONTACT (night, big serif) ===== */
 .contact{min-height:80svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12vh 5vw;background:radial-gradient(ellipse at 50% 50%,rgba(26,26,143,0.22),transparent 70%)}
@@ -294,6 +318,16 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
     <h2 class="reveal" data-en="Pick your reports. Add to cart." data-es="Elige tus reportes. Agrégalos al carrito.">Pick your reports. Add to cart.</h2>
 
     <div class="catalog reveal">
+      <div class="item item-entry">
+        <div class="item-idx">★</div>
+        <div class="item-info">
+          <h3 data-en="Market Snapshot" data-es="Market Snapshot">Market Snapshot</h3>
+          <p data-en="New to BriefOps? Start here. A one-page market snapshot in 24 hours: market size estimate, your top competitors, a key trend, and one clear opportunity. The fastest way to see how we work — and it credits toward any full report." data-es="¿Nuevo en BriefOps? Empieza aquí. Un snapshot de mercado de una página en 24 horas: estimación de tamaño de mercado, tus competidores principales, una tendencia clave y una oportunidad concreta. La forma más rápida de ver cómo trabajamos — y se acredita a cualquier reporte completo.">New to BriefOps? Start here. A one-page market snapshot in 24 hours: market size estimate, your top competitors, a key trend, and one clear opportunity. The fastest way to see how we work — and it credits toward any full report.</p>
+          <div class="item-badge" data-en="⚡ 24-hour delivery · credits toward any report" data-es="⚡ Entrega en 24 horas · se acredita a cualquier reporte">⚡ 24-hour delivery · credits toward any report</div>
+        </div>
+        <div class="item-price">$39<small>USD · 24h</small></div>
+        <button class="add-btn" data-sku="snapshot" data-name="Market Snapshot" data-price="39" onclick="addToCart(this)"><span data-en="Add" data-es="Agregar">Add</span></button>
+      </div>
       <div class="item">
         <div class="item-idx">01</div>
         <div class="item-info">
@@ -419,6 +453,49 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
   </div>
 </section>
 
+<!-- NIGHT: COMPARISON -->
+<section class="night-sec">
+  <div class="night-inner">
+    <div class="night-eyebrow" data-en="BriefOps vs. Consulting" data-es="BriefOps vs. Consultoría">BriefOps vs. Consulting</div>
+    <h2 class="reveal" data-en="Same insight. Days, not weeks. A fraction of the cost." data-es="El mismo conocimiento. Días, no semanas. Una fracción del costo.">Same insight. Days, not weeks. A fraction of the cost.</h2>
+    <div class="compare reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th data-en="" data-es=""></th>
+            <th data-en="BriefOps" data-es="BriefOps">BriefOps</th>
+            <th data-en="Traditional consulting firm" data-es="Consultoría tradicional">Traditional consulting firm</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-en="Cost" data-es="Costo">Cost</td><td class="good" data-en="$39–$1,497 fixed" data-es="$39–$1,497 fijo">$39–$1,497 fixed</td><td class="bad" data-en="$5,000–$50,000+" data-es="$5,000–$50,000+">$5,000–$50,000+</td></tr>
+          <tr><td data-en="Delivery speed" data-es="Velocidad de entrega">Delivery speed</td><td class="good" data-en="24–72 hours" data-es="24–72 horas">24–72 hours</td><td class="bad" data-en="4–8 weeks" data-es="4–8 semanas">4–8 weeks</td></tr>
+          <tr><td data-en="Pricing" data-es="Precios">Pricing</td><td class="good" data-en="Fixed &amp; public" data-es="Fijo y público">Fixed &amp; public</td><td class="bad" data-en="Custom quote, negotiation" data-es="Cotización a medida, negociación">Custom quote, negotiation</td></tr>
+          <tr><td data-en="Process" data-es="Proceso">Process</td><td class="good" data-en="No calls, no meetings" data-es="Sin llamadas, sin juntas">No calls, no meetings</td><td class="bad" data-en="Discovery calls, workshops" data-es="Llamadas de descubrimiento, talleres">Discovery calls, workshops</td></tr>
+          <tr><td data-en="Data sources" data-es="Fuentes de datos">Data sources</td><td class="good" data-en="Cited &amp; verifiable" data-es="Citadas y verificables">Cited &amp; verifiable</td><td class="neutral" data-en="Often proprietary/opaque" data-es="A menudo propietarias/opacas">Often proprietary/opaque</td></tr>
+          <tr><td data-en="Best for" data-es="Ideal para">Best for</td><td class="good" data-en="Fast, focused decisions" data-es="Decisiones rápidas y enfocadas">Fast, focused decisions</td><td class="neutral" data-en="Large, multi-month mandates" data-es="Mandatos grandes de varios meses">Large, multi-month mandates</td></tr>
+        </tbody>
+      </table>
+      <p class="compare-note reveal" data-en="We're not a replacement for a six-month strategy engagement. We're the faster, cheaper way to get a specific decision made with real data — without the offices, account managers, and timelines you're really paying for." data-es="No reemplazamos un proyecto de estrategia de seis meses. Somos la forma más rápida y barata de tomar una decisión específica con datos reales — sin las oficinas, gerentes de cuenta y plazos que en realidad estás pagando.">We're not a replacement for a six-month strategy engagement. We're the faster, cheaper way to get a specific decision made with real data — without the offices, account managers, and timelines you're really paying for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAPER: GUARANTEES -->
+<section class="paper">
+  <div class="amber-grid"></div>
+  <div class="paper-inner">
+    <span class="paper-eyebrow" data-en="Our Guarantees" data-es="Nuestras Garantías">Our Guarantees</span>
+    <h2 class="reveal" data-en="The risk is ours, not yours" data-es="El riesgo es nuestro, no tuyo">The risk is ours, not yours</h2>
+    <div class="guarantees reveal">
+      <div class="guarantee"><div class="g-ico">✓</div><div><h3 data-en="Satisfaction or refund" data-es="Satisfacción o reembolso">Satisfaction or refund</h3><p data-en="If the report misses the brief you approved, we revise it until it's right — or refund it in full. Your call." data-es="Si el reporte no cumple el brief que aprobaste, lo revisamos hasta que quede bien — o lo reembolsamos completo. Tú decides.">If the report misses the brief you approved, we revise it until it's right — or refund it in full. Your call.</p></div></div>
+      <div class="guarantee"><div class="g-ico">✓</div><div><h3 data-en="On-time delivery" data-es="Entrega a tiempo">On-time delivery</h3><p data-en="We deliver within the stated window (24–72h) or you're not charged for the delay. Deadlines are the product." data-es="Entregamos dentro del plazo indicado (24–72h) o no cobramos por el retraso. Los plazos son parte del producto.">We deliver within the stated window (24–72h) or you're not charged for the delay. Deadlines are the product.</p></div></div>
+      <div class="guarantee"><div class="g-ico">✓</div><div><h3 data-en="Verifiable data" data-es="Datos verificables">Verifiable data</h3><p data-en="Every figure is cited to a source you can check. If a claim can't be backed by data, it doesn't appear in your report." data-es="Cada cifra se cita a una fuente que puedes comprobar. Si una afirmación no tiene respaldo, no aparece en tu reporte.">Every figure is cited to a source you can check. If a claim can't be backed by data, it doesn't appear in your report.</p></div></div>
+      <div class="guarantee"><div class="g-ico">✓</div><div><h3 data-en="One revision included" data-es="Una revisión incluida">One revision included</h3><p data-en="Every report includes a full revision round at no extra cost — so the final document is exactly what you need." data-es="Cada reporte incluye una ronda de revisión completa sin costo extra — para que el documento final sea justo lo que necesitas.">Every report includes a full revision round at no extra cost — so the final document is exactly what you need.</p></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- PAPER: FAQ -->
 <section class="paper">
   <div class="paper-inner">
@@ -429,6 +506,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
       <div class="faq-item"><div class="faq-q"><span data-en="How do I pay?" data-es="¿Cómo pago?">How do I pay?</span><span class="pl">+</span></div><p class="faq-a" data-en="After checkout, we reply with a PayPal link or bank transfer details, always in USD. Work starts once payment is confirmed." data-es="Después de ordenar, respondemos con un link de PayPal o datos de transferencia, siempre en USD. El trabajo inicia al confirmarse el pago.">After checkout, we reply with a PayPal link or bank transfer details, always in USD. Work starts once payment is confirmed.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="What if I'm not satisfied?" data-es="¿Y si no quedo satisfecho?">What if I'm not satisfied?</span><span class="pl">+</span></div><p class="faq-a" data-en="Full refund or we revise until it's right. Your call. One revision round is included in every report." data-es="Reembolso completo o revisamos hasta que quede bien. Tú decides. Cada reporte incluye una ronda de revisión.">Full refund or we revise until it's right. Your call. One revision round is included in every report.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="Can I use it with investors?" data-es="¿Puedo usarlo con inversionistas?">Can I use it with investors?</span><span class="pl">+</span></div><p class="faq-a" data-en="Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check." data-es="Sí — exactamente para eso están diseñados el Pitch Deck y el Plan de Negocio, con datos verificables que los inversionistas pueden comprobar.">Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check.</p></div>
+      <div class="faq-item"><div class="faq-q"><span data-en="I've never used BriefOps — where do I start?" data-es="Nunca he usado BriefOps — ¿por dónde empiezo?">I've never used BriefOps — where do I start?</span><span class="pl">+</span></div><p class="faq-a" data-en="Start with the Market Snapshot ($39). It's a one-page market read delivered in 24 hours — the lowest-risk way to see exactly how we work. If you order a full report afterward, the $39 credits toward it." data-es="Empieza con el Market Snapshot ($39). Es una lectura de mercado de una página entregada en 24 horas — la forma de menor riesgo para ver cómo trabajamos. Si luego pides un reporte completo, los $39 se acreditan.">Start with the Market Snapshot ($39). It's a one-page market read delivered in 24 hours — the lowest-risk way to see exactly how we work. If you order a full report afterward, the $39 credits toward it.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="Why cheaper than a consulting firm?" data-es="¿Por qué más barato que una consultoría?">Why cheaper than a consulting firm?</span><span class="pl">+</span></div><p class="faq-a" data-en="No offices, no account managers, no six-week timelines. Professional data tools plus expert analysis plus human review — the same insight at a fraction of the cost, in days." data-es="Sin oficinas, sin gerentes de cuenta, sin plazos de seis semanas. Herramientas profesionales de datos más análisis experto más revisión humana — el mismo conocimiento a una fracción del costo, en días.">No offices, no account managers, no six-week timelines. Professional data tools plus expert analysis plus human review — the same insight at a fraction of the cost, in days.</p></div>
     </div>
   </div>
