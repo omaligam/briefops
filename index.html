@@ -105,6 +105,8 @@ nav{
   text-shadow:0 0 20px rgba(255,216,155,0.5),0 0 60px rgba(255,216,155,0.25);margin-bottom:28px;
 }
 .hero h1 .glitch{animation:chroma 3s infinite}
+.hero-logo-wrap{margin-bottom:28px;display:flex;justify-content:center;width:100%}
+.hero-logo-img{width:min(88vw,760px);height:auto;display:block;filter:drop-shadow(0 0 24px rgba(143,176,255,0.45)) drop-shadow(0 0 60px rgba(143,176,255,0.2))}
 .hero-sub{font-family:'Playfair Display',serif;font-size:clamp(18px,2.4vw,26px);max-width:30ch;line-height:1.5;color:var(--glow);margin-bottom:44px;font-style:italic}
 .scroll-inspect{font-family:'VT323',monospace;font-size:clamp(20px,3.5vw,30px);color:var(--cream);letter-spacing:0.05em;margin-bottom:20px}
 .hero-cta{display:inline-block;margin-top:8px;font-family:'Space Mono',monospace;font-size:clamp(13px,1.8vw,15px);font-weight:700;color:var(--night);background:var(--amber);padding:14px 26px;letter-spacing:0.03em;transition:all 0.3s;border:2px solid var(--amber)}
@@ -295,7 +297,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 <!-- HERO -->
 <header class="hero">
   <div class="hero-kicker" data-en="A Market Intelligence Studio" data-es="Un Estudio de Inteligencia de Mercado">A Market Intelligence Studio</div>
-  <h1 class="serif"><span data-en="Good" data-es="Buenos">Good</span> <span class="glitch" data-en="data." data-es="datos.">data.</span></h1>
+  <h1 class="hero-logo-wrap"><img class="hero-logo-img" src="/briefops-logo-cream.png" alt="BriefOps"></h1>
   <p class="hero-sub" data-en="Real market intelligence, delivered in 48 hours. Let's crunch the numbers." data-es="Inteligencia de mercado real, entregada en 48 horas. Hagamos los números.">Real market intelligence, delivered in 48 hours. Let's crunch the numbers.</p>
   <div class="scroll-inspect" data-en="Scroll to Inspect Our Reports" data-es="Scroll para Inspeccionar Nuestros Reportes">Scroll to Inspect Our Reports</div>
   <a href="/BriefOps_Sample_Report.pdf" target="_blank" rel="noopener" class="hero-cta" data-en="↓ See a real sample report (PDF)" data-es="↓ Ver un reporte de muestra real (PDF)">↓ See a real sample report (PDF)</a>
