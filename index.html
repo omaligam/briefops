@@ -104,6 +104,8 @@ nav{
 .hero h1 .glitch{animation:chroma 3s infinite}
 .hero-sub{font-family:'Playfair Display',serif;font-size:clamp(18px,2.4vw,26px);max-width:30ch;line-height:1.5;color:var(--glow);margin-bottom:44px;font-style:italic}
 .scroll-inspect{font-family:'VT323',monospace;font-size:clamp(20px,3.5vw,30px);color:var(--cream);letter-spacing:0.05em;margin-bottom:20px}
+.hero-cta{display:inline-block;margin-top:8px;font-family:'Space Mono',monospace;font-size:clamp(13px,1.8vw,15px);font-weight:700;color:var(--night);background:var(--amber);padding:14px 26px;letter-spacing:0.03em;transition:all 0.3s;border:2px solid var(--amber)}
+.hero-cta:hover{background:var(--glow);border-color:var(--glow);transform:translateY(-2px)}
 .hands{display:flex;gap:24px;justify-content:center;font-size:32px}
 .hands span{animation:bounce 1.4s ease-in-out infinite}
 .hands span:nth-child(2){animation-delay:0.2s}
@@ -162,6 +164,16 @@ nav{
 
 /* ===== STEPS ===== */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:5vw;margin-top:7vh}
+.method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:6vh}
+.method-card{border:1px solid rgba(240,230,200,0.18);padding:26px;background:rgba(240,230,200,0.02);transition:border-color 0.3s,background 0.3s}
+.method-card:hover{border-color:var(--amber);background:rgba(232,163,61,0.05)}
+.method-ico{font-family:'VT323',monospace;font-size:32px;color:var(--amber);line-height:1;margin-bottom:12px}
+.method-card h3{font-family:'Playfair Display',serif;font-size:clamp(19px,2.4vw,24px);font-weight:700;color:var(--cream);margin-bottom:10px}
+.method-card p{font-size:13px;color:var(--dim);line-height:1.7}
+.method-cta{margin-top:6vh;border:1px solid rgba(240,230,200,0.2);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:linear-gradient(90deg,rgba(232,163,61,0.08),transparent)}
+.method-cta-title{font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--cream)}
+.method-cta-sub{font-size:13px;color:var(--dim);margin-top:6px;max-width:48ch}
+@media(max-width:760px){.method-grid{grid-template-columns:1fr;gap:18px}.method-cta{flex-direction:column;align-items:flex-start}}
 .step-n{font-family:'VT323',monospace;font-size:48px;color:var(--amber);line-height:1}
 .step h3{font-family:'Playfair Display',serif;font-size:clamp(18px,2.4vw,26px);font-weight:700;margin:14px 0 10px;color:var(--cream)}
 .step p{font-size:13px;color:var(--dim);line-height:1.7}
@@ -259,6 +271,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
   <h1 class="serif"><span data-en="Good" data-es="Buenos">Good</span> <span class="glitch" data-en="data." data-es="datos.">data.</span></h1>
   <p class="hero-sub" data-en="Real market intelligence, delivered in 48 hours. Let's crunch the numbers." data-es="Inteligencia de mercado real, entregada en 48 horas. Hagamos los números.">Real market intelligence, delivered in 48 hours. Let's crunch the numbers.</p>
   <div class="scroll-inspect" data-en="Scroll to Inspect Our Reports" data-es="Scroll para Inspeccionar Nuestros Reportes">Scroll to Inspect Our Reports</div>
+  <a href="/BriefOps_Sample_Report.pdf" target="_blank" rel="noopener" class="hero-cta" data-en="↓ See a real sample report (PDF)" data-es="↓ Ver un reporte de muestra real (PDF)">↓ See a real sample report (PDF)</a>
   <div class="hands"><span>☞</span><span>☞</span><span>☞</span></div>
 </header>
 
@@ -354,12 +367,54 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 <!-- PAPER: HOW IT WORKS -->
 <section class="paper">
   <div class="paper-inner">
-    <span class="paper-eyebrow" data-en="The Process" data-es="El Proceso">The Process</span>
-    <h2 class="reveal" data-en="Three steps. Zero calls. Pick up the phone, or just add to cart." data-es="Tres pasos. Cero llamadas. Levanta el teléfono, o solo agrega al carrito.">Three steps. Zero calls. Pick up the phone, or just add to cart.</h2>
+    <span class="paper-eyebrow" data-en="How BriefOps Works" data-es="Cómo Funciona BriefOps">How BriefOps Works</span>
+    <h2 class="reveal" data-en="Five steps. Zero calls. A structured, repeatable process." data-es="Cinco pasos. Cero llamadas. Un proceso estructurado y repetible.">Five steps. Zero calls. A structured, repeatable process.</h2>
     <div class="steps reveal">
-      <div class="step"><div class="step-n">01</div><h3 data-en="Add &amp; check out" data-es="Agrega y ordena">Add &amp; check out</h3><p data-en="Add reports to your cart and check out. Your email opens with your order and a brief template: website, competitors, goal." data-es="Agrega reportes a tu carrito y ordena. Se abre tu correo con tu pedido y una plantilla de brief: sitio web, competidores, objetivo.">Add reports to your cart and check out. Your email opens with your order and a brief template: website, competitors, goal.</p></div>
-      <div class="step"><div class="step-n">02</div><h3 data-en="We confirm &amp; research" data-es="Confirmamos e investigamos">We confirm &amp; research</h3><p data-en="We reply within hours with your payment link — PayPal or bank transfer, in USD. Once confirmed, we pull live data and build." data-es="Respondemos en horas con tu link de pago — PayPal o transferencia, en USD. Al confirmarse, extraemos datos reales y construimos.">We reply within hours with your payment link — PayPal or bank transfer, in USD. Once confirmed, we pull live data and build.</p></div>
-      <div class="step"><div class="step-n">03</div><h3 data-en="Receive &amp; present" data-es="Recibe y presenta">Receive &amp; present</h3><p data-en="Your document arrives by email in 48–72 hours: PPTX, XLSX, or PDF. One revision included. Full refund if it misses." data-es="Tu documento llega por correo en 48–72 horas: PPTX, XLSX o PDF. Una revisión incluida. Reembolso completo si no cumple.">Your document arrives by email in 48–72 hours: PPTX, XLSX, or PDF. One revision included. Full refund if it misses.</p></div>
+      <div class="step"><div class="step-n">01</div><h3 data-en="Submit your brief" data-es="Envías tu brief">Submit your brief</h3><p data-en="Add reports to your cart and check out. Your email opens with your order and a short brief: your website, your competitors, and what you need to decide." data-es="Agrega reportes a tu carrito y ordena. Se abre tu correo con tu pedido y un brief corto: tu sitio web, tus competidores y qué necesitas decidir.">Add reports to your cart and check out. Your email opens with your order and a short brief: your website, your competitors, and what you need to decide.</p></div>
+      <div class="step"><div class="step-n">02</div><h3 data-en="Research &amp; data collection" data-es="Investigación y datos">Research &amp; data collection</h3><p data-en="Once payment is confirmed, we pull live data from professional tools like Semrush, plus public filings, census and trade sources — every figure traceable to its origin." data-es="Al confirmarse el pago, extraemos datos reales de herramientas profesionales como Semrush, más registros públicos y fuentes de censo y comercio — cada cifra rastreable a su origen.">Once payment is confirmed, we pull live data from professional tools like Semrush, plus public filings, census and trade sources — every figure traceable to its origin.</p></div>
+      <div class="step"><div class="step-n">03</div><h3 data-en="Competitive analysis" data-es="Análisis competitivo">Competitive analysis</h3><p data-en="We map your competitors on price, positioning, traffic, and digital visibility — isolating the gaps and openings that are actually reachable for you." data-es="Mapeamos a tus competidores en precio, posicionamiento, tráfico y visibilidad digital — aislando las brechas y oportunidades que de verdad puedes alcanzar.">We map your competitors on price, positioning, traffic, and digital visibility — isolating the gaps and openings that are actually reachable for you.</p></div>
+      <div class="step"><div class="step-n">04</div><h3 data-en="Insight generation" data-es="Generación de insights">Insight generation</h3><p data-en="Raw data becomes decisions. We triangulate the numbers, score the opportunities, and write recommendations you can act on this quarter — reviewed by a human before it ships." data-es="Los datos crudos se vuelven decisiones. Triangulamos los números, calificamos las oportunidades y escribimos recomendaciones accionables este trimestre — revisadas por un humano antes de entregar.">Raw data becomes decisions. We triangulate the numbers, score the opportunities, and write recommendations you can act on this quarter — reviewed by a human before it ships.</p></div>
+      <div class="step"><div class="step-n">05</div><h3 data-en="Report delivery" data-es="Entrega del reporte">Report delivery</h3><p data-en="Your finished document arrives by email in 48–72 hours: PPTX, XLSX, or PDF, ready for your board or investors. One revision included. Full refund if it misses the brief." data-es="Tu documento terminado llega por correo en 48–72 horas: PPTX, XLSX o PDF, listo para tu junta o inversionistas. Una revisión incluida. Reembolso completo si no cumple el brief.">Your finished document arrives by email in 48–72 hours: PPTX, XLSX, or PDF, ready for your board or investors. One revision included. Full refund if it misses the brief.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NIGHT: METHODOLOGY & QUALITY -->
+<section class="night-sec">
+  <div class="night-inner">
+    <div class="night-eyebrow" data-en="Methodology &amp; Quality" data-es="Metodología y Calidad">Methodology &amp; Quality</div>
+    <h2 class="reveal" data-en="Why you can trust the numbers" data-es="Por qué puedes confiar en los números">Why you can trust the numbers</h2>
+    <p class="reveal" style="max-width:60ch;color:var(--dim);margin-top:16px;font-family:'Playfair Display',serif;font-size:clamp(15px,1.8vw,18px);line-height:1.7" data-en="Confidence in a report comes from being able to check it. No black box, no invented figures — here is exactly how every BriefOps report is built and verified." data-es="La confianza en un reporte viene de poder verificarlo. Sin caja negra, sin cifras inventadas — así se construye y verifica cada reporte de BriefOps.">Confidence in a report comes from being able to check it. No black box, no invented figures — here is exactly how every BriefOps report is built and verified.</p>
+
+    <div class="method-grid reveal">
+      <div class="method-card">
+        <div class="method-ico">01</div>
+        <h3 data-en="Real data sources" data-es="Fuentes de datos reales">Real data sources</h3>
+        <p data-en="Live data from professional platforms like Semrush, plus public filings, census and trade data. Never AI-guessed numbers." data-es="Datos en vivo de plataformas profesionales como Semrush, más registros públicos y datos de censo y comercio. Nunca números inventados por IA.">Live data from professional platforms like Semrush, plus public filings, census and trade data. Never AI-guessed numbers.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-ico">02</div>
+        <h3 data-en="Triangulated &amp; validated" data-es="Triangulado y validado">Triangulated &amp; validated</h3>
+        <p data-en="Market size is estimated top-down and bottom-up, then reconciled. No single-source figures — every key number is cross-checked." data-es="El tamaño de mercado se estima de arriba-abajo y de abajo-arriba, luego se reconcilia. Sin cifras de una sola fuente — cada número clave se contrasta.">Market size is estimated top-down and bottom-up, then reconciled. No single-source figures — every key number is cross-checked.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-ico">03</div>
+        <h3 data-en="Every figure cited" data-es="Cada cifra citada">Every figure cited</h3>
+        <p data-en="In your report, every number carries an inline source you can open and verify yourself. If a claim can't be backed by data, it doesn't ship." data-es="En tu reporte, cada número lleva una fuente en línea que puedes abrir y verificar tú mismo. Si una afirmación no tiene respaldo, no se entrega.">In your report, every number carries an inline source you can open and verify yourself. If a claim can't be backed by data, it doesn't ship.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-ico">04</div>
+        <h3 data-en="Human review" data-es="Revisión humana">Human review</h3>
+        <p data-en="Before delivery, a person checks every claim against its source and flags anything that can't be substantiated. Analysis is written by a human, not auto-generated." data-es="Antes de entregar, una persona revisa cada afirmación contra su fuente y marca lo que no se pueda sustentar. El análisis lo escribe un humano, no se autogenera.">Before delivery, a person checks every claim against its source and flags anything that can't be substantiated. Analysis is written by a human, not auto-generated.</p>
+      </div>
+    </div>
+
+    <div class="method-cta reveal">
+      <div>
+        <div class="method-cta-title serif" data-en="See it for yourself" data-es="Compruébalo tú mismo">See it for yourself</div>
+        <div class="method-cta-sub" data-en="A full 9-page sample report — structure, data, charts, and methodology." data-es="Un reporte de muestra completo de 9 páginas — estructura, datos, gráficas y metodología.">A full 9-page sample report — structure, data, charts, and methodology.</div>
+      </div>
+      <a href="/BriefOps_Sample_Report.pdf" target="_blank" rel="noopener" class="add-btn" style="text-decoration:none" data-en="Open sample report (PDF)" data-es="Abrir reporte de muestra (PDF)">Open sample report (PDF)</a>
     </div>
   </div>
 </section>
