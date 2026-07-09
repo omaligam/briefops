@@ -80,9 +80,9 @@ nav{
 .paper::before{opacity:0.5}
 .paper .cols{column-gap:40px}
 .logo-word{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;font-size:24px;letter-spacing:1px;color:var(--cream);text-shadow:0 0 12px rgba(255,216,155,0.4)}
-.logo-svg{height:26px;width:auto;color:var(--cream);filter:drop-shadow(0 0 12px rgba(255,216,155,0.4));display:block}
-.boot-logo-svg{height:clamp(52px,12vw,96px);width:auto;color:var(--cream);display:block;filter:drop-shadow(0 0 6px rgba(255,216,155,0.5))}
-.foot-logo-svg{height:clamp(32px,6vw,52px);width:auto;color:var(--cream);display:block}
+.logo-img{height:24px;width:auto;display:block;filter:drop-shadow(0 0 10px rgba(143,176,255,0.3))}
+.boot-logo-img{height:clamp(46px,11vw,84px);width:auto;display:block}
+.foot-logo-img{height:clamp(30px,5.5vw,48px);width:auto;display:block}
 .nav-right{display:flex;gap:10px;align-items:center}
 .lang-btn{background:none;border:1px solid rgba(240,230,200,0.25);color:var(--cream);padding:6px 12px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.25s;letter-spacing:0.1em}
 .lang-btn.active{background:var(--amber);color:var(--night);border-color:var(--amber)}
@@ -272,7 +272,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 <!-- BOOT SCREEN -->
 <div id="boot">
   <div class="boot-logo">
-    <div class="css-sphere boot-sph"><span></span><span></span><span></span><span></span><span></span></div><svg class="boot-logo-svg" viewBox="0 0 600 150" aria-label="BriefOps" role="img"><defs><pattern id="bootStripes" width="600" height="14" patternUnits="userSpaceOnUse"><rect width="600" height="14" fill="#000"/><rect width="600" height="9" fill="#fff"/></pattern><mask id="bootStripeMask"><rect width="600" height="150" fill="url(#bootStripes)"/></mask></defs><text x="0" y="112" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-style="italic" font-size="130" letter-spacing="-2" fill="currentColor" mask="url(#bootStripeMask)">BriefOps</text></svg>
+    <div class="css-sphere boot-sph"><span></span><span></span><span></span><span></span><span></span></div><img class="boot-logo-img" src="/briefops-logo-cream.png" alt="BriefOps">
   </div>
   <div class="boot-sub">BriefOps Intelligence Terminal<br>Version 2.026</div>
   <div class="boot-bar" id="bootbar"></div>
@@ -284,7 +284,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 <canvas id="bgGrid"></canvas>
 
 <nav>
-  <div class="logo"><div class="css-sphere nav-sph"><span></span><span></span><span></span><span></span><span></span></div><svg class="logo-svg" viewBox="0 0 600 150" aria-label="BriefOps" role="img"><text x="0" y="112" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-style="italic" font-size="130" letter-spacing="-2" fill="currentColor">BriefOps</text></svg></div>
+  <div class="logo"><div class="css-sphere nav-sph"><span></span><span></span><span></span><span></span><span></span></div><img class="logo-img" src="/briefops-logo-cream.png" alt="BriefOps"></div>
   <div class="nav-right">
     <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
     <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
@@ -528,7 +528,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 <!-- FOOTER (boot style) -->
 <footer>
   <div class="foot-inner">
-    <div class="foot-logo"><div class="css-sphere foot-sph"><span></span><span></span><span></span><span></span><span></span></div><svg class="foot-logo-svg" viewBox="0 0 600 150" aria-label="BriefOps" role="img"><text x="0" y="112" font-family="'Playfair Display',Georgia,serif" font-weight="900" font-style="italic" font-size="130" letter-spacing="-2" fill="currentColor">BriefOps</text></svg></div>
+    <div class="foot-logo"><div class="css-sphere foot-sph"><span></span><span></span><span></span><span></span><span></span></div><img class="foot-logo-img" src="/briefops-logo-cream.png" alt="BriefOps"></div>
     <div class="foot-sub">Market Intelligence Terminal<br>Version 2.026</div>
     <div class="foot-cols">
       <div>
