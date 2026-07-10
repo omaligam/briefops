@@ -508,7 +508,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
     <h2 class="reveal" style="margin-bottom:40px" data-en="The Fine Print" data-es="La Letra Chica">The Fine Print</h2>
     <div class="reveal">
       <div class="faq-item open"><div class="faq-q"><span data-en="Is the data real or AI-generated?" data-es="¿Los datos son reales o generados por IA?">Is the data real or AI-generated?</span><span class="pl">+</span></div><p class="faq-a" data-en="Real. We use Semrush — a professional SEO platform — and current market sources. Every report cites sources you can verify yourself." data-es="Reales. Usamos Semrush — plataforma profesional de SEO — y fuentes de mercado actuales. Cada reporte cita fuentes que puedes verificar tú mismo.">Real. We use Semrush — a professional SEO platform — and current market sources. Every report cites sources you can verify yourself.</p></div>
-      <div class="faq-item"><div class="faq-q"><span data-en="How do I pay?" data-es="¿Cómo pago?">How do I pay?</span><span class="pl">+</span></div><p class="faq-a" data-en="After checkout, we reply with a PayPal link or bank transfer details, always in USD. Work starts once payment is confirmed." data-es="Después de ordenar, respondemos con un link de PayPal o datos de transferencia, siempre en USD. El trabajo inicia al confirmarse el pago.">After checkout, we reply with a PayPal link or bank transfer details, always in USD. Work starts once payment is confirmed.</p></div>
+      <div class="faq-item"><div class="faq-q"><span data-en="How do I pay?" data-es="¿Cómo pago?">How do I pay?</span><span class="pl">+</span></div><p class="faq-a" data-en="We use Stripe — the same payment processor used by Amazon and Shopify. Pay securely by credit or debit card in USD. Work starts immediately after payment is confirmed." data-es="Usamos Stripe — el mismo procesador de pagos de Amazon y Shopify. Paga con tarjeta de crédito o débito en USD de forma segura. El trabajo inicia inmediatamente después de confirmar el pago.">We use Stripe — the same payment processor used by Amazon and Shopify. Pay securely by credit or debit card in USD. Work starts immediately after payment is confirmed.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="What if I'm not satisfied?" data-es="¿Y si no quedo satisfecho?">What if I'm not satisfied?</span><span class="pl">+</span></div><p class="faq-a" data-en="Full refund or we revise until it's right. Your call. One revision round is included in every report." data-es="Reembolso completo o revisamos hasta que quede bien. Tú decides. Cada reporte incluye una ronda de revisión.">Full refund or we revise until it's right. Your call. One revision round is included in every report.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="Can I use it with investors?" data-es="¿Puedo usarlo con inversionistas?">Can I use it with investors?</span><span class="pl">+</span></div><p class="faq-a" data-en="Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check." data-es="Sí — exactamente para eso están diseñados el Pitch Deck y el Plan de Negocio, con datos verificables que los inversionistas pueden comprobar.">Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="I've never used BriefOps — where do I start?" data-es="Nunca he usado BriefOps — ¿por dónde empiezo?">I've never used BriefOps — where do I start?</span><span class="pl">+</span></div><p class="faq-a" data-en="Start with the Market Snapshot ($39). It's a one-page market read delivered in 24 hours — the lowest-risk way to see exactly how we work. If you order a full report afterward, the $39 credits toward it." data-es="Empieza con el Market Snapshot ($39). Es una lectura de mercado de una página entregada en 24 horas — la forma de menor riesgo para ver cómo trabajamos. Si luego pides un reporte completo, los $39 se acreditan.">Start with the Market Snapshot ($39). It's a one-page market read delivered in 24 hours — the lowest-risk way to see exactly how we work. If you order a full report afterward, the $39 credits toward it.</p></div>
@@ -557,8 +557,8 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot">
     <div class="cart-total"><span data-en="Total" data-es="Total">Total</span><span id="cartTotal">$0 USD</span></div>
-    <p class="cart-note" data-en="Checkout opens your email with the order. We reply with a payment link (PayPal or transfer, USD)." data-es="Ordenar abre tu correo con el pedido. Respondemos con un link de pago (PayPal o transferencia, USD).">Checkout opens your email with the order. We reply with a payment link (PayPal or transfer, USD).</p>
-    <button class="cart-checkout" id="cartCheckout" onclick="checkout()" disabled data-en="Checkout via Email" data-es="Ordenar por Correo">Checkout via Email</button>
+    <p class="cart-note" data-en="Secure checkout powered by Stripe. Pay by card in USD." data-es="Checkout seguro con Stripe. Paga con tarjeta en USD.">Secure checkout powered by Stripe. Pay by card in USD.</p>
+    <button class="cart-checkout" id="cartCheckout" onclick="checkout()" disabled data-en="Pay with Card →" data-es="Pagar con Tarjeta →">Pay with Card →</button>
   </div>
 </aside>
 
@@ -643,15 +643,32 @@ function toggleCart(){
 }
 function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartBackdrop').classList.add('open');}
 function flashCart(){var c=document.getElementById('cartBtn');c.style.transform='scale(1.12)';setTimeout(function(){c.style.transform='';},200);}
+// Stripe Payment Links — one per product SKU
+var STRIPE_LINKS={
+  snapshot: 'https://buy.stripe.com/8x26oHd5695F5v8aJbbQY00',
+  seo:      'https://buy.stripe.com/8x2eVdd566Xx7DgdVnbQY01',
+  research: 'https://buy.stripe.com/6oUeVd8OQ1Dd4r418BbQY02',
+  compintel:'https://buy.stripe.com/8x2aEX6GIa9JaPs6sVbQY03',
+  pitch:    'https://buy.stripe.com/4gMbJ11mo95F3n05oRbQY04',
+  bizplan:  'https://buy.stripe.com/5kQ3cvfde0z94r43gJbQY05',
+  radar:    'https://buy.stripe.com/fZubJ14yAa9JbTw4kNbQY06'
+};
+
 function checkout(){
   if(cart.length===0)return;
-  var L=LABELS[currentLang];
-  var lines=cart.map(function(i){return '- '+i.name+' ('+fmt(i.price)+')';}).join('\n');
-  var total=cart.reduce(function(s,i){return s+i.price;},0);
-  var totalLine=(currentLang==='es'?'\nTotal: ':'\nTotal: ')+fmt(total)+'\n';
-  var subject=L.checkoutSubject+cart.map(function(i){return i.name;}).join(', ');
-  var body=L.bodyIntro+lines+'\n'+totalLine+L.bodyFields;
-  window.location.href='mailto:hello@briefops.online?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  // If single item, go direct to its Stripe link
+  if(cart.length===1){
+    var link=STRIPE_LINKS[cart[0].sku];
+    if(link) { window.open(link,'_blank'); return; }
+  }
+  // Multi-item: open Stripe link for highest-value item + email fallback
+  var sorted=cart.slice().sort(function(a,b){return b.price-a.price;});
+  var primaryLink=STRIPE_LINKS[sorted[0].sku];
+  if(primaryLink){
+    // Pass order summary as URL param for Stripe to forward
+    var items=cart.map(function(i){return i.name+' ('+fmt(i.price)+')';}).join(', ');
+    window.open(primaryLink+'?prefilled_email=&client_reference_id='+encodeURIComponent(items),'_blank');
+  }
 }
 
 // ================= FAQ =================
