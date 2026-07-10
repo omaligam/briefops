@@ -543,14 +543,46 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 </section>
 
 <!-- CONTACT -->
-<section class="contact">
-  <h2 class="serif"><span data-en="Good" data-es="Buen">Good</span> <span class="glitch" data-en="buy." data-es="trato.">buy.</span></h2>
-  <p data-en="Contact us about your project or general enquiries. Let's interface — email us today!" data-es="Contáctanos sobre tu proyecto o dudas generales. Hagamos interfaz — ¡escríbenos hoy!">Contact us about your project or general enquiries. Let's interface — email us today!</p>
-  <div class="contact-links">
-    <a class="big-link" href="mailto:hello@briefops.online">hello@briefops.online</a>
-    <a class="big-link" href="#catalog" data-en="Browse the catalog" data-es="Ver el catálogo">Browse the catalog</a>
+<section class="contact" style="background:#000;min-height:70svh;justify-content:center;padding:10vh 5vw">
+  <div id="terminal-block" style="font-family:'Space Mono',monospace;text-align:left;max-width:680px;width:100%">
+    <div style="color:#444;font-size:12px;letter-spacing:0.1em;margin-bottom:32px">BRIEFOPS TERMINAL v2.026 — READY</div>
+    <div id="term-line-1" style="font-size:clamp(13px,1.8vw,16px);color:#666;margin-bottom:12px"></div>
+    <div id="term-line-2" style="font-size:clamp(13px,1.8vw,16px);color:#666;margin-bottom:12px"></div>
+    <div id="term-line-3" style="font-size:clamp(22px,4vw,42px);font-weight:700;color:var(--cream);margin-bottom:8px;line-height:1.1"></div>
+    <div id="term-line-4" style="font-size:clamp(13px,1.8vw,16px);color:#666;margin-bottom:40px"></div>
+    <div id="term-cta" style="opacity:0;transition:opacity 0.6s">
+      <a href="mailto:hello@briefops.online" style="display:inline-block;background:var(--amber);color:var(--night);font-family:'Space Mono',monospace;font-size:14px;font-weight:700;padding:16px 32px;letter-spacing:0.05em;text-decoration:none;transition:all 0.3s;border:2px solid var(--amber)" onmouseover="this.style.background='transparent';this.style.color='var(--amber)'" onmouseout="this.style.background='var(--amber)';this.style.color='var(--night)'" data-en="→ BRIEF US NOW" data-es="→ CONTÁCTANOS">→ BRIEF US NOW</a>
+      <div style="margin-top:20px;color:#444;font-size:12px;letter-spacing:0.05em">hello@briefops.online</div>
+    </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var lines=[
+    {el:'term-line-1', text:'> MARKET INTELLIGENCE STUDIO', delay:300, speed:40},
+    {el:'term-line-2', text:'> CDMX — DELIVERING IN 24–72H', delay:1200, speed:40},
+    {el:'term-line-3', text:'BRIEF US.', delay:2200, speed:80},
+    {el:'term-line-4', text:'> hello@briefops.online_', delay:3400, speed:50}
+  ];
+  function typeIt(el,text,speed,cb){
+    var i=0;
+    var cur=document.getElementById(el);
+    var t=setInterval(function(){
+      cur.textContent=text.slice(0,i+1)+(i<text.length-1?'█':'');
+      i++;
+      if(i>=text.length){clearInterval(t);cur.textContent=text;if(cb)cb();}
+    },speed);
+  }
+  lines.forEach(function(l,idx){
+    setTimeout(function(){
+      typeIt(l.el,l.text,l.speed,idx===lines.length-1?function(){
+        setTimeout(function(){document.getElementById('term-cta').style.opacity='1';},400);
+      }:null);
+    },l.delay);
+  });
+})();
+</script>
 
 <!-- FOOTER (boot style) -->
 <footer>
