@@ -751,7 +751,7 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 // ================= WEBGL: BLUE MESH (full page, option A) =================
 (function(){
   if(typeof THREE==='undefined')return;
-  var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var reduced=false;
   var canvas=document.getElementById('bgGrid');
   var renderer;
   try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});}
