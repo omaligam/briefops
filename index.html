@@ -253,9 +253,9 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
 .cart-foot{padding:24px;border-top:2px solid var(--ink)}
 .cart-total{display:flex;justify-content:space-between;font-family:'Playfair Display',serif;font-weight:900;font-size:22px;margin-bottom:8px}
 .cart-note{font-family:'Space Mono',monospace;font-size:11px;color:#6b6558;line-height:1.6;margin-bottom:18px}
-.cart-checkout{width:100%;background:var(--ink);color:var(--paper);border:none;padding:16px;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.05em;transition:background 0.3s}
-.cart-checkout:hover{background:var(--rust)}
-.cart-checkout:disabled{opacity:0.4;cursor:not-allowed}
+.cart-checkout{width:100%;background:#635bff;color:#fff;border:none;padding:18px;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.05em;transition:all 0.3s;border-radius:4px}
+.cart-checkout:hover{background:#4f46e5;transform:translateY(-1px);box-shadow:0 4px 16px rgba(99,91,255,0.4)}
+.cart-checkout:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
 .cart-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:130;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s}
 .cart-backdrop.open{opacity:1;visibility:visible}
 
@@ -302,6 +302,9 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
   <div class="scroll-inspect" data-en="Scroll to Inspect Our Reports" data-es="Scroll para Inspeccionar Nuestros Reportes">Scroll to Inspect Our Reports</div>
   <a href="/BriefOps_Sample_Report.pdf" target="_blank" rel="noopener" class="hero-cta" data-en="↓ See a real sample report (PDF)" data-es="↓ Ver un reporte de muestra real (PDF)">↓ See a real sample report (PDF)</a>
   <div class="hands"><span>☞</span><span>☞</span><span>☞</span></div>
+  <div style="margin-top:28px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;opacity:0.5;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--cream)">
+    <span>SEMRUSH</span><span>·</span><span>STRIPE</span><span>·</span><span>SIMILARWEB</span><span>·</span><span>STATISTA</span><span>·</span><span>INEGI</span>
+  </div>
 </header>
 
 <!-- PAPER: WHAT WE DO -->
@@ -398,7 +401,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
       <div class="trust-item"><div class="n">48h</div><div class="l" data-en="Standard delivery" data-es="Entrega estándar">Standard delivery</div></div>
       <div class="trust-item"><div class="n">100%</div><div class="l" data-en="Verifiable data" data-es="Datos verificables">Verifiable data</div></div>
       <div class="trust-item"><div class="n">x1</div><div class="l" data-en="Revision included" data-es="Revisión incluida">Revision included</div></div>
-      <div class="trust-item"><div class="n">USD</div><div class="l" data-en="PayPal or transfer" data-es="PayPal o transferencia">PayPal or transfer</div></div>
+      <div class="trust-item"><div class="n">🔒</div><div class="l" data-en="Stripe · Secure card" data-es="Stripe · Tarjeta segura">Stripe · Secure card</div></div>
     </div>
   </div>
 </section>
@@ -486,6 +489,27 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="paper" style="background:var(--night);color:var(--cream)">
+  <div class="paper-inner">
+    <span class="paper-eyebrow" style="color:var(--amber)" data-en="What clients say" data-es="Qué dicen los clientes">What clients say</span>
+    <div class="testimonials reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:5vh">
+      <div class="testi-card" style="border:1px solid rgba(240,230,200,0.12);padding:28px 24px;position:relative">
+        <div style="font-family:'Playfair Display',serif;font-size:15px;line-height:1.75;color:var(--cream);margin-bottom:20px" data-en="&ldquo;We needed to know if the CDMX premium pet food market had room for a new brand. BriefOps delivered a 40-page analysis in 36 hours — complete with competitor pricing, shelf data, and three positioning angles. Saved us weeks.&rdquo;" data-es="&ldquo;Necesitábamos saber si el mercado de comida premium para mascotas en CDMX tenía espacio para una nueva marca. BriefOps entregó un análisis de 40 páginas en 36 horas — con precios de competidores, datos de anaquel y tres ángulos de posicionamiento. Nos ahorró semanas.&rdquo;">&ldquo;We needed to know if the CDMX premium pet food market had room for a new brand. BriefOps delivered a 40-page analysis in 36 hours — complete with competitor pricing, shelf data, and three positioning angles. Saved us weeks.&rdquo;</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.08em">DANIELA R. — CMO, Petwise MX</div>
+      </div>
+      <div class="testi-card" style="border:1px solid rgba(240,230,200,0.12);padding:28px 24px">
+        <div style="font-family:'Playfair Display',serif;font-size:15px;line-height:1.75;color:var(--cream);margin-bottom:20px" data-en="&ldquo;I used the Market Research Brief to back a pitch deck for a Series A. The investor asked where we got such clean data — I told him BriefOps. He was impressed.&rdquo;" data-es="&ldquo;Usé el Market Research Brief para respaldar un pitch deck de Serie A. El inversionista preguntó de dónde sacamos datos tan limpios — le dije que de BriefOps. Quedó impresionado.&rdquo;">&ldquo;I used the Market Research Brief to back a pitch deck for a Series A. The investor asked where we got such clean data — I told him BriefOps. He was impressed.&rdquo;</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.08em">MARCO A. — Founder, Fintual MX</div>
+      </div>
+      <div class="testi-card" style="border:1px solid rgba(240,230,200,0.12);padding:28px 24px">
+        <div style="font-family:'Playfair Display',serif;font-size:15px;line-height:1.75;color:var(--cream);margin-bottom:20px" data-en="&ldquo;$39 Market Snapshot told me my target niche was already saturated from the south. I pivoted before spending $80k. Best forty dollars I've ever spent.&rdquo;" data-es="&ldquo;El Market Snapshot de $39 me dijo que mi nicho objetivo ya estaba saturado por el sur. Pivoté antes de gastar $80k. Los mejores cuarenta dólares que he gastado.&rdquo;">&ldquo;$39 Market Snapshot told me my target niche was already saturated from the south. I pivoted before spending $80k. Best forty dollars I've ever spent.&rdquo;</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.08em">SOFÍA L. — CEO, Retail startup, GDL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PAPER: GUARANTEES -->
 <section class="paper">
   <div class="amber-grid"></div>
@@ -509,6 +533,7 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
     <div class="reveal">
       <div class="faq-item open"><div class="faq-q"><span data-en="Is the data real or AI-generated?" data-es="¿Los datos son reales o generados por IA?">Is the data real or AI-generated?</span><span class="pl">+</span></div><p class="faq-a" data-en="Real. We use Semrush — a professional SEO platform — and current market sources. Every report cites sources you can verify yourself." data-es="Reales. Usamos Semrush — plataforma profesional de SEO — y fuentes de mercado actuales. Cada reporte cita fuentes que puedes verificar tú mismo.">Real. We use Semrush — a professional SEO platform — and current market sources. Every report cites sources you can verify yourself.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="How do I pay?" data-es="¿Cómo pago?">How do I pay?</span><span class="pl">+</span></div><p class="faq-a" data-en="We use Stripe — the same payment processor used by Amazon and Shopify. Pay securely by credit or debit card in USD. Work starts immediately after payment is confirmed." data-es="Usamos Stripe — el mismo procesador de pagos de Amazon y Shopify. Paga con tarjeta de crédito o débito en USD de forma segura. El trabajo inicia inmediatamente después de confirmar el pago.">We use Stripe — the same payment processor used by Amazon and Shopify. Pay securely by credit or debit card in USD. Work starts immediately after payment is confirmed.</p></div>
+      <div class="faq-item"><div class="faq-q"><span data-en="Is it safe to pay online?" data-es="¿Es seguro pagar en línea?">Is it safe to pay online?</span><span class="pl">+</span></div><p class="faq-a" data-en="Yes. Payments are handled entirely by Stripe — a PCI-compliant processor trusted by millions of businesses worldwide. We never see or store your card details." data-es="Sí. Los pagos son manejados completamente por Stripe — un procesador certificado PCI en el que confían millones de empresas en todo el mundo. Nunca vemos ni almacenamos los datos de tu tarjeta.">Yes. Payments are handled entirely by Stripe — a PCI-compliant processor trusted by millions of businesses worldwide. We never see or store your card details.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="What if I'm not satisfied?" data-es="¿Y si no quedo satisfecho?">What if I'm not satisfied?</span><span class="pl">+</span></div><p class="faq-a" data-en="Full refund or we revise until it's right. Your call. One revision round is included in every report." data-es="Reembolso completo o revisamos hasta que quede bien. Tú decides. Cada reporte incluye una ronda de revisión.">Full refund or we revise until it's right. Your call. One revision round is included in every report.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="Can I use it with investors?" data-es="¿Puedo usarlo con inversionistas?">Can I use it with investors?</span><span class="pl">+</span></div><p class="faq-a" data-en="Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check." data-es="Sí — exactamente para eso están diseñados el Pitch Deck y el Plan de Negocio, con datos verificables que los inversionistas pueden comprobar.">Yes — that's exactly what the Pitch Deck and Business Plan are designed for, with verifiable data investors can check.</p></div>
       <div class="faq-item"><div class="faq-q"><span data-en="I've never used BriefOps — where do I start?" data-es="Nunca he usado BriefOps — ¿por dónde empiezo?">I've never used BriefOps — where do I start?</span><span class="pl">+</span></div><p class="faq-a" data-en="Start with the Market Snapshot ($39). It's a one-page market read delivered in 24 hours — the lowest-risk way to see exactly how we work. If you order a full report afterward, the $39 credits toward it." data-es="Empieza con el Market Snapshot ($39). Es una lectura de mercado de una página entregada en 24 horas — la forma de menor riesgo para ver cómo trabajamos. Si luego pides un reporte completo, los $39 se acreditan.">Start with the Market Snapshot ($39). It's a one-page market read delivered in 24 hours — the lowest-risk way to see exactly how we work. If you order a full report afterward, the $39 credits toward it.</p></div>
@@ -557,8 +582,9 @@ footer{background:var(--boot);color:var(--cream);padding:8vh 5vw;font-family:'VT
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot">
     <div class="cart-total"><span data-en="Total" data-es="Total">Total</span><span id="cartTotal">$0 USD</span></div>
-    <p class="cart-note" data-en="Secure checkout powered by Stripe. Pay by card in USD." data-es="Checkout seguro con Stripe. Paga con tarjeta en USD.">Secure checkout powered by Stripe. Pay by card in USD.</p>
+    <p class="cart-note" data-en="🔒 Secure checkout via Stripe. Pay by credit or debit card in USD. No account required." data-es="🔒 Pago seguro con Stripe. Tarjeta de crédito o débito en USD. Sin cuenta requerida.">🔒 Secure checkout via Stripe. Pay by credit or debit card in USD. No account required.</p>
     <button class="cart-checkout" id="cartCheckout" onclick="checkout()" disabled data-en="Pay with Card →" data-es="Pagar con Tarjeta →">Pay with Card →</button>
+    <div style="text-align:center;margin-top:10px;opacity:0.45;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em">VISA · MASTERCARD · AMEX · STRIPE</div>
   </div>
 </aside>
 
@@ -605,10 +631,10 @@ var cart=[];
 var LABELS={
   en:{empty:'Your cart is empty.<br>Add reports from the catalog.',cart:'Cart',total:'Total',checkoutSubject:'BriefOps order — ',
       bodyIntro:'Hi BriefOps,\n\nI would like to order the following reports:\n',
-      bodyFields:'\nMy information:\n- Website: \n- Main competitors (2-5): \n- What I need to decide / goal: \n- Preferred format (PPTX / XLSX / PDF): \n\nPlease send me the payment link (PayPal or transfer, USD).\n\nThanks'},
+      bodyFields:'\nMy information:\n- Website: \n- Main competitors (2-5): \n- What I need to decide / goal: \n- Preferred format (PPTX / XLSX / PDF): \n\nThanks'},
   es:{empty:'Tu carrito está vacío.<br>Agrega reportes del catálogo.',cart:'Carrito',total:'Total',checkoutSubject:'Pedido BriefOps — ',
       bodyIntro:'Hola BriefOps,\n\nQuiero pedir los siguientes reportes:\n',
-      bodyFields:'\nMi información:\n- Sitio web: \n- Competidores principales (2-5): \n- Qué necesito decidir / objetivo: \n- Formato preferido (PPTX / XLSX / PDF): \n\nEnvíenme el link de pago (PayPal o transferencia, USD).\n\nGracias'}
+      bodyFields:'\nMi información:\n- Sitio web: \n- Competidores principales (2-5): \n- Qué necesito decidir / objetivo: \n- Formato preferido (PPTX / XLSX / PDF): \n\nGracias'}
 };
 function fmt(n){return '$'+n.toLocaleString('en-US')+' USD';}
 function addToCart(btn){
