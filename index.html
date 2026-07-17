@@ -842,4 +842,81 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 })();
 </script>
 </body>
+  <!-- BriefOps Chatbot -->
+  <script>
+    (function(){
+      const styles=`<style>
+      #chatbot-widget{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:9999;font-size:28px;transition:all 0.3s ease}
+      #chatbot-widget:hover{transform:scale(1.1);box-shadow:0 6px 16px rgba(0,0,0,0.2)}
+      #chatbot-container{position:fixed;bottom:90px;right:20px;width:350px;max-height:500px;background:white;border-radius:12px;box-shadow:0 5px 40px rgba(0,0,0,0.16);display:none;flex-direction:column;z-index:9999}
+      #chatbot-container.active{display:flex}
+      #chatbot-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:16px;border-radius:12px 12px 0 0;font-size:16px;font-weight:bold}
+      #chatbot-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+      .message{display:flex;margin-bottom:8px}
+      .bot-message{justify-content:flex-start}
+      .user-message{justify-content:flex-end}
+      .message-bubble{max-width:80%;padding:12px 16px;border-radius:8px;font-size:14px;line-height:1.4}
+      .bot-message .message-bubble{background:#f0f0f0;border:1px solid #e0e0e0;color:#333}
+      .user-message .message-bubble{background:#667eea;color:white}
+      #chatbot-input{padding:12px;border-top:1px solid #e0e0e0;display:flex;gap:8px}
+      #chatbot-input input{flex:1;border:1px solid #ddd;border-radius:20px;padding:10px 16px;font-size:14px;outline:none}
+      #chatbot-input input:focus{border-color:#667eea;box-shadow:0 0 0 2px rgba(102,126,234,0.1)}
+      #chatbot-input button{background:#667eea;color:white;border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+      #chatbot-input button:hover{background:#764ba2}
+      </style>`
+      document.head.insertAdjacentHTML('beforeend',styles)
+      const knowledgeBase={
+        'price':['El plan básico cuesta $39 USD','Nuestro plan profesional cuesta $299 USD','El plan empresarial personalizado es $1,497 USD'],
+        'service':'BriefOps proporciona análisis de inteligencia de mercado y research para empresas',
+        'delivery':'Entregamos resultados en 48 horas máximo',
+        'contact':'Contáctanos en sales@briefops.online',
+        'data':'Utilizamos datos de Semrush y otras fuentes confiables',
+        'markets':'Calculamos TAM, SAM y SOM para tu mercado objetivo',
+        'discount':'Consultora con nosotros sobre descuentos especiales',
+        'greeting':'¡Hola! ¿Cómo puedo ayudarte?'
+      }
+      function getResponse(input){
+        const lower=input.toLowerCase()
+        for(const[key,responses]of Object.entries(knowledgeBase)){
+          if(lower.includes(key)||lower.includes(key.toLowerCase())){
+            return Array.isArray(responses)?responses[Math.floor(Math.random()*responses.length)]:responses
+          }}
+        return '¿Puedo ayudarte con algo más? Escribe tu pregunta.'
+      }
+      const widget=document.createElement('div')
+      widget.id='chatbot-widget'
+      widget.textContent='💬'
+      widget.onclick=()=>container.classList.toggle('active')
+      document.body.appendChild(widget)
+      const container=document.createElement('div')
+      container.id='chatbot-container'
+      container.innerHTML=`<div id="chatbot-header">BriefOps Chat</div><div id="chatbot-messages"></div><div id="chatbot-input"><input type="text" placeholder="Escribe tu mensaje..."><button>↑</button></div>`
+      document.body.appendChild(container)
+      const messagesDiv=container.querySelector('#chatbot-messages')
+      const inputField=container.querySelector('#chatbot-input input')
+      const sendBtn=container.querySelector('#chatbot-input button')
+      function addMessage(text,isBotMessage){
+        const msgDiv=document.createElement('div')
+        msgDiv.className=`message ${isBotMessage?'bot-message':'user-message'}`
+        const bubble=document.createElement('div')
+        bubble.className='message-bubble'
+        bubble.textContent=text
+        msgDiv.appendChild(bubble)
+        messagesDiv.appendChild(msgDiv)
+        messagesDiv.scrollTop=messagesDiv.scrollHeight
+      }
+      function sendMessage(){
+        const text=inputField.value.trim()
+        if(!text)return
+        addMessage(text,false)
+        inputField.value=''
+        const response=getResponse(text)
+        setTimeout(()=>addMessage(response,true),300)
+      }
+      sendBtn.onclick=sendMessage
+      inputField.addEventListener('keypress',e=>{if(e.key==='Enter')sendMessage()})
+      addMessage(knowledgeBase.greeting,true)
+    })()
+      </script>
+  </script>
 </html>
