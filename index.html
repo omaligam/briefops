@@ -748,83 +748,64 @@ var obs=new IntersectionObserver(function(entries){
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-// ================= WEBGL: BLUE MESH (full page, option A) =================
+// ================= WEBGL: OPTIMIZED MESH (Performance Fix) =================
 (function(){
   if(typeof THREE==='undefined')return;
-  var reduced=false;
   var canvas=document.getElementById('bgGrid');
   var renderer;
-  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});}
+  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:false,alpha:true,powerPreference:'high-performance'});}
   catch(e){canvas.style.display='none';return;}
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
   renderer.setSize(window.innerWidth,window.innerHeight);
+  renderer.sortObjects=false;
   var scene=new THREE.Scene();
   scene.fog=new THREE.Fog(0x05060a,7,26);
   var camera=new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight,0.1,100);
   camera.position.set(0,1.6,7);camera.lookAt(0,1.1,0);
-  var COLS=64,ROWS=80,SP=0.6;
-  var geo=new THREE.BufferGeometry(),verts=[];
+  var COLS=48,ROWS=60,SP=0.6;var verts=[],idx=[];
   for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++)verts.push((c-COLS/2)*SP,0,(r-ROWS/2)*SP);
-  var idx=[];
-  for(var r=0;r<ROWS-1;r++)for(var c=0;c<COLS-1;c++){var a=r*COLS+c;idx.push(a,a+1,a,a+COLS);}
-  geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
-  geo.setIndex(idx);
-  var mat=new THREE.LineBasicMaterial({color:0x00d4ff,transparent:true,opacity:0.6,vertexColors:false});
-  var grid=new THREE.LineSegments(geo,mat);scene.add(grid);
-  var geo2=geo.clone();
-  var mat2=new THREE.LineBasicMaterial({color:0xb400ff,transparent:true,opacity:0.3});
-  var grid2=new THREE.LineSegments(geo2,mat2);grid2.position.y=-0.05;scene.add(grid2);
-  var geo3=geo.clone();
-  var mat3=new THREE.LineBasicMaterial({color:0xff0090,transparent:true,opacity:0.15});
-  var grid3=new THREE.LineSegments(geo3,mat3);grid3.position.y=-0.1;scene.add(grid3);
-  var mouseX=0,scrollY=0;
-  if(!reduced){
-    window.addEventListener('mousemove',function(e){mouseX=e.clientX/window.innerWidth-0.5;},{passive:true});
-    window.addEventListener('scroll',function(){scrollY=window.scrollY;},{passive:true});
-  }
+  for(var r=0;r<ROWS-1;r++)for(var c=0;c<COLS-1;c++){var a=r*COLS+c;idx.push(a,a+1,a,a+COLS,a+1,a+COLS+1,a+COLS,a+COLS+1);}
+  function makeGeo(){var g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(verts.slice(),3));g.setIndex(new THREE.BufferAttribute(new Uint32Array(idx),1));return g;}
+  var grids=[
+    {geo:makeGeo(),mat:new THREE.LineBasicMaterial({color:0x00d4ff,transparent:true,opacity:0.6,linewidth:1}),y:0,t_off:0},
+    {geo:makeGeo(),mat:new THREE.LineBasicMaterial({color:0xb400ff,transparent:true,opacity:0.3,linewidth:1}),y:-0.05,t_off:0.5},
+    {geo:makeGeo(),mat:new THREE.LineBasicMaterial({color:0xff0090,transparent:true,opacity:0.15,linewidth:1}),y:-0.1,t_off:1.0}
+  ];
+  var meshes=[];
+  grids.forEach(function(g){
+    var mesh=new THREE.LineSegments(g.geo,g.mat);mesh.position.y=g.y;scene.add(mesh);
+    meshes.push({mesh:mesh,geo:g.geo,mat:g.mat,t_off:g.t_off});
+  });
+  var mouseX=0,scrollY=0,lastOverPaper=false,overPaperCheck=0;
+  window.addEventListener('mousemove',function(e){mouseX=e.clientX/window.innerWidth-0.5;},{passive:true});
+  window.addEventListener('scroll',function(){scrollY=window.scrollY;},{passive:true});
   window.addEventListener('resize',function(){
     camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth,window.innerHeight);
   });
-  function wave(g,t,off){
-    var p=g.attributes.position.array,i=0;
-    for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){
+  function wave(p,t,off){
+    for(var i=0;i<p.length;i+=3){
       var x=p[i],z=p[i+2];
       p[i+1]=Math.sin(x*0.4+t)*0.5+Math.cos(z*0.3+t*0.7)*0.6+Math.sin((x+z)*0.2+t*0.4)*0.4+off;
-      i+=3;
     }
-    g.attributes.position.needsUpdate=true;
   }
-  // cyberpunk colors: cyan/magenta/purple shifting
-  var COL_BLUE=new THREE.Color(0x00d4ff), COL_BLUE2=new THREE.Color(0xb400ff);
-  var COL_AMBER=new THREE.Color(0xff0090), COL_AMBER2=new THREE.Color(0x00ffaa);
-  var curBlend=0;
-  function overPaper(){
-    var mid=window.innerHeight*0.5;
-    var papers=document.querySelectorAll('.paper');
-    for(var i=0;i<papers.length;i++){
-      var r=papers[i].getBoundingClientRect();
-      if(r.top<=mid && r.bottom>=mid) return true;
-    }
-    return false;
-  }
-  var t=0;
+  var t=0,frameCount=0;
   function loop(){
-    t+=reduced?0:0.013;
-    var target=overPaper()?1:0;
-    curBlend+=(target-curBlend)*0.08;
-    // Cycle hue over time for cyberpunk feel
-    var hue=t*0.05;
-    mat.color.setHSL((0.55+Math.sin(hue)*0.1)%1, 1.0, 0.6);
-    mat2.color.setHSL((0.78+Math.cos(hue*0.7)*0.1)%1, 1.0, 0.55);
-    mat3.color.setHSL((0.92+Math.sin(hue*1.3)*0.08)%1, 1.0, 0.6);
-    mat.opacity=0.55+Math.sin(t*0.3)*0.1;
-    mat2.opacity=0.28+Math.cos(t*0.4)*0.08;
-    mat3.opacity=0.12+Math.sin(t*0.5)*0.05;
-    wave(geo,t,0);
-    wave(geo2,t+0.5,-0.05);
-    wave(geo3,t+1.0,-0.1);
-    grid.position.z=(t*1.2)%SP;grid2.position.z=(t*1.2)%SP;grid3.position.z=(t*1.2)%SP;
+    t+=0.013;frameCount++;
+    if(frameCount%4===0){
+      var mid=window.innerHeight*0.5,papers=document.querySelectorAll('.paper'),overPaper=false;
+      for(var i=0;i<papers.length;i++){var r=papers[i].getBoundingClientRect();if(r.top<=mid&&r.bottom>=mid){overPaper=true;break;}}
+      lastOverPaper=overPaper;
+    }
+    meshes.forEach(function(m){
+      var p=m.geo.attributes.position.array;
+      wave(p,t+m.t_off,m.t_off);
+      m.geo.attributes.position.needsUpdate=true;
+      var hue=(t*0.05+m.t_off*0.15)%1;
+      m.mat.color.setHSL(hue,0.95,0.55);
+      m.mat.opacity=(0.2+Math.sin(t*0.2+m.t_off)*0.2)*(!lastOverPaper?1:0.5);
+      m.mesh.position.z=(t*1.2+m.t_off*0.5)%SP;
+    });
     camera.position.x+=(mouseX*1.2-camera.position.x)*0.03;
     camera.position.y=1.6-Math.min(scrollY*0.0009,1.2);
     camera.lookAt(0,1.0,0);
