@@ -663,6 +663,7 @@ function setLang(lang){
   document.getElementById('btn-es').classList.toggle('active',lang==='es');
   try{localStorage.setItem('briefops_lang',lang);}catch(e){}
   renderCart();
+  if(typeof updateChatbotLanguage==='function')updateChatbotLanguage(lang);
 }
 
 // ================= CART =================
@@ -842,7 +843,7 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 })();
 </script>
 </body>
-  <!-- BriefOps Chatbot -->
+  <!-- BriefOps Chatbot (Bilingual) -->
   <script>
     (function(){
       const styles=`<style>
@@ -865,36 +866,73 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
       #chatbot-input button:hover{background:#764ba2}
       </style>`
       document.head.insertAdjacentHTML('beforeend',styles)
-      const knowledgeBase={
-        'price':['El plan básico cuesta $39 USD','Nuestro plan profesional cuesta $299 USD','El plan empresarial personalizado es $1,497 USD'],
-        'service':'BriefOps proporciona análisis de inteligencia de mercado y research para empresas',
-        'delivery':'Entregamos resultados en 48 horas máximo',
-        'contact':'Contáctanos en sales@briefops.online',
-        'data':'Utilizamos datos de Semrush y otras fuentes confiables',
-        'markets':'Calculamos TAM, SAM y SOM para tu mercado objetivo',
-        'discount':'Consultora con nosotros sobre descuentos especiales',
-        'greeting':'¡Hola! ¿Cómo puedo ayudarte?'
+      
+      // Bilingual knowledge bases
+      const knowledgeBases={
+        en:{
+          'price':['Basic plan is $39 USD','Professional plan is $299 USD','Enterprise customized plan is $1,497 USD'],
+          'service':'BriefOps provides market intelligence and research analysis for companies',
+          'delivery':'We deliver results within 48 hours maximum',
+          'contact':'Contact us at sales@briefops.online',
+          'data':'We use data from Semrush and other trusted sources',
+          'markets':'We calculate TAM, SAM and SOM for your target market',
+          'discount':'Consult with us about special discounts',
+          'greeting':'Hello! How can I help you?',
+          'placeholder':'Type your message...'
+        },
+        es:{
+          'price':['El plan básico cuesta $39 USD','El plan profesional cuesta $299 USD','El plan empresarial personalizado es $1,497 USD'],
+          'service':'BriefOps proporciona análisis de inteligencia de mercado e investigación para empresas',
+          'delivery':'Entregamos resultados en 48 horas máximo',
+          'contact':'Contáctanos en sales@briefops.online',
+          'data':'Utilizamos datos de Semrush y otras fuentes confiables',
+          'markets':'Calculamos TAM, SAM y SOM para tu mercado objetivo',
+          'discount':'Consulta con nosotros sobre descuentos especiales',
+          'greeting':'¡Hola! ¿Cómo puedo ayudarte?',
+          'placeholder':'Escribe tu mensaje...'
+        }
       }
-      function getResponse(input){
+      
+      let currentChatLang='en'
+      
+      function getResponse(input,lang){
         const lower=input.toLowerCase()
-        for(const[key,responses]of Object.entries(knowledgeBase)){
+        const kb=knowledgeBases[lang]
+        for(const[key,responses]of Object.entries(kb)){
+          if(key==='greeting'||key==='placeholder')continue
           if(lower.includes(key)||lower.includes(key.toLowerCase())){
             return Array.isArray(responses)?responses[Math.floor(Math.random()*responses.length)]:responses
           }}
-        return '¿Puedo ayudarte con algo más? Escribe tu pregunta.'
+        return lang==='es'?'¿Puedo ayudarte con algo más? Escribe tu pregunta.':'Can I help you with anything else? Write your question.'
       }
+      
+      function updateChatbotLanguage(lang){
+        currentChatLang=lang
+        const inputField=document.querySelector('#chatbot-input input')
+        if(inputField){
+          inputField.placeholder=knowledgeBases[lang].placeholder
+        }
+      }
+      
+      // Make updateChatbotLanguage globally available
+      window.updateChatbotLanguage=updateChatbotLanguage
+      
       const widget=document.createElement('div')
       widget.id='chatbot-widget'
       widget.textContent='💬'
       widget.onclick=()=>container.classList.toggle('active')
       document.body.appendChild(widget)
+      
       const container=document.createElement('div')
       container.id='chatbot-container'
-      container.innerHTML=`<div id="chatbot-header">BriefOps Chat</div><div id="chatbot-messages"></div><div id="chatbot-input"><input type="text" placeholder="Escribe tu mensaje..."><button>↑</button></div>`
+      const placeholder=knowledgeBases[currentChatLang].placeholder
+      container.innerHTML=`<div id="chatbot-header">BriefOps Chat</div><div id="chatbot-messages"></div><div id="chatbot-input"><input type="text" placeholder="${placeholder}"><button>↑</button></div>`
       document.body.appendChild(container)
+      
       const messagesDiv=container.querySelector('#chatbot-messages')
       const inputField=container.querySelector('#chatbot-input input')
       const sendBtn=container.querySelector('#chatbot-input button')
+      
       function addMessage(text,isBotMessage){
         const msgDiv=document.createElement('div')
         msgDiv.className=`message ${isBotMessage?'bot-message':'user-message'}`
@@ -905,18 +943,22 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
         messagesDiv.appendChild(msgDiv)
         messagesDiv.scrollTop=messagesDiv.scrollHeight
       }
+      
       function sendMessage(){
         const text=inputField.value.trim()
         if(!text)return
         addMessage(text,false)
         inputField.value=''
-        const response=getResponse(text)
+        const response=getResponse(text,currentChatLang)
         setTimeout(()=>addMessage(response,true),300)
       }
+      
       sendBtn.onclick=sendMessage
       inputField.addEventListener('keypress',e=>{if(e.key==='Enter')sendMessage()})
-      addMessage(knowledgeBase.greeting,true)
+      
+      // Initial greeting
+      addMessage(knowledgeBases[currentChatLang].greeting,true)
     })()
-      </script>
   </script>
+</body>
 </html>
